@@ -307,6 +307,127 @@
             font-size: 11px;
         }
 
+        .benchmark-link {
+            color: #00D4FF;
+            font-size: 11px;
+            text-decoration: none;
+            margin-top: 8px;
+            display: block;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .benchmark-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+            overflow-x: auto;
+        }
+
+        .timeline-track {
+            position: relative;
+            height: 4px;
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 2px;
+            margin: 60px 20px 80px 20px;
+        }
+
+        .timeline-items {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+        }
+
+        .timeline-item {
+            position: absolute;
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00FF88;
+            border: 2px solid #0a1410;
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot.openai { background: #00D4FF; }
+        .timeline-dot.anthropic { background: #FF8800; }
+        .timeline-dot.google { background: #FF00FF; }
+        .timeline-dot.meta { background: #AA44FF; }
+        .timeline-dot.xai { background: #FFD700; }
+
+        .timeline-label {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .timeline-label.above {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-label.below {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-label .model-name {
+            display: block;
+            color: #00FF88;
+        }
+
+        .timeline-label .model-name.openai { color: #00D4FF; }
+        .timeline-label .model-name.anthropic { color: #FF8800; }
+        .timeline-label .model-name.google { color: #FF00FF; }
+        .timeline-label .model-name.meta { color: #AA44FF; }
+        .timeline-label .model-name.xai { color: #FFD700; }
+
+        .timeline-label .model-date {
+            display: block;
+            color: rgba(150, 200, 170, 0.5);
+            font-size: 9px;
+            font-weight: 400;
+        }
+
+        .timeline-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: rgba(150, 200, 170, 0.7);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
         /* Hardware Cards */
         .hardware-grid {
             display: grid;
@@ -430,8 +551,8 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-label">2025 AI VC Deployed</div>
-                    <div class="metric-value text-yellow">$225B+</div>
-                    <div class="metric-subtitle">46% of all VC</div>
+                    <div class="metric-value text-yellow">$202B</div>
+                    <div class="metric-subtitle">~50% of all VC</div>
                 </div>
             </div>
 
@@ -458,8 +579,8 @@
                     <div class="milestone-text">GPT-5.2 releases with 93.2% GPQA Diamond</div>
                 </div>
                 <div class="milestone funding">
-                    <div class="milestone-date text-magenta">Nov 25</div>
-                    <div class="milestone-text">xAI closes $15B round at $230B valuation</div>
+                    <div class="milestone-date text-magenta">Dec 19</div>
+                    <div class="milestone-text">xAI expected to close $15B round at $230B valuation</div>
                 </div>
                 <div class="milestone model">
                     <div class="milestone-date text-cyan">Nov 24</div>
@@ -467,7 +588,7 @@
                 </div>
                 <div class="milestone model">
                     <div class="milestone-date text-cyan">Nov 18</div>
-                    <div class="milestone-text">Gemini 3 launches with 2M context window</div>
+                    <div class="milestone-text">Gemini 3 launches with 1M context window</div>
                 </div>
                 <div class="milestone model">
                     <div class="milestone-date text-cyan">Nov 17</div>
@@ -520,7 +641,7 @@
                         <tr class="frontier">
                             <td class="text-green font-bold">GPT-5.2</td>
                             <td class="text-muted">OpenAI</td>
-                            <td class="text-center text-muted">128K</td>
+                            <td class="text-center text-muted">400K</td>
                             <td class="text-center text-cyan">$1.75</td>
                             <td class="text-center text-cyan">$14.00</td>
                             <td class="text-center text-lime font-bold">80.0%</td>
@@ -530,9 +651,9 @@
                         <tr class="frontier">
                             <td class="text-green font-bold">Gemini 3 Pro</td>
                             <td class="text-muted">Google</td>
-                            <td class="text-center text-muted">2M</td>
-                            <td class="text-center text-cyan">$1.25</td>
-                            <td class="text-center text-cyan">$5.00</td>
+                            <td class="text-center text-muted">1M</td>
+                            <td class="text-center text-cyan">$2.00</td>
+                            <td class="text-center text-cyan">$12.00</td>
                             <td class="text-center text-lime font-bold">76.2%</td>
                             <td class="text-center text-lime font-bold">91.9%</td>
                             <td class="text-center text-magenta font-bold">1501</td>
@@ -630,7 +751,7 @@
                 </div>
                 <div class="insight-box">
                     <span class="insight-label">Key Insight:</span>
-                    <span class="insight-text">From 3 seconds (GPT-2) to 4.75 hours (Opus 4.5) = ~5,700x improvement in 6 years</span>
+                    <span class="insight-text">From 3 seconds (GPT-2) to 4h49m (Opus 4.5) = ~5,700x improvement in 6 years</span>
                 </div>
             </div>
 
@@ -651,6 +772,7 @@
                     <div class="benchmark-leader">Leader: Claude Opus 4.5</div>
                     <div class="benchmark-desc">Real GitHub issue resolution. Tests if models can actually fix bugs in production codebases.</div>
                     <div class="benchmark-human">Human baseline: ~4.8%</div>
+                    <a href="https://www.swebench.com" target="_blank" class="benchmark-link">→ Leaderboard</a>
                 </div>
                 <div class="benchmark-card">
                     <div class="benchmark-header">
@@ -660,6 +782,7 @@
                     <div class="benchmark-leader">Leader: GPT-5.2 Pro</div>
                     <div class="benchmark-desc">PhD-level science questions where domain experts succeed but non-experts fail.</div>
                     <div class="benchmark-human">Human baseline: ~65%</div>
+                    <a href="https://github.com/idavidrein/gpqa" target="_blank" class="benchmark-link">→ Dataset</a>
                 </div>
                 <div class="benchmark-card">
                     <div class="benchmark-header">
@@ -669,6 +792,7 @@
                     <div class="benchmark-leader">Leader: Gemini 3</div>
                     <div class="benchmark-desc">Novel visual reasoning puzzles. Tests genuine abstraction vs pattern matching.</div>
                     <div class="benchmark-human">Human baseline: ~85%</div>
+                    <a href="https://arcprize.org/leaderboard" target="_blank" class="benchmark-link">→ Leaderboard</a>
                 </div>
                 <div class="benchmark-card">
                     <div class="benchmark-header">
@@ -678,6 +802,128 @@
                     <div class="benchmark-leader">Leader: Multiple</div>
                     <div class="benchmark-desc">Code generation from docstrings. Largely saturated—models now exceed human performance.</div>
                     <div class="benchmark-human">Human baseline: ~65%</div>
+                    <a href="https://github.com/openai/human-eval" target="_blank" class="benchmark-link">→ Dataset</a>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 24px;">
+                <div class="card-title">LMArena Chatbot Leaderboard</div>
+                <div class="card-subtitle">Live crowdsourced rankings via blind human preference</div>
+                <a href="https://lmarena.ai/leaderboard" target="_blank" class="benchmark-link" style="margin-top: 8px; display: inline-block;">→ View Live Leaderboard</a>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <div class="card-title">Frontier Model Release Timeline</div>
+                <div class="card-subtitle">Major model releases from 2024-2025 • Accelerating cadence</div>
+                <div class="timeline-container">
+                    <div class="timeline-track">
+                        <div class="timeline-items">
+                            <!-- 2024 Models -->
+                            <div class="timeline-item" style="left: 2%;">
+                                <div class="timeline-dot google"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name google">Gemini 1.5</span>
+                                    <span class="model-date">Feb '24</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 8%;">
+                                <div class="timeline-dot anthropic"></div>
+                                <div class="timeline-label below">
+                                    <span class="model-name anthropic">Claude 3</span>
+                                    <span class="model-date">Mar '24</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 18%;">
+                                <div class="timeline-dot openai"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name openai">GPT-4o</span>
+                                    <span class="model-date">May '24</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 27%;">
+                                <div class="timeline-dot anthropic"></div>
+                                <div class="timeline-label below">
+                                    <span class="model-name anthropic">Claude 3.5</span>
+                                    <span class="model-date">Jun '24</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 35%;">
+                                <div class="timeline-dot meta"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name meta">Llama 3.1</span>
+                                    <span class="model-date">Jul '24</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 43%;">
+                                <div class="timeline-dot openai"></div>
+                                <div class="timeline-label below">
+                                    <span class="model-name openai">o1</span>
+                                    <span class="model-date">Sep '24</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 52%;">
+                                <div class="timeline-dot google"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name google">Gemini 2</span>
+                                    <span class="model-date">Dec '24</span>
+                                </div>
+                            </div>
+                            <!-- 2025 Models -->
+                            <div class="timeline-item" style="left: 58%;">
+                                <div class="timeline-dot xai"></div>
+                                <div class="timeline-label below">
+                                    <span class="model-name xai">Grok 3</span>
+                                    <span class="model-date">Feb '25</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 65%;">
+                                <div class="timeline-dot openai"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name openai">GPT-5</span>
+                                    <span class="model-date">Apr '25</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 72%;">
+                                <div class="timeline-dot anthropic"></div>
+                                <div class="timeline-label below">
+                                    <span class="model-name anthropic">Claude 4.5</span>
+                                    <span class="model-date">Jul '25</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 79%;">
+                                <div class="timeline-dot xai"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name xai">Grok 4</span>
+                                    <span class="model-date">Sep '25</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 86%;">
+                                <div class="timeline-dot google"></div>
+                                <div class="timeline-label below">
+                                    <span class="model-name google">Gemini 3</span>
+                                    <span class="model-date">Oct '25</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item" style="left: 94%;">
+                                <div class="timeline-dot openai"></div>
+                                <div class="timeline-label above">
+                                    <span class="model-name openai">GPT-5.2</span>
+                                    <span class="model-date">Dec '25</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-legend">
+                    <div class="legend-item"><div class="legend-dot" style="background: #00D4FF;"></div>OpenAI</div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #FF8800;"></div>Anthropic</div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #FF00FF;"></div>Google</div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #AA44FF;"></div>Meta</div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #FFD700;"></div>xAI</div>
+                </div>
+                <div class="insight-box" style="margin-top: 16px;">
+                    <span class="insight-label">Trend:</span>
+                    <span class="insight-text">13 frontier releases in 22 months • Labs now shipping major updates every ~6 weeks</span>
                 </div>
             </div>
         </div>
@@ -692,8 +938,8 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-label">2025 AI VC Total</div>
-                    <div class="metric-value text-cyan">$225B+</div>
-                    <div class="metric-subtitle">46% of all VC</div>
+                    <div class="metric-value text-cyan">$202B</div>
+                    <div class="metric-subtitle">~50% of all VC</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-label">NVDA Market Cap</div>
@@ -755,8 +1001,8 @@
                         </tr>
                         <tr>
                             <td class="text-green font-bold">Figure AI</td>
-                            <td class="text-right text-magenta font-bold">$45B</td>
-                            <td class="text-right text-cyan">$2.5B</td>
+                            <td class="text-right text-magenta font-bold">$39B</td>
+                            <td class="text-right text-cyan">$1.9B</td>
                             <td class="text-right text-lime">$0.1B</td>
                             <td class="text-muted">Humanoid Robotics</td>
                             <td class="text-yellow">Private</td>
@@ -764,8 +1010,8 @@
                         <tr>
                             <td class="text-green font-bold">Cursor</td>
                             <td class="text-right text-magenta font-bold">$29.3B</td>
-                            <td class="text-right text-cyan">$0.9B</td>
-                            <td class="text-right text-lime">$0.3B</td>
+                            <td class="text-right text-cyan">$2.3B</td>
+                            <td class="text-right text-lime">$1B</td>
                             <td class="text-muted">AI Code Editor</td>
                             <td class="text-yellow">Private</td>
                         </tr>
@@ -787,17 +1033,17 @@
                         </tr>
                         <tr>
                             <td class="text-green font-bold">Safe Superintelligence</td>
-                            <td class="text-right text-magenta font-bold">$8B</td>
-                            <td class="text-right text-cyan">$2B</td>
+                            <td class="text-right text-magenta font-bold">$32B</td>
+                            <td class="text-right text-cyan">$3B</td>
                             <td class="text-right text-lime">$0B</td>
                             <td class="text-muted">Safe ASI</td>
                             <td class="text-yellow">Pre-revenue</td>
                         </tr>
                         <tr>
                             <td class="text-green font-bold">Mistral</td>
-                            <td class="text-right text-magenta font-bold">$6B</td>
-                            <td class="text-right text-cyan">$1.1B</td>
-                            <td class="text-right text-lime">$0.2B</td>
+                            <td class="text-right text-magenta font-bold">$14B</td>
+                            <td class="text-right text-cyan">$2.8B</td>
+                            <td class="text-right text-lime">$0.3B</td>
                             <td class="text-muted">Open Models</td>
                             <td class="text-yellow">Private</td>
                         </tr>
@@ -1216,7 +1462,7 @@
                 labels: ['Mar 23', 'Nov 23', 'Feb 24', 'May 24', 'Feb 25', 'Jun 25', 'Dec 25'],
                 datasets: [{
                     label: 'Context Window (K tokens)',
-                    data: [8, 128, 200, 1000, 1000, 2000, 2000],
+                    data: [8, 128, 200, 1000, 1000, 1000, 1000],
                     borderColor: colors.purple,
                     backgroundColor: 'rgba(170, 68, 255, 0.1)',
                     fill: true,
@@ -1244,10 +1490,10 @@
         new Chart(valuationCtx, {
             type: 'bar',
             data: {
-                labels: ['OpenAI', 'xAI', 'Anthropic', 'Databricks', 'Figure AI', 'Cursor', 'Scale AI', 'Perplexity'],
+                labels: ['OpenAI', 'xAI', 'Anthropic', 'Databricks', 'Figure AI', 'SSI', 'Cursor', 'Scale AI'],
                 datasets: [{
                     label: 'Valuation ($B)',
-                    data: [500, 230, 183, 134, 45, 29.3, 29, 18],
+                    data: [500, 230, 183, 134, 39, 32, 29.3, 29],
                     backgroundColor: [colors.magenta, colors.lime, colors.cyan, colors.purple, colors.orange, colors.yellow, colors.pink, colors.blue],
                     borderRadius: 4
                 }]
