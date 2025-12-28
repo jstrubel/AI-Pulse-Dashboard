@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Pulse - Real-time AI Progress Tracker</title>
+    <meta name="description" content="Track AI progress in real-time. Benchmark scores, model comparisons, funding rounds, and hardware metrics.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #050a08 0%, #0a1510 50%, #081210 100%);
+            color: #e0f0e8;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 32px 24px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00FF88;
+            box-shadow: 0 0 12px #00FF88;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00FF88;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: rgba(150, 200, 170, 0.5);
+            font-size: 13px;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 18px;
+            background: rgba(20, 35, 30, 0.6);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 8px;
+            color: rgba(0, 255, 136, 0.6);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+            color: rgba(0, 255, 136, 0.8);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.1));
+            border-color: rgba(0, 255, 136, 0.5);
+            color: #00FF88;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, rgba(20, 35, 30, 0.8), rgba(15, 25, 20, 0.9));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .metric-label {
+            color: rgba(0, 255, 136, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .metric-subtitle {
+            color: rgba(150, 200, 170, 0.6);
+            font-size: 12px;
+        }
+
+        /* Cards */
+        .card {
+            background: linear-gradient(135deg, rgba(20, 35, 30, 0.8), rgba(15, 25, 20, 0.9));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            color: #00FF88;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-subtitle {
+            color: rgba(150, 200, 170, 0.5);
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 8px;
+            color: rgba(0, 255, 136, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            font-weight: 500;
+        }
+
+        td {
+            padding: 12px 8px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.08);
+        }
+
+        tr.frontier {
+            background: rgba(0, 255, 136, 0.03);
+        }
+
+        .text-green { color: #00FF88; }
+        .text-cyan { color: #00D4FF; }
+        .text-magenta { color: #FF00FF; }
+        .text-orange { color: #FF8800; }
+        .text-yellow { color: #FFD700; }
+        .text-purple { color: #AA44FF; }
+        .text-lime { color: #00FF88; }
+        .text-muted { color: rgba(150, 200, 170, 0.7); }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: 600; }
+
+        /* Milestones */
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            background: rgba(0, 255, 136, 0.03);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .milestone.funding {
+            border-left: 3px solid #FF00FF;
+        }
+
+        .milestone.model {
+            border-left: 3px solid #00D4FF;
+        }
+
+        .milestone-date {
+            font-size: 12px;
+            font-weight: 600;
+            min-width: 50px;
+        }
+
+        .milestone-text {
+            color: rgba(200, 230, 210, 0.8);
+            font-size: 13px;
+        }
+
+        /* Insight Box */
+        .insight-box {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(255, 0, 255, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #FF00FF;
+        }
+
+        .insight-label {
+            color: #FF00FF;
+            font-weight: 600;
+        }
+
+        .insight-text {
+            color: rgba(200, 230, 210, 0.8);
+            margin-left: 8px;
+        }
+
+        /* Benchmark Cards Grid */
+        .benchmark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .benchmark-card {
+            background: linear-gradient(135deg, rgba(20, 35, 30, 0.8), rgba(15, 25, 20, 0.9));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .benchmark-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .benchmark-name {
+            color: #00FF88;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .benchmark-score {
+            color: #00FF88;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .benchmark-leader {
+            color: #00D4FF;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .benchmark-desc {
+            color: rgba(150, 200, 170, 0.6);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .benchmark-human {
+            color: #FF8800;
+            font-size: 11px;
+        }
+
+        /* Hardware Cards */
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .hardware-card {
+            background: linear-gradient(135deg, rgba(20, 35, 30, 0.8), rgba(15, 25, 20, 0.9));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .hardware-card.lime { border-left: 3px solid #00FF88; }
+        .hardware-card.cyan { border-left: 3px solid #00D4FF; }
+        .hardware-card.magenta { border-left: 3px solid #FF00FF; }
+        .hardware-card.orange { border-left: 3px solid #FF8800; }
+        .hardware-card.purple { border-left: 3px solid #AA44FF; }
+        .hardware-card.yellow { border-left: 3px solid #FFD700; }
+
+        .hardware-name {
+            color: #00FF88;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .hardware-desc {
+            color: rgba(150, 200, 170, 0.6);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .hardware-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .hardware-status.lime { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
+        .hardware-status.cyan { background: rgba(0, 212, 255, 0.2); color: #00D4FF; }
+        .hardware-status.magenta { background: rgba(255, 0, 255, 0.2); color: #FF00FF; }
+        .hardware-status.orange { background: rgba(255, 136, 0, 0.2); color: #FF8800; }
+        .hardware-status.purple { background: rgba(170, 68, 255, 0.2); color: #AA44FF; }
+        .hardware-status.yellow { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 11px;
+            color: rgba(150, 170, 200, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .metrics-grid {
+                flex-direction: column;
+            }
+            
+            .metric-card {
+                min-width: 100%;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th, td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="pulse-dot"></div>
+                <h1>AI Pulse</h1>
+            </div>
+            <p class="subtitle">Real-time AI progress tracker • Updated Dec 28, 2025</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav">
+            <button class="nav-btn active" onclick="showTab('overview')">◉ Overview</button>
+            <button class="nav-btn" onclick="showTab('models')">⬡ Models & Pricing</button>
+            <button class="nav-btn" onclick="showTab('benchmarks')">◈ Benchmarks</button>
+            <button class="nav-btn" onclick="showTab('funding')">◇ Funding</button>
+            <button class="nav-btn" onclick="showTab('hardware')">▣ Hardware</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Best SWE-Bench</div>
+                    <div class="metric-value text-lime">80.9%</div>
+                    <div class="metric-subtitle">Claude Opus 4.5</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Best GPQA</div>
+                    <div class="metric-value text-cyan">93.2%</div>
+                    <div class="metric-subtitle">GPT-5.2 Pro</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Top Private Valuation</div>
+                    <div class="metric-value text-magenta">$500B</div>
+                    <div class="metric-subtitle">OpenAI</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">2025 AI VC Deployed</div>
+                    <div class="metric-value text-yellow">$225B+</div>
+                    <div class="metric-subtitle">46% of all VC</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">SWE-Bench Verified Progress</div>
+                <div class="card-subtitle">Real GitHub issue resolution • Human baseline ~4.8%</div>
+                <div class="chart-container">
+                    <canvas id="sweBenchChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Multi-Benchmark Progress</div>
+                <div class="card-subtitle">Tracking capability growth across key benchmarks</div>
+                <div class="chart-container">
+                    <canvas id="multiBenchmarkChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Recent Milestones</div>
+                <div class="milestone model">
+                    <div class="milestone-date text-cyan">Dec 11</div>
+                    <div class="milestone-text">GPT-5.2 releases with 93.2% GPQA Diamond</div>
+                </div>
+                <div class="milestone funding">
+                    <div class="milestone-date text-magenta">Nov 25</div>
+                    <div class="milestone-text">xAI closes $15B round at $230B valuation</div>
+                </div>
+                <div class="milestone model">
+                    <div class="milestone-date text-cyan">Nov 24</div>
+                    <div class="milestone-text">Claude Opus 4.5 achieves 80.9% SWE-Bench</div>
+                </div>
+                <div class="milestone model">
+                    <div class="milestone-date text-cyan">Nov 18</div>
+                    <div class="milestone-text">Gemini 3 launches with 2M context window</div>
+                </div>
+                <div class="milestone model">
+                    <div class="milestone-date text-cyan">Nov 17</div>
+                    <div class="milestone-text">Grok 4.1 tops LMArena at 1483 Elo</div>
+                </div>
+                <div class="milestone funding">
+                    <div class="milestone-date text-magenta">Oct 25</div>
+                    <div class="milestone-text">OpenAI secondary sale at $500B valuation</div>
+                </div>
+                <div class="milestone funding">
+                    <div class="milestone-date text-magenta">Sep 25</div>
+                    <div class="milestone-text">Anthropic raises $13B at $183B valuation</div>
+                </div>
+                <div class="milestone model">
+                    <div class="milestone-date text-cyan">Jul 25</div>
+                    <div class="milestone-text">Grok 4 released with 2M token context</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Models Tab -->
+        <div id="models" class="tab-content">
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-title">Frontier & Efficient Models Comparison</div>
+                <div class="card-subtitle">December 2025 pricing and benchmarks</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Company</th>
+                            <th class="text-center">Context</th>
+                            <th class="text-center">$/M In</th>
+                            <th class="text-center">$/M Out</th>
+                            <th class="text-center">SWE-Bench</th>
+                            <th class="text-center">GPQA</th>
+                            <th class="text-center">Arena Elo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="frontier">
+                            <td class="text-green font-bold">Claude Opus 4.5</td>
+                            <td class="text-muted">Anthropic</td>
+                            <td class="text-center text-muted">200K</td>
+                            <td class="text-center text-cyan">$15.00</td>
+                            <td class="text-center text-cyan">$75.00</td>
+                            <td class="text-center text-lime font-bold">80.9%</td>
+                            <td class="text-center text-lime font-bold">89.0%</td>
+                            <td class="text-center text-magenta font-bold">1520</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-green font-bold">GPT-5.2</td>
+                            <td class="text-muted">OpenAI</td>
+                            <td class="text-center text-muted">128K</td>
+                            <td class="text-center text-cyan">$1.75</td>
+                            <td class="text-center text-cyan">$14.00</td>
+                            <td class="text-center text-lime font-bold">80.0%</td>
+                            <td class="text-center text-lime font-bold">93.2%</td>
+                            <td class="text-center text-magenta font-bold">1510</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-green font-bold">Gemini 3 Pro</td>
+                            <td class="text-muted">Google</td>
+                            <td class="text-center text-muted">2M</td>
+                            <td class="text-center text-cyan">$1.25</td>
+                            <td class="text-center text-cyan">$5.00</td>
+                            <td class="text-center text-lime font-bold">76.2%</td>
+                            <td class="text-center text-lime font-bold">91.9%</td>
+                            <td class="text-center text-magenta font-bold">1501</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-green font-bold">Grok 4.1</td>
+                            <td class="text-muted">xAI</td>
+                            <td class="text-center text-muted">2M</td>
+                            <td class="text-center text-cyan">$3.00</td>
+                            <td class="text-center text-cyan">$15.00</td>
+                            <td class="text-center text-yellow font-bold">74.0%</td>
+                            <td class="text-center text-lime font-bold">88.0%</td>
+                            <td class="text-center text-magenta font-bold">1483</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Claude Sonnet 4.5</td>
+                            <td class="text-muted">Anthropic</td>
+                            <td class="text-center text-muted">200K</td>
+                            <td class="text-center text-cyan">$3.00</td>
+                            <td class="text-center text-cyan">$15.00</td>
+                            <td class="text-center text-yellow font-bold">72.0%</td>
+                            <td class="text-center text-lime font-bold">85.0%</td>
+                            <td class="text-center text-magenta font-bold">1440</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Grok 4</td>
+                            <td class="text-muted">xAI</td>
+                            <td class="text-center text-muted">2M</td>
+                            <td class="text-center text-cyan">$3.00</td>
+                            <td class="text-center text-cyan">$15.00</td>
+                            <td class="text-center text-yellow font-bold">71.7%</td>
+                            <td class="text-center text-lime font-bold">88.0%</td>
+                            <td class="text-center text-magenta font-bold">1450</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">DeepSeek V3</td>
+                            <td class="text-muted">DeepSeek</td>
+                            <td class="text-center text-muted">64K</td>
+                            <td class="text-center text-cyan">$0.27</td>
+                            <td class="text-center text-cyan">$1.10</td>
+                            <td class="text-center text-orange font-bold">42.0%</td>
+                            <td class="text-center text-yellow font-bold">59.1%</td>
+                            <td class="text-center text-magenta font-bold">1318</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">GPT-4o</td>
+                            <td class="text-muted">OpenAI</td>
+                            <td class="text-center text-muted">128K</td>
+                            <td class="text-center text-cyan">$2.50</td>
+                            <td class="text-center text-cyan">$10.00</td>
+                            <td class="text-center text-orange font-bold">33.2%</td>
+                            <td class="text-center text-yellow font-bold">53.6%</td>
+                            <td class="text-center text-magenta font-bold">1280</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Grok 3 Mini</td>
+                            <td class="text-muted">xAI</td>
+                            <td class="text-center text-muted">128K</td>
+                            <td class="text-center text-cyan">$0.30</td>
+                            <td class="text-center text-cyan">$0.50</td>
+                            <td class="text-center text-orange font-bold">35.0%</td>
+                            <td class="text-center text-yellow font-bold">60.0%</td>
+                            <td class="text-center text-magenta font-bold">1280</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Gemini 2 Flash</td>
+                            <td class="text-muted">Google</td>
+                            <td class="text-center text-muted">1M</td>
+                            <td class="text-center text-cyan">$0.075</td>
+                            <td class="text-center text-cyan">$0.30</td>
+                            <td class="text-center text-orange font-bold">28.0%</td>
+                            <td class="text-center text-yellow font-bold">52.0%</td>
+                            <td class="text-center text-magenta font-bold">1250</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Inference Cost Deflation</div>
+                <div class="card-subtitle">$/M tokens (input) • 99%+ cost reduction since GPT-4 launch</div>
+                <div class="chart-container">
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benchmarks Tab -->
+        <div id="benchmarks" class="tab-content">
+            <div class="card">
+                <div class="card-title">METR Task Autonomy Duration</div>
+                <div class="card-subtitle">Time AI can work autonomously before human intervention • ~196 day doubling time</div>
+                <div class="chart-container">
+                    <canvas id="metrChart"></canvas>
+                </div>
+                <div class="insight-box">
+                    <span class="insight-label">Key Insight:</span>
+                    <span class="insight-text">From 3 seconds (GPT-2) to 4.75 hours (Opus 4.5) = ~5,700x improvement in 6 years</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Context Window Growth</div>
+                <div class="card-subtitle">Thousands of tokens • 250x increase since GPT-4 launch</div>
+                <div class="chart-container">
+                    <canvas id="contextChart"></canvas>
+                </div>
+            </div>
+
+            <div class="benchmark-grid">
+                <div class="benchmark-card">
+                    <div class="benchmark-header">
+                        <div class="benchmark-name">SWE-Bench Verified</div>
+                        <div class="benchmark-score">80.9%</div>
+                    </div>
+                    <div class="benchmark-leader">Leader: Claude Opus 4.5</div>
+                    <div class="benchmark-desc">Real GitHub issue resolution. Tests if models can actually fix bugs in production codebases.</div>
+                    <div class="benchmark-human">Human baseline: ~4.8%</div>
+                </div>
+                <div class="benchmark-card">
+                    <div class="benchmark-header">
+                        <div class="benchmark-name">GPQA Diamond</div>
+                        <div class="benchmark-score">93.2%</div>
+                    </div>
+                    <div class="benchmark-leader">Leader: GPT-5.2 Pro</div>
+                    <div class="benchmark-desc">PhD-level science questions where domain experts succeed but non-experts fail.</div>
+                    <div class="benchmark-human">Human baseline: ~65%</div>
+                </div>
+                <div class="benchmark-card">
+                    <div class="benchmark-header">
+                        <div class="benchmark-name">ARC-AGI</div>
+                        <div class="benchmark-score">45.1%</div>
+                    </div>
+                    <div class="benchmark-leader">Leader: Gemini 3</div>
+                    <div class="benchmark-desc">Novel visual reasoning puzzles. Tests genuine abstraction vs pattern matching.</div>
+                    <div class="benchmark-human">Human baseline: ~85%</div>
+                </div>
+                <div class="benchmark-card">
+                    <div class="benchmark-header">
+                        <div class="benchmark-name">HumanEval</div>
+                        <div class="benchmark-score">97%</div>
+                    </div>
+                    <div class="benchmark-leader">Leader: Multiple</div>
+                    <div class="benchmark-desc">Code generation from docstrings. Largely saturated—models now exceed human performance.</div>
+                    <div class="benchmark-human">Human baseline: ~65%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funding Tab -->
+        <div id="funding" class="tab-content">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Top Private Valuation</div>
+                    <div class="metric-value text-magenta">$500B</div>
+                    <div class="metric-subtitle">OpenAI</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">2025 AI VC Total</div>
+                    <div class="metric-value text-cyan">$225B+</div>
+                    <div class="metric-subtitle">46% of all VC</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">NVDA Market Cap</div>
+                    <div class="metric-value text-lime">$4.65T</div>
+                    <div class="metric-subtitle">#1 globally</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">AI Chip Makers</div>
+                    <div class="metric-value text-yellow">$8T+</div>
+                    <div class="metric-subtitle">Combined market cap</div>
+                </div>
+            </div>
+
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-title">Top 10 Private AI Companies</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th class="text-right">Valuation</th>
+                            <th class="text-right">Total Raised</th>
+                            <th class="text-right">Est. Revenue</th>
+                            <th>Focus</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-green font-bold">OpenAI</td>
+                            <td class="text-right text-magenta font-bold">$500B</td>
+                            <td class="text-right text-cyan">$64B</td>
+                            <td class="text-right text-lime">$13.5B</td>
+                            <td class="text-muted">Foundation Models</td>
+                            <td class="text-yellow">IPO 2026-27?</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Anthropic</td>
+                            <td class="text-right text-magenta font-bold">$183B</td>
+                            <td class="text-right text-cyan">$33.7B</td>
+                            <td class="text-right text-lime">$5.5B</td>
+                            <td class="text-muted">AI Safety + Claude</td>
+                            <td class="text-yellow">Private</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">xAI</td>
+                            <td class="text-right text-magenta font-bold">$230B</td>
+                            <td class="text-right text-cyan">$25B</td>
+                            <td class="text-right text-lime">$1.5B</td>
+                            <td class="text-muted">Grok + Truth-seeking</td>
+                            <td class="text-yellow">Private</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Databricks</td>
+                            <td class="text-right text-magenta font-bold">$134B</td>
+                            <td class="text-right text-cyan">$9.5B</td>
+                            <td class="text-right text-lime">$3.2B</td>
+                            <td class="text-muted">Data + AI Platform</td>
+                            <td class="text-yellow">IPO 2026?</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Figure AI</td>
+                            <td class="text-right text-magenta font-bold">$45B</td>
+                            <td class="text-right text-cyan">$2.5B</td>
+                            <td class="text-right text-lime">$0.1B</td>
+                            <td class="text-muted">Humanoid Robotics</td>
+                            <td class="text-yellow">Private</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Cursor</td>
+                            <td class="text-right text-magenta font-bold">$29.3B</td>
+                            <td class="text-right text-cyan">$0.9B</td>
+                            <td class="text-right text-lime">$0.3B</td>
+                            <td class="text-muted">AI Code Editor</td>
+                            <td class="text-yellow">Private</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Scale AI</td>
+                            <td class="text-right text-magenta font-bold">$29B</td>
+                            <td class="text-right text-cyan">$16B</td>
+                            <td class="text-right text-lime">$1.4B</td>
+                            <td class="text-muted">Data Labeling</td>
+                            <td class="text-yellow">Meta 49%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Perplexity</td>
+                            <td class="text-right text-magenta font-bold">$18B</td>
+                            <td class="text-right text-cyan">$1.8B</td>
+                            <td class="text-right text-lime">$0.5B</td>
+                            <td class="text-muted">AI Search</td>
+                            <td class="text-yellow">Private</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Safe Superintelligence</td>
+                            <td class="text-right text-magenta font-bold">$8B</td>
+                            <td class="text-right text-cyan">$2B</td>
+                            <td class="text-right text-lime">$0B</td>
+                            <td class="text-muted">Safe ASI</td>
+                            <td class="text-yellow">Pre-revenue</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Mistral</td>
+                            <td class="text-right text-magenta font-bold">$6B</td>
+                            <td class="text-right text-cyan">$1.1B</td>
+                            <td class="text-right text-lime">$0.2B</td>
+                            <td class="text-muted">Open Models</td>
+                            <td class="text-yellow">Private</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Private AI Valuations</div>
+                <div class="card-subtitle">Billions USD • OpenAI at $500B leads by wide margin</div>
+                <div class="chart-container">
+                    <canvas id="valuationChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-title">Top 10 Public AI & Hardware Companies</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Ticker</th>
+                            <th class="text-right">Market Cap</th>
+                            <th class="text-right">YTD Return</th>
+                            <th class="text-right">P/E</th>
+                            <th>AI Focus</th>
+                            <th class="text-right">AI Rev %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-green font-bold">NVIDIA</td>
+                            <td class="text-cyan">NVDA</td>
+                            <td class="text-right text-magenta font-bold">$4.65T</td>
+                            <td class="text-right text-lime">+185%</td>
+                            <td class="text-right text-muted">58x</td>
+                            <td class="text-muted">AI GPUs</td>
+                            <td class="text-right text-purple">85%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Apple</td>
+                            <td class="text-cyan">AAPL</td>
+                            <td class="text-right text-magenta font-bold">$4.0T</td>
+                            <td class="text-right text-yellow">+32%</td>
+                            <td class="text-right text-muted">34x</td>
+                            <td class="text-muted">AI Integration</td>
+                            <td class="text-right text-purple">15%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Alphabet</td>
+                            <td class="text-cyan">GOOGL</td>
+                            <td class="text-right text-magenta font-bold">$3.8T</td>
+                            <td class="text-right text-yellow">+45%</td>
+                            <td class="text-right text-muted">28x</td>
+                            <td class="text-muted">Gemini + Cloud</td>
+                            <td class="text-right text-purple">40%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Microsoft</td>
+                            <td class="text-cyan">MSFT</td>
+                            <td class="text-right text-magenta font-bold">$3.2T</td>
+                            <td class="text-right text-yellow">+18%</td>
+                            <td class="text-right text-muted">35x</td>
+                            <td class="text-muted">Azure AI + Copilot</td>
+                            <td class="text-right text-purple">35%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Amazon</td>
+                            <td class="text-cyan">AMZN</td>
+                            <td class="text-right text-magenta font-bold">$2.4T</td>
+                            <td class="text-right text-lime">+55%</td>
+                            <td class="text-right text-muted">48x</td>
+                            <td class="text-muted">AWS AI + Alexa</td>
+                            <td class="text-right text-purple">25%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Broadcom</td>
+                            <td class="text-cyan">AVGO</td>
+                            <td class="text-right text-magenta font-bold">$1.7T</td>
+                            <td class="text-right text-lime">+62%</td>
+                            <td class="text-right text-muted">42x</td>
+                            <td class="text-muted">Custom AI Chips</td>
+                            <td class="text-right text-purple">45%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Meta</td>
+                            <td class="text-cyan">META</td>
+                            <td class="text-right text-magenta font-bold">$1.7T</td>
+                            <td class="text-right text-lime">+78%</td>
+                            <td class="text-right text-muted">32x</td>
+                            <td class="text-muted">Llama + AI Ads</td>
+                            <td class="text-right text-purple">50%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">TSMC</td>
+                            <td class="text-cyan">TSM</td>
+                            <td class="text-right text-magenta font-bold">$1.52T</td>
+                            <td class="text-right text-lime">+95%</td>
+                            <td class="text-right text-muted">28x</td>
+                            <td class="text-muted">AI Chip Mfg</td>
+                            <td class="text-right text-purple">50%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Tesla</td>
+                            <td class="text-cyan">TSLA</td>
+                            <td class="text-right text-magenta font-bold">$1.43T</td>
+                            <td class="text-right text-lime">+120%</td>
+                            <td class="text-right text-muted">95x</td>
+                            <td class="text-muted">FSD + Optimus</td>
+                            <td class="text-right text-purple">20%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">AMD</td>
+                            <td class="text-cyan">AMD</td>
+                            <td class="text-right text-magenta font-bold">$249B</td>
+                            <td class="text-right text-yellow">+25%</td>
+                            <td class="text-right text-muted">45x</td>
+                            <td class="text-muted">MI300 AI GPUs</td>
+                            <td class="text-right text-purple">40%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Hardware Tab -->
+        <div id="hardware" class="tab-content">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">NVIDIA Market Cap</div>
+                    <div class="metric-value text-lime">$4.65T</div>
+                    <div class="metric-subtitle">#1 globally</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">2025 Hyperscaler CapEx</div>
+                    <div class="metric-value text-cyan">$280B+</div>
+                    <div class="metric-subtitle">AWS + Azure + GCP</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">H100 Cluster Size</div>
+                    <div class="metric-value text-magenta">200K+</div>
+                    <div class="metric-subtitle">xAI Colossus</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">AI Power Draw</div>
+                    <div class="metric-value text-yellow">20GW+</div>
+                    <div class="metric-subtitle">US data centers</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Semiconductor Market Caps</div>
+                <div class="card-subtitle">Billions USD • AI chip demand driving massive valuations</div>
+                <div class="chart-container">
+                    <canvas id="semiconductorChart"></canvas>
+                </div>
+            </div>
+
+            <div class="hardware-grid">
+                <div class="hardware-card lime">
+                    <div class="hardware-name">NVIDIA H100/H200</div>
+                    <div class="hardware-desc">Dominant AI training/inference GPUs. 80GB HBM3, ~$25-40K/unit.</div>
+                    <span class="hardware-status lime">Supply constrained</span>
+                </div>
+                <div class="hardware-card cyan">
+                    <div class="hardware-name">NVIDIA B100/B200</div>
+                    <div class="hardware-desc">Blackwell generation. 2x perf/watt vs Hopper. Ramping Q1 2025.</div>
+                    <span class="hardware-status cyan">Launching now</span>
+                </div>
+                <div class="hardware-card magenta">
+                    <div class="hardware-name">AMD MI300X</div>
+                    <div class="hardware-desc">NVIDIA alternative. 192GB HBM3. Competitive on inference.</div>
+                    <span class="hardware-status magenta">Gaining share</span>
+                </div>
+                <div class="hardware-card orange">
+                    <div class="hardware-name">Google TPU v5p</div>
+                    <div class="hardware-desc">Custom AI accelerator for Gemini training. GCP only.</div>
+                    <span class="hardware-status orange">Internal use</span>
+                </div>
+                <div class="hardware-card purple">
+                    <div class="hardware-name">Broadcom ASICs</div>
+                    <div class="hardware-desc">Custom chips for hyperscalers (Google, Meta). Growing fast.</div>
+                    <span class="hardware-status purple">High demand</span>
+                </div>
+                <div class="hardware-card yellow">
+                    <div class="hardware-name">TSMC 2nm</div>
+                    <div class="hardware-desc">Next-gen node launching Q4 2025. 25-30% power reduction.</div>
+                    <span class="hardware-status yellow">Ramping</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>Sources: Artificial Analysis, METR, Papers With Code, Crunchbase, company filings</div>
+            <div>AI Pulse • 2025</div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            // Add active to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Chart.js defaults
+        Chart.defaults.color = 'rgba(150, 200, 170, 0.7)';
+        Chart.defaults.borderColor = 'rgba(0, 255, 136, 0.1)';
+
+        // Color palette
+        const colors = {
+            lime: '#00FF88',
+            cyan: '#00D4FF',
+            magenta: '#FF00FF',
+            orange: '#FF8800',
+            purple: '#AA44FF',
+            yellow: '#FFD700',
+            pink: '#FF6B9D',
+            blue: '#4488FF'
+        };
+
+        // SWE-Bench Chart
+        const sweBenchCtx = document.getElementById('sweBenchChart').getContext('2d');
+        new Chart(sweBenchCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 23', 'Mar 24', 'Jun 24', 'Oct 24', 'Feb 25', 'Jul 25', 'Nov 25', 'Dec 25'],
+                datasets: [{
+                    label: 'SWE-Bench Score',
+                    data: [3.8, 13.8, 33.2, 49.0, 62.8, 71.7, 76.2, 80.9],
+                    borderColor: colors.lime,
+                    backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: colors.lime
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    annotation: {
+                        annotations: {
+                            humanLine: {
+                                type: 'line',
+                                yMin: 4.8,
+                                yMax: 4.8,
+                                borderColor: colors.orange,
+                                borderDash: [5, 5],
+                                borderWidth: 2
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+
+        // Multi-Benchmark Chart
+        const multiBenchCtx = document.getElementById('multiBenchmarkChart').getContext('2d');
+        new Chart(multiBenchCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 24', 'Apr 24', 'Jul 24', 'Oct 24', 'Feb 25', 'Jun 25', 'Dec 25'],
+                datasets: [
+                    {
+                        label: 'SWE-Bench',
+                        data: [13.8, 21.5, 33.2, 49.0, 62.8, 71.7, 80.9],
+                        borderColor: colors.lime,
+                        tension: 0.3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'GPQA Diamond',
+                        data: [56, 59, 65, 78, 84, 88, 93.8],
+                        borderColor: colors.cyan,
+                        tension: 0.3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'HumanEval',
+                        data: [67, 72, 84, 91, 93, 95, 97],
+                        borderColor: colors.magenta,
+                        tension: 0.3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'ARC-AGI',
+                        data: [5, 9, 21, 32, 40, 43, 45],
+                        borderColor: colors.orange,
+                        tension: 0.3,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+
+        // Cost Deflation Chart
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mar 23', 'Jun 23', 'Nov 23', 'Mar 24', 'Jun 24', 'Dec 24', 'Jan 25', 'Jun 25', 'Dec 25'],
+                datasets: [
+                    {
+                        label: 'Frontier Tier',
+                        data: [30, 30, 15, 10, 5, 2.5, 2.5, 1.5, 1.0],
+                        borderColor: colors.magenta,
+                        stepped: true,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Efficient Tier',
+                        data: [30, 15, 8, 3, 1.5, 0.6, 0.27, 0.15, 0.10],
+                        borderColor: colors.cyan,
+                        stepped: true,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        min: 0.1,
+                        max: 50,
+                        ticks: { callback: value => '$' + value }
+                    }
+                }
+            }
+        });
+
+        // METR Chart
+        const metrCtx = document.getElementById('metrChart').getContext('2d');
+        new Chart(metrCtx, {
+            type: 'bar',
+            data: {
+                labels: ['GPT-2', 'GPT-3', 'GPT-4', 'Claude 3', 'o1/Sonnet', 'Opus 4.5'],
+                datasets: [{
+                    label: 'Seconds of Autonomy',
+                    data: [3, 30, 180, 900, 3600, 17100],
+                    backgroundColor: [colors.cyan, colors.cyan, colors.cyan, colors.magenta, colors.magenta, colors.lime],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const seconds = context.raw;
+                                if (seconds < 60) return seconds + ' seconds';
+                                if (seconds < 3600) return (seconds / 60).toFixed(0) + ' minutes';
+                                return (seconds / 3600).toFixed(2) + ' hours';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        min: 1,
+                        max: 20000
+                    }
+                }
+            }
+        });
+
+        // Context Window Chart
+        const contextCtx = document.getElementById('contextChart').getContext('2d');
+        new Chart(contextCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mar 23', 'Nov 23', 'Feb 24', 'May 24', 'Feb 25', 'Jun 25', 'Dec 25'],
+                datasets: [{
+                    label: 'Context Window (K tokens)',
+                    data: [8, 128, 200, 1000, 1000, 2000, 2000],
+                    borderColor: colors.purple,
+                    backgroundColor: 'rgba(170, 68, 255, 0.1)',
+                    fill: true,
+                    stepped: true,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        ticks: { callback: value => value + 'K' }
+                    }
+                }
+            }
+        });
+
+        // Valuation Chart
+        const valuationCtx = document.getElementById('valuationChart').getContext('2d');
+        new Chart(valuationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['OpenAI', 'xAI', 'Anthropic', 'Databricks', 'Figure AI', 'Cursor', 'Scale AI', 'Perplexity'],
+                datasets: [{
+                    label: 'Valuation ($B)',
+                    data: [500, 230, 183, 134, 45, 29.3, 29, 18],
+                    backgroundColor: [colors.magenta, colors.lime, colors.cyan, colors.purple, colors.orange, colors.yellow, colors.pink, colors.blue],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => '$' + context.raw + 'B'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Semiconductor Chart
+        const semiCtx = document.getElementById('semiconductorChart').getContext('2d');
+        new Chart(semiCtx, {
+            type: 'bar',
+            data: {
+                labels: ['NVIDIA', 'Broadcom', 'TSMC', 'ASML', 'AMD', 'Qualcomm', 'Intel'],
+                datasets: [{
+                    label: 'Market Cap ($B)',
+                    data: [4654, 1700, 1520, 410, 249, 180, 95],
+                    backgroundColor: [colors.lime, colors.cyan, colors.magenta, colors.orange, colors.purple, colors.yellow, colors.pink],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => '$' + context.raw + 'B'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
