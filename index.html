@@ -203,6 +203,34 @@
             font-weight: 500;
         }
 
+        th.sortable {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        th.sortable:hover {
+            color: #00FF88;
+        }
+
+        th.sortable::after {
+            content: ' ↕';
+            opacity: 0.4;
+            font-size: 10px;
+        }
+
+        th.sortable.asc::after {
+            content: ' ↑';
+            opacity: 1;
+            color: #00FF88;
+        }
+
+        th.sortable.desc::after {
+            content: ' ↓';
+            opacity: 1;
+            color: #00FF88;
+        }
+
         td {
             padding: 12px 8px;
             border-bottom: 1px solid rgba(0, 255, 136, 0.08);
@@ -545,6 +573,7 @@
             <button class="nav-btn" onclick="showTab('benchmarks')">◈ Benchmarks</button>
             <button class="nav-btn" onclick="showTab('funding')">◇ Funding</button>
             <button class="nav-btn" onclick="showTab('hardware')">▣ Hardware</button>
+            <button class="nav-btn" onclick="showTab('implications')">⚡ Implications</button>
         </div>
 
         <!-- Overview Tab -->
@@ -696,127 +725,153 @@
         <!-- Models Tab -->
         <div id="models" class="tab-content">
             <div class="section-description">
-                <strong>Models & Pricing</strong> compares the leading AI models by capability and cost. <strong>Context window</strong> is how much text the model can process at once (200K tokens ≈ 150K words or a 500-page book). <strong>$/M In/Out</strong> is the API cost per million tokens for input and output. <strong>SWE-Bench</strong> measures real coding ability, <strong>GPQA</strong> tests expert-level reasoning, and <strong>Arena Elo</strong> reflects crowdsourced human preference rankings. The cost deflation chart shows how API prices have dropped 99%+ since GPT-4's launch in March 2023.
+                <strong>Models & Pricing</strong> compares the leading AI models by capability and cost. <strong>Context window</strong> is how much text the model can process at once. <strong>$/M In/Out</strong> is the API cost per million tokens. <strong>SWE-Bench</strong> measures real coding ability, <strong>GPQA</strong> tests PhD-level reasoning, <strong>MMLU</strong> tests broad knowledge across 57 subjects, and <strong>MATH</strong> tests competition-level mathematics. Click column headers to sort. At 95%+ MATH, models can assist with novel mathematical research—a key enabler for AI-accelerated scientific discovery.
             </div>
             <div class="card" style="overflow-x: auto;">
                 <div class="card-title">Frontier & Efficient Models Comparison</div>
-                <div class="card-subtitle">December 2025 pricing and benchmarks</div>
-                <table>
+                <div class="card-subtitle">December 2025 pricing and benchmarks • Click headers to sort</div>
+                <table id="modelsTable">
                     <thead>
                         <tr>
                             <th>Model</th>
                             <th>Company</th>
-                            <th class="text-center">Context</th>
-                            <th class="text-center">$/M In</th>
-                            <th class="text-center">$/M Out</th>
-                            <th class="text-center">SWE-Bench</th>
-                            <th class="text-center">GPQA</th>
-                            <th class="text-center">Arena Elo</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 2)">Context</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 3)">$/M In</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 4)">$/M Out</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 5)">SWE</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 6)">GPQA</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 7)">MMLU</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 8)">MATH</th>
+                            <th class="text-center sortable" onclick="sortTable('modelsTable', 9)">Elo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="frontier">
                             <td class="text-green font-bold">Claude Opus 4.5</td>
                             <td class="text-muted">Anthropic</td>
-                            <td class="text-center text-muted">200K</td>
-                            <td class="text-center text-cyan">$15.00</td>
-                            <td class="text-center text-cyan">$75.00</td>
-                            <td class="text-center text-lime font-bold">80.9%</td>
-                            <td class="text-center text-lime font-bold">89.0%</td>
-                            <td class="text-center text-magenta font-bold">1520</td>
+                            <td class="text-center text-muted" data-value="200">200K</td>
+                            <td class="text-center text-cyan" data-value="15">$15.00</td>
+                            <td class="text-center text-cyan" data-value="75">$75.00</td>
+                            <td class="text-center text-lime font-bold" data-value="80.9">80.9%</td>
+                            <td class="text-center text-lime font-bold" data-value="89">89.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="96.4">96.4%</td>
+                            <td class="text-center text-lime font-bold" data-value="91.2">91.2%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1520">1520</td>
                         </tr>
                         <tr class="frontier">
                             <td class="text-green font-bold">GPT-5.2</td>
                             <td class="text-muted">OpenAI</td>
-                            <td class="text-center text-muted">400K</td>
-                            <td class="text-center text-cyan">$1.75</td>
-                            <td class="text-center text-cyan">$14.00</td>
-                            <td class="text-center text-lime font-bold">80.0%</td>
-                            <td class="text-center text-lime font-bold">93.2%</td>
-                            <td class="text-center text-magenta font-bold">1510</td>
+                            <td class="text-center text-muted" data-value="400">400K</td>
+                            <td class="text-center text-cyan" data-value="1.75">$1.75</td>
+                            <td class="text-center text-cyan" data-value="14">$14.00</td>
+                            <td class="text-center text-lime font-bold" data-value="80">80.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="93.2">93.2%</td>
+                            <td class="text-center text-lime font-bold" data-value="97.1">97.1%</td>
+                            <td class="text-center text-lime font-bold" data-value="94.3">94.3%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1510">1510</td>
                         </tr>
                         <tr class="frontier">
                             <td class="text-green font-bold">Gemini 3 Pro</td>
                             <td class="text-muted">Google</td>
-                            <td class="text-center text-muted">1M</td>
-                            <td class="text-center text-cyan">$2.00</td>
-                            <td class="text-center text-cyan">$12.00</td>
-                            <td class="text-center text-lime font-bold">76.2%</td>
-                            <td class="text-center text-lime font-bold">91.9%</td>
-                            <td class="text-center text-magenta font-bold">1501</td>
+                            <td class="text-center text-muted" data-value="1000">1M</td>
+                            <td class="text-center text-cyan" data-value="2">$2.00</td>
+                            <td class="text-center text-cyan" data-value="12">$12.00</td>
+                            <td class="text-center text-lime font-bold" data-value="76.2">76.2%</td>
+                            <td class="text-center text-lime font-bold" data-value="91.9">91.9%</td>
+                            <td class="text-center text-lime font-bold" data-value="96.8">96.8%</td>
+                            <td class="text-center text-lime font-bold" data-value="92.8">92.8%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1501">1501</td>
                         </tr>
                         <tr class="frontier">
                             <td class="text-green font-bold">Grok 4.1</td>
                             <td class="text-muted">xAI</td>
-                            <td class="text-center text-muted">2M</td>
-                            <td class="text-center text-cyan">$3.00</td>
-                            <td class="text-center text-cyan">$15.00</td>
-                            <td class="text-center text-yellow font-bold">74.0%</td>
-                            <td class="text-center text-lime font-bold">88.0%</td>
-                            <td class="text-center text-magenta font-bold">1483</td>
+                            <td class="text-center text-muted" data-value="2000">2M</td>
+                            <td class="text-center text-cyan" data-value="3">$3.00</td>
+                            <td class="text-center text-cyan" data-value="15">$15.00</td>
+                            <td class="text-center text-yellow font-bold" data-value="74">74.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="88">88.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="95.2">95.2%</td>
+                            <td class="text-center text-lime font-bold" data-value="89.5">89.5%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1483">1483</td>
                         </tr>
                         <tr>
                             <td class="text-green font-bold">Claude Sonnet 4.5</td>
                             <td class="text-muted">Anthropic</td>
-                            <td class="text-center text-muted">200K</td>
-                            <td class="text-center text-cyan">$3.00</td>
-                            <td class="text-center text-cyan">$15.00</td>
-                            <td class="text-center text-yellow font-bold">72.0%</td>
-                            <td class="text-center text-lime font-bold">85.0%</td>
-                            <td class="text-center text-magenta font-bold">1440</td>
+                            <td class="text-center text-muted" data-value="200">200K</td>
+                            <td class="text-center text-cyan" data-value="3">$3.00</td>
+                            <td class="text-center text-cyan" data-value="15">$15.00</td>
+                            <td class="text-center text-yellow font-bold" data-value="72">72.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="85">85.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="94.8">94.8%</td>
+                            <td class="text-center text-lime font-bold" data-value="87.2">87.2%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1440">1440</td>
                         </tr>
                         <tr>
                             <td class="text-green font-bold">Grok 4</td>
                             <td class="text-muted">xAI</td>
-                            <td class="text-center text-muted">2M</td>
-                            <td class="text-center text-cyan">$3.00</td>
-                            <td class="text-center text-cyan">$15.00</td>
-                            <td class="text-center text-yellow font-bold">71.7%</td>
-                            <td class="text-center text-lime font-bold">88.0%</td>
-                            <td class="text-center text-magenta font-bold">1450</td>
+                            <td class="text-center text-muted" data-value="2000">2M</td>
+                            <td class="text-center text-cyan" data-value="3">$3.00</td>
+                            <td class="text-center text-cyan" data-value="15">$15.00</td>
+                            <td class="text-center text-yellow font-bold" data-value="71.7">71.7%</td>
+                            <td class="text-center text-lime font-bold" data-value="88">88.0%</td>
+                            <td class="text-center text-lime font-bold" data-value="94.5">94.5%</td>
+                            <td class="text-center text-lime font-bold" data-value="88.1">88.1%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1450">1450</td>
                         </tr>
                         <tr>
                             <td class="text-green font-bold">DeepSeek V3</td>
                             <td class="text-muted">DeepSeek</td>
-                            <td class="text-center text-muted">64K</td>
-                            <td class="text-center text-cyan">$0.27</td>
-                            <td class="text-center text-cyan">$1.10</td>
-                            <td class="text-center text-orange font-bold">42.0%</td>
-                            <td class="text-center text-yellow font-bold">59.1%</td>
-                            <td class="text-center text-magenta font-bold">1318</td>
+                            <td class="text-center text-muted" data-value="64">64K</td>
+                            <td class="text-center text-cyan" data-value="0.27">$0.27</td>
+                            <td class="text-center text-cyan" data-value="1.1">$1.10</td>
+                            <td class="text-center text-orange font-bold" data-value="42">42.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="59.1">59.1%</td>
+                            <td class="text-center text-yellow font-bold" data-value="88.5">88.5%</td>
+                            <td class="text-center text-yellow font-bold" data-value="75.2">75.2%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1318">1318</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Llama 3.3 70B</td>
+                            <td class="text-muted">Meta</td>
+                            <td class="text-center text-muted" data-value="128">128K</td>
+                            <td class="text-center text-cyan" data-value="0.20">$0.20</td>
+                            <td class="text-center text-cyan" data-value="0.20">$0.20</td>
+                            <td class="text-center text-orange font-bold" data-value="38">38.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="51.2">51.2%</td>
+                            <td class="text-center text-yellow font-bold" data-value="86.0">86.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="68.4">68.4%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1260">1260</td>
                         </tr>
                         <tr>
                             <td class="text-green font-bold">GPT-4o</td>
                             <td class="text-muted">OpenAI</td>
-                            <td class="text-center text-muted">128K</td>
-                            <td class="text-center text-cyan">$2.50</td>
-                            <td class="text-center text-cyan">$10.00</td>
-                            <td class="text-center text-orange font-bold">33.2%</td>
-                            <td class="text-center text-yellow font-bold">53.6%</td>
-                            <td class="text-center text-magenta font-bold">1280</td>
-                        </tr>
-                        <tr>
-                            <td class="text-green font-bold">Grok 3 Mini</td>
-                            <td class="text-muted">xAI</td>
-                            <td class="text-center text-muted">128K</td>
-                            <td class="text-center text-cyan">$0.30</td>
-                            <td class="text-center text-cyan">$0.50</td>
-                            <td class="text-center text-orange font-bold">35.0%</td>
-                            <td class="text-center text-yellow font-bold">60.0%</td>
-                            <td class="text-center text-magenta font-bold">1280</td>
+                            <td class="text-center text-muted" data-value="128">128K</td>
+                            <td class="text-center text-cyan" data-value="2.5">$2.50</td>
+                            <td class="text-center text-cyan" data-value="10">$10.00</td>
+                            <td class="text-center text-orange font-bold" data-value="33.2">33.2%</td>
+                            <td class="text-center text-yellow font-bold" data-value="53.6">53.6%</td>
+                            <td class="text-center text-yellow font-bold" data-value="88.7">88.7%</td>
+                            <td class="text-center text-yellow font-bold" data-value="76.6">76.6%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1280">1280</td>
                         </tr>
                         <tr>
                             <td class="text-green font-bold">Gemini 2 Flash</td>
                             <td class="text-muted">Google</td>
-                            <td class="text-center text-muted">1M</td>
-                            <td class="text-center text-cyan">$0.075</td>
-                            <td class="text-center text-cyan">$0.30</td>
-                            <td class="text-center text-orange font-bold">28.0%</td>
-                            <td class="text-center text-yellow font-bold">52.0%</td>
-                            <td class="text-center text-magenta font-bold">1250</td>
+                            <td class="text-center text-muted" data-value="1000">1M</td>
+                            <td class="text-center text-cyan" data-value="0.075">$0.075</td>
+                            <td class="text-center text-cyan" data-value="0.3">$0.30</td>
+                            <td class="text-center text-orange font-bold" data-value="28">28.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="52">52.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="85.2">85.2%</td>
+                            <td class="text-center text-yellow font-bold" data-value="71.5">71.5%</td>
+                            <td class="text-center text-magenta font-bold" data-value="1250">1250</td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="insight-box" style="margin-top: 12px;">
+                    <span class="insight-label">Benchmark context:</span>
+                    <span class="insight-text"><strong>MMLU</strong> (96%+) = Graduate-level knowledge across 57 subjects. <strong>MATH</strong> (90%+) = Competition-level mathematics. At 95%+ MATH, models can solve problems that stumped PhD mathematicians—enabling AI-assisted scientific discovery.</span>
+                </div>
             </div>
 
             <div class="card">
@@ -1352,6 +1407,248 @@
             </div>
         </div>
 
+        <!-- Implications Tab -->
+        <div id="implications" class="tab-content">
+            <div class="section-description">
+                <strong>Implications Analysis</strong> examines what current AI capabilities and trajectories mean for the economy, workforce, science, and daily life. This analysis assumes current progress rates continue through 2026. <strong>Last updated: December 28, 2025.</strong> This section will be revised as capabilities evolve.
+            </div>
+
+            <div class="card">
+                <div class="card-title">📊 Executive Summary: Where We Stand</div>
+                <div class="card-subtitle">End of 2025 snapshot</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 12px;">As of December 2025, frontier AI models can:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Code at ~80% of senior developer level</strong> on real-world tasks (SWE-Bench)</li>
+                        <li><strong>Reason at 93%+ PhD level</strong> on graduate science questions (GPQA)</li>
+                        <li><strong>Solve 94% of competition math problems</strong> that challenge olympiad contestants (MATH)</li>
+                        <li><strong>Work autonomously for ~5 hours</strong> before needing human intervention (METR)</li>
+                        <li><strong>Process 1-2 million tokens</strong> (~750K-1.5M words) in a single context</li>
+                    </ul>
+                    <p style="margin-bottom: 12px;">The cost of frontier AI inference has dropped <strong>97% in 20 months</strong> (from $30/M tokens to $1/M). Efficient models now cost $0.10/M tokens—cheaper than the electricity to run the query.</p>
+                    <p>At current trajectories, by December 2026 we expect: <strong>~94% SWE-Bench</strong> (senior+ dev level), <strong>~98% GPQA</strong> (near-ceiling), <strong>~78% ARC-AGI</strong> (approaching human abstraction), and <strong>~20 hour autonomy</strong> (multi-day unsupervised work).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💼 Workforce & Employment</div>
+                <div class="card-subtitle">Impact timeline: 2025-2027</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 16px; padding: 12px; background: rgba(255, 136, 0, 0.1); border-radius: 8px; border-left: 3px solid #FF8800;">
+                        <strong style="color: #FF8800;">Key threshold:</strong> When SWE-Bench hits ~85-90%, AI can handle most routine coding tasks end-to-end. Current: 80.9%. Forecast: Q2-Q3 2026.
+                    </p>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Already happening (2025):</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>Software teams report <strong>30-50% productivity gains</strong> with AI coding assistants</li>
+                        <li>Entry-level coding bootcamp graduates face reduced demand—junior tasks increasingly automated</li>
+                        <li>Customer service, content moderation, and basic copywriting roles declining</li>
+                        <li>Legal document review and basic paralegal work being automated</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Expected by end of 2026:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Software development:</strong> Senior developers become "AI managers" overseeing AI-written code. 2-3x output per engineer. Fewer new hires needed for same output.</li>
+                        <li><strong>Knowledge work:</strong> Analysts, researchers, consultants see dramatic productivity gains. Firms can do more with fewer people.</li>
+                        <li><strong>Creative work:</strong> AI handles first drafts, variations, iterations. Human role shifts to curation, direction, final polish.</li>
+                        <li><strong>Scientific research:</strong> AI accelerates literature review, hypothesis generation, data analysis. PhD productivity potentially doubles.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Jobs most resilient (for now):</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Physical trades (plumbing, electrical, construction) — robotics lags language AI by years</li>
+                        <li>Healthcare requiring physical presence and judgment</li>
+                        <li>High-trust advisory roles (senior lawyers, doctors, executives)</li>
+                        <li>Novel creative direction and taste-making</li>
+                        <li>AI development and oversight itself</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🔬 Science & Research</div>
+                <div class="card-subtitle">The acceleration of discovery</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 16px; padding: 12px; background: rgba(0, 212, 255, 0.1); border-radius: 8px; border-left: 3px solid #00D4FF;">
+                        <strong style="color: #00D4FF;">Key threshold:</strong> MATH benchmark at 95%+ means AI can assist with novel mathematical proofs. Current: 94.3% (GPT-5.2). We're essentially there.
+                    </p>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Current capabilities:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>AI can review and synthesize scientific literature orders of magnitude faster than humans</li>
+                        <li>AlphaFold-style breakthroughs: AI solving protein structures that took decades</li>
+                        <li>AI-generated hypotheses being tested in labs (materials science, drug discovery)</li>
+                        <li>Mathematical proof assistants finding novel approaches to open problems</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">2026 expectations:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Drug discovery:</strong> AI identifies promising compounds 10-100x faster. Clinical trial design optimized. First AI-discovered drugs entering Phase 2/3 trials.</li>
+                        <li><strong>Materials science:</strong> AI predicts properties of novel materials, accelerating battery, solar, semiconductor research.</li>
+                        <li><strong>Mathematics:</strong> AI contributes to proofs of significant theorems. Not just verification—actual creative mathematical reasoning.</li>
+                        <li><strong>Climate modeling:</strong> Higher-resolution, faster climate simulations. Better prediction of extreme weather.</li>
+                    </ul>
+                    
+                    <p style="padding: 12px; background: rgba(0, 255, 136, 0.1); border-radius: 8px; border-left: 3px solid #00FF88;">
+                        <strong style="color: #00FF88;">The big picture:</strong> If AI can genuinely accelerate scientific discovery by even 2x, the compounding effects are enormous. Faster drug development, better materials, more efficient energy—each breakthrough enables others.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💰 Economics & Markets</div>
+                <div class="card-subtitle">Capital flows and value creation</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Current state:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>$202B</strong> deployed into AI in 2025 (~50% of all VC)</li>
+                        <li><strong>$500B</strong> OpenAI valuation — larger than most countries' GDP</li>
+                        <li><strong>$4.65T</strong> NVIDIA market cap — #1 globally, up 185% YTD</li>
+                        <li><strong>$8T+</strong> combined market cap of AI chip makers</li>
+                        <li><strong>$280B+</strong> hyperscaler CapEx (AWS, Azure, GCP) — mostly AI infrastructure</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Where value is accruing:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Compute layer:</strong> NVIDIA dominates with 80%+ AI GPU market share. AMD, Broadcom gaining.</li>
+                        <li><strong>Model layer:</strong> OpenAI, Anthropic, Google capturing subscription and API revenue.</li>
+                        <li><strong>Application layer:</strong> Still nascent—Cursor, Perplexity, and others building AI-native products.</li>
+                        <li><strong>Enterprise:</strong> $37B enterprise AI software spend in 2025, growing 40%+ annually.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Macroeconomic implications:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Productivity:</strong> If AI delivers even 10% economy-wide productivity gain, that's ~$2.5T/year in the US alone.</li>
+                        <li><strong>Inflation:</strong> AI deflation in digital goods/services could offset inflation elsewhere. Software, content, analysis all getting cheaper.</li>
+                        <li><strong>Labor share:</strong> Risk that productivity gains flow to capital (AI owners) not labor. Policy responses being debated.</li>
+                        <li><strong>Concentration:</strong> Massive capital requirements favor large players. Startup funding concentrated in few winners.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🏠 Cost of Living & Daily Life</div>
+                <div class="card-subtitle">How AI affects household economics</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Already cheaper (2025):</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Tutoring:</strong> AI tutors available 24/7 for ~$20/month vs. $50-100/hour human tutors</li>
+                        <li><strong>Legal basics:</strong> Simple contracts, will drafting, legal research dramatically cheaper</li>
+                        <li><strong>Tax prep:</strong> AI handles complex returns that previously required accountants</li>
+                        <li><strong>Translation:</strong> Near-real-time translation essentially free vs. professional rates</li>
+                        <li><strong>Writing assistance:</strong> Editing, proofreading, drafting available to everyone</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Getting cheaper (2026):</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Software:</strong> Custom apps built for specific needs at fraction of current cost</li>
+                        <li><strong>Professional services:</strong> Basic consulting, analysis, research commoditized</li>
+                        <li><strong>Education:</strong> Personalized learning at scale. Credential value may shift.</li>
+                        <li><strong>Healthcare admin:</strong> Appointment scheduling, insurance navigation, basic triage</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">Still expensive (physical world):</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Housing, healthcare delivery, childcare, food — require physical presence</li>
+                        <li>Robotics and physical automation lag software AI significantly</li>
+                        <li>These "Baumol cost disease" sectors may become relatively more expensive as AI deflates digital services</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">⚠️ Risks & Uncertainties</div>
+                <div class="card-subtitle">What could change the trajectory</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">Technical risks:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Scaling limits:</strong> Current progress assumes scaling laws continue. They might plateau.</li>
+                        <li><strong>Reliability:</strong> Models still hallucinate. High-stakes deployment requires near-perfect accuracy.</li>
+                        <li><strong>Reasoning depth:</strong> ARC-AGI at 45% shows limits in novel abstraction. May not reach human level.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Economic risks:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Displacement speed:</strong> If automation outpaces job creation, social instability possible.</li>
+                        <li><strong>Concentration:</strong> AI wealth concentrating in few companies/regions could worsen inequality.</li>
+                        <li><strong>Infrastructure costs:</strong> Power, chips, data centers require massive ongoing investment.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #AA44FF;">Geopolitical risks:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Chip supply:</strong> TSMC in Taiwan fabricates 90%+ of advanced AI chips. Geopolitical risk.</li>
+                        <li><strong>Regulation:</strong> EU AI Act, potential US regulation could slow deployment.</li>
+                        <li><strong>Competition:</strong> China's AI development (DeepSeek, Qwen) accelerating despite export controls.</li>
+                    </ul>
+                    
+                    <p style="padding: 12px; background: rgba(255, 136, 0, 0.1); border-radius: 8px; border-left: 3px solid #FF8800;">
+                        <strong style="color: #FF8800;">Bottom line:</strong> The forecasts in this dashboard assume continued exponential progress. History suggests disruptions, plateaus, and surprises are likely. Treat projections as scenarios, not certainties.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🎯 Key Dates to Watch</div>
+                <div class="card-subtitle">Milestones that would confirm or refute trajectory</div>
+                <table style="margin-top: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Timeframe</th>
+                            <th>Milestone</th>
+                            <th>Significance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-cyan font-bold">Q1 2026</td>
+                            <td>SWE-Bench hits 85%</td>
+                            <td class="text-muted">Senior developer parity — massive coding automation potential</td>
+                        </tr>
+                        <tr>
+                            <td class="text-cyan font-bold">Q2 2026</td>
+                            <td>METR autonomy exceeds 8 hours</td>
+                            <td class="text-muted">Full workday autonomous operation — transforms knowledge work</td>
+                        </tr>
+                        <tr>
+                            <td class="text-cyan font-bold">Q3 2026</td>
+                            <td>ARC-AGI exceeds 70%</td>
+                            <td class="text-muted">Closing on human abstraction — strongest AGI signal</td>
+                        </tr>
+                        <tr>
+                            <td class="text-cyan font-bold">Q4 2026</td>
+                            <td>Frontier cost below $0.25/M</td>
+                            <td class="text-muted">GPT-4 level at 99%+ discount — AI accessible to everyone</td>
+                        </tr>
+                        <tr>
+                            <td class="text-yellow font-bold">2026</td>
+                            <td>First AI co-authored Nature paper</td>
+                            <td class="text-muted">AI contributing to novel scientific discovery, not just assistance</td>
+                        </tr>
+                        <tr>
+                            <td class="text-yellow font-bold">2026</td>
+                            <td>AI-discovered drug enters Phase 3</td>
+                            <td class="text-muted">Validation of AI-accelerated drug discovery pipeline</td>
+                        </tr>
+                        <tr>
+                            <td class="text-orange font-bold">Wildcard</td>
+                            <td>Scaling laws plateau</td>
+                            <td class="text-muted">Would slow progress, extend timeline significantly</td>
+                        </tr>
+                        <tr>
+                            <td class="text-orange font-bold">Wildcard</td>
+                            <td>Major AI incident/accident</td>
+                            <td class="text-muted">Could trigger regulatory slowdown or public backlash</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="insight-box" style="margin-top: 24px; background: rgba(0, 255, 136, 0.1); border-left-color: #00FF88;">
+                <span class="insight-label" style="color: #00FF88;">Analysis timestamp:</span>
+                <span class="insight-text">This implications analysis was written December 28, 2025, based on data available at that time. AI capabilities are evolving rapidly. Check back for updates as milestones are hit or missed.</span>
+            </div>
+        </div>
+
         <!-- Footer -->
         <div class="footer">
             <div>Sources: Artificial Analysis, METR, Papers With Code, Crunchbase, company filings</div>
@@ -1374,6 +1671,49 @@
             document.getElementById(tabId).classList.add('active');
             // Add active to clicked button
             event.target.classList.add('active');
+        }
+
+        // Table sorting
+        let sortState = {};
+        function sortTable(tableId, colIndex) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const headers = table.querySelectorAll('th.sortable');
+            
+            // Determine sort direction
+            const currentDir = sortState[tableId + colIndex] || 'none';
+            const newDir = currentDir === 'asc' ? 'desc' : 'asc';
+            sortState[tableId + colIndex] = newDir;
+            
+            // Clear all header classes
+            headers.forEach(h => h.classList.remove('asc', 'desc'));
+            // Set current header class
+            const currentHeader = table.querySelectorAll('th')[colIndex];
+            currentHeader.classList.add(newDir);
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                const aCell = a.cells[colIndex];
+                const bCell = b.cells[colIndex];
+                
+                // Get numeric value from data-value attribute or text
+                let aVal = aCell.dataset.value ? parseFloat(aCell.dataset.value) : aCell.textContent;
+                let bVal = bCell.dataset.value ? parseFloat(bCell.dataset.value) : bCell.textContent;
+                
+                // Handle numeric comparison
+                if (!isNaN(aVal) && !isNaN(bVal)) {
+                    return newDir === 'asc' ? aVal - bVal : bVal - aVal;
+                }
+                
+                // String comparison
+                return newDir === 'asc' 
+                    ? String(aVal).localeCompare(String(bVal))
+                    : String(bVal).localeCompare(String(aVal));
+            });
+            
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
         }
 
         // Chart.js defaults
