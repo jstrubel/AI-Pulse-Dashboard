@@ -107,6 +107,22 @@
             display: block;
         }
 
+        /* Section Description */
+        .section-description {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(0, 255, 136, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            color: rgba(150, 200, 170, 0.85);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .section-description strong {
+            color: #00D4FF;
+        }
+
         /* Metric Cards */
         .metrics-grid {
             display: flex;
@@ -533,6 +549,9 @@
 
         <!-- Overview Tab -->
         <div id="overview" class="tab-content active">
+            <div class="section-description">
+                <strong>Overview</strong> shows the current state of frontier AI at a glance. The metrics highlight today's best-performing models across key benchmarks. SWE-Bench measures real-world coding ability (fixing actual GitHub issues), GPQA tests PhD-level science reasoning, and LMArena ranks models via blind human preference voting. The charts below track how quickly these capabilities are improving over time.
+            </div>
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-label">Best SWE-Bench</div>
@@ -611,6 +630,9 @@
 
         <!-- Models Tab -->
         <div id="models" class="tab-content">
+            <div class="section-description">
+                <strong>Models & Pricing</strong> compares the leading AI models by capability and cost. <strong>Context window</strong> is how much text the model can process at once (200K tokens ≈ 150K words or a 500-page book). <strong>$/M In/Out</strong> is the API cost per million tokens for input and output. <strong>SWE-Bench</strong> measures real coding ability, <strong>GPQA</strong> tests expert-level reasoning, and <strong>Arena Elo</strong> reflects crowdsourced human preference rankings. The cost deflation chart shows how API prices have dropped 99%+ since GPT-4's launch in March 2023.
+            </div>
             <div class="card" style="overflow-x: auto;">
                 <div class="card-title">Frontier & Efficient Models Comparison</div>
                 <div class="card-subtitle">December 2025 pricing and benchmarks</div>
@@ -743,6 +765,9 @@
 
         <!-- Benchmarks Tab -->
         <div id="benchmarks" class="tab-content">
+            <div class="section-description">
+                <strong>Benchmarks</strong> tracks how AI capabilities are measured and improving. <strong>METR Autonomy</strong> measures how long an AI can work independently on complex tasks before needing human help—a key indicator of agentic capability. <strong>Context windows</strong> determine how much information a model can consider at once. The benchmark cards show current leaders on standardized tests: SWE-Bench (real coding), GPQA (PhD science), ARC-AGI (novel reasoning), and HumanEval (code generation). The timeline visualizes the accelerating pace of frontier model releases.
+            </div>
             <div class="card">
                 <div class="card-title">METR Task Autonomy Duration</div>
                 <div class="card-subtitle">Time AI can work autonomously before human intervention • ~196 day doubling time</div>
@@ -822,14 +847,14 @@
                             <div class="timeline-item" style="left: 2%;">
                                 <div class="timeline-dot google"></div>
                                 <div class="timeline-label above">
-                                    <span class="model-name google">Gemini 1.5</span>
+                                    <span class="model-name google">Gemini 1.5 Pro</span>
                                     <span class="model-date">Feb '24</span>
                                 </div>
                             </div>
                             <div class="timeline-item" style="left: 8%;">
                                 <div class="timeline-dot anthropic"></div>
                                 <div class="timeline-label below">
-                                    <span class="model-name anthropic">Claude 3</span>
+                                    <span class="model-name anthropic">Claude 3 Opus</span>
                                     <span class="model-date">Mar '24</span>
                                 </div>
                             </div>
@@ -843,28 +868,28 @@
                             <div class="timeline-item" style="left: 27%;">
                                 <div class="timeline-dot anthropic"></div>
                                 <div class="timeline-label below">
-                                    <span class="model-name anthropic">Claude 3.5</span>
+                                    <span class="model-name anthropic">Claude 3.5 Sonnet</span>
                                     <span class="model-date">Jun '24</span>
                                 </div>
                             </div>
                             <div class="timeline-item" style="left: 35%;">
                                 <div class="timeline-dot meta"></div>
                                 <div class="timeline-label above">
-                                    <span class="model-name meta">Llama 3.1</span>
+                                    <span class="model-name meta">Llama 3.1 405B</span>
                                     <span class="model-date">Jul '24</span>
                                 </div>
                             </div>
                             <div class="timeline-item" style="left: 43%;">
                                 <div class="timeline-dot openai"></div>
                                 <div class="timeline-label below">
-                                    <span class="model-name openai">o1</span>
+                                    <span class="model-name openai">o1-preview</span>
                                     <span class="model-date">Sep '24</span>
                                 </div>
                             </div>
                             <div class="timeline-item" style="left: 52%;">
                                 <div class="timeline-dot google"></div>
                                 <div class="timeline-label above">
-                                    <span class="model-name google">Gemini 2</span>
+                                    <span class="model-name google">Gemini 2.0 Flash</span>
                                     <span class="model-date">Dec '24</span>
                                 </div>
                             </div>
@@ -886,7 +911,7 @@
                             <div class="timeline-item" style="left: 72%;">
                                 <div class="timeline-dot anthropic"></div>
                                 <div class="timeline-label below">
-                                    <span class="model-name anthropic">Claude 4.5</span>
+                                    <span class="model-name anthropic">Claude Opus 4.5</span>
                                     <span class="model-date">Jul '25</span>
                                 </div>
                             </div>
@@ -900,7 +925,7 @@
                             <div class="timeline-item" style="left: 86%;">
                                 <div class="timeline-dot google"></div>
                                 <div class="timeline-label below">
-                                    <span class="model-name google">Gemini 3</span>
+                                    <span class="model-name google">Gemini 3 Pro</span>
                                     <span class="model-date">Oct '25</span>
                                 </div>
                             </div>
@@ -930,6 +955,9 @@
 
         <!-- Funding Tab -->
         <div id="funding" class="tab-content">
+            <div class="section-description">
+                <strong>Funding</strong> tracks the capital flowing into AI. Private valuations show what investors believe leading AI labs are worth. The VC totals reveal AI's dominance of venture capital (now ~50% of all funding). Public market caps show how investors value AI infrastructure companies. The funding table breaks down each major AI company by valuation, total raised, and revenue where available. Note: Private company valuations are based on latest funding rounds and may not reflect current fair market value.
+            </div>
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-label">Top Private Valuation</div>
@@ -1171,6 +1199,9 @@
 
         <!-- Hardware Tab -->
         <div id="hardware" class="tab-content">
+            <div class="section-description">
+                <strong>Hardware</strong> covers the physical infrastructure powering AI. Training frontier models requires massive GPU clusters—xAI's Colossus runs 200K+ NVIDIA H100s. <strong>Hyperscaler CapEx</strong> shows how much cloud providers are investing in AI infrastructure. The hardware cards highlight current and upcoming chips: NVIDIA's Blackwell architecture (B200/GB200), AMD's MI300 series, and custom silicon from Google (TPU) and Amazon (Trainium). Power consumption is a growing constraint, with AI datacenters now drawing tens of gigawatts globally.
+            </div>
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-label">NVIDIA Market Cap</div>
