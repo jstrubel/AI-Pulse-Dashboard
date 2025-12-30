@@ -581,28 +581,28 @@
         <!-- Overview Tab -->
         <div id="overview" class="tab-content active">
             <div class="section-description">
-                <strong>Overview</strong> shows the current state of frontier AI at a glance. The metrics highlight today's best-performing models across key benchmarks. SWE-Bench measures real-world coding ability (fixing actual GitHub issues), GPQA tests PhD-level science reasoning, and LMArena ranks models via blind human preference voting. The charts below track how quickly these capabilities are improving over time.
+                <strong>Overview</strong> shows the current state of frontier AI at a glance. The metrics highlight today's best-performing models across key benchmarks. SWE-Bench measures real-world coding ability (fixing actual GitHub issues), GPQA tests PhD-level science reasoning, and METR measures how long AI can work autonomously. The charts below track how quickly these capabilities are improving over time.
             </div>
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-label">Best SWE-Bench</div>
+                    <div class="metric-label">Coding Ability (SWE-Bench)</div>
                     <div class="metric-value text-lime">80.9%</div>
-                    <div class="metric-subtitle">Claude Opus 4.5</div>
+                    <div class="metric-subtitle">Senior dev ~85% • Est. mid-2026</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label">Best GPQA</div>
+                    <div class="metric-label">PhD Reasoning (GPQA)</div>
                     <div class="metric-value text-cyan">93.2%</div>
-                    <div class="metric-subtitle">GPT-5.2 Pro</div>
+                    <div class="metric-subtitle">Human experts ~70%</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label">Top Private Valuation</div>
-                    <div class="metric-value text-magenta">$500B</div>
-                    <div class="metric-subtitle">OpenAI</div>
+                    <div class="metric-label">Autonomous Work</div>
+                    <div class="metric-value text-yellow">4.8 hrs</div>
+                    <div class="metric-subtitle">Full workday ~8hrs • Est. mid-2026</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label">2025 AI VC Deployed</div>
-                    <div class="metric-value text-yellow">$202B</div>
-                    <div class="metric-subtitle">~50% of all VC</div>
+                    <div class="metric-label">Frontier Cost</div>
+                    <div class="metric-value" style="color: rgba(0, 255, 136, 0.85);">$1/M</div>
+                    <div class="metric-subtitle">Down 97% from GPT-4 launch</div>
                 </div>
             </div>
 
@@ -614,7 +614,7 @@
                 </div>
                 <div class="insight-box">
                     <span class="insight-label">What the thresholds mean:</span>
-                    <span class="insight-text"><strong>~50%</strong> = Junior developer productivity (useful copilot). <strong>~85%</strong> = Senior developer level (autonomous coding). <strong>~95%+</strong> = "Coding AGI" — models can reliably ship production code. Forecast: ~94% by Dec 2026.</span>
+                    <span class="insight-text">~50% = Junior developer productivity (useful copilot). ~85% = Senior developer level (autonomous coding). ~95%+ = "Coding AGI" — models can reliably ship production code. Forecast: ~94% by Dec 2026.</span>
                 </div>
             </div>
 
@@ -626,42 +626,42 @@
                 </div>
                 <div class="insight-box">
                     <span class="insight-label">Benchmark significance:</span>
-                    <span class="insight-text"><strong>SWE-Bench 85%+</strong> = AI can replace most coding tasks. <strong>GPQA 95%+</strong> = PhD-level scientific reasoning. <strong>ARC-AGI 85%+</strong> = Human-level novel abstraction (true AGI indicator). ARC forecast: ~78% by Dec 2026.</span>
+                    <span class="insight-text">SWE-Bench 85%+ = AI can replace most coding tasks. GPQA 95%+ = PhD-level scientific reasoning. ARC-AGI 85%+ = Human-level novel abstraction (true AGI indicator). ARC forecast: ~78% by Dec 2026.</span>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-title">Recent Milestones</div>
                 <div class="milestone model">
-                    <div class="milestone-date text-cyan">Dec 11</div>
+                    <div class="milestone-date">Dec 11</div>
                     <div class="milestone-text">GPT-5.2 releases with 93.2% GPQA Diamond</div>
                 </div>
                 <div class="milestone funding">
-                    <div class="milestone-date text-magenta">Dec 19</div>
+                    <div class="milestone-date">Dec 19</div>
                     <div class="milestone-text">xAI expected to close $15B round at $230B valuation</div>
                 </div>
                 <div class="milestone model">
-                    <div class="milestone-date text-cyan">Nov 24</div>
+                    <div class="milestone-date">Nov 24</div>
                     <div class="milestone-text">Claude Opus 4.5 achieves 80.9% SWE-Bench</div>
                 </div>
                 <div class="milestone model">
-                    <div class="milestone-date text-cyan">Nov 18</div>
+                    <div class="milestone-date">Nov 18</div>
                     <div class="milestone-text">Gemini 3 launches with 1M context window</div>
                 </div>
                 <div class="milestone model">
-                    <div class="milestone-date text-cyan">Nov 17</div>
+                    <div class="milestone-date">Nov 17</div>
                     <div class="milestone-text">Grok 4.1 tops LMArena at 1483 Elo</div>
                 </div>
                 <div class="milestone funding">
-                    <div class="milestone-date text-magenta">Oct 25</div>
+                    <div class="milestone-date">Oct 25</div>
                     <div class="milestone-text">OpenAI secondary sale at $500B valuation</div>
                 </div>
                 <div class="milestone funding">
-                    <div class="milestone-date text-magenta">Sep 25</div>
+                    <div class="milestone-date">Sep 25</div>
                     <div class="milestone-text">Anthropic raises $13B at $183B valuation</div>
                 </div>
                 <div class="milestone model">
-                    <div class="milestone-date text-cyan">Jul 25</div>
+                    <div class="milestone-date">Jul 25</div>
                     <div class="milestone-text">Grok 4 released with 2M token context</div>
                 </div>
             </div>
@@ -681,38 +681,38 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-lime font-bold">SWE-Bench</td>
+                            <td class="font-bold">SWE-Bench</td>
                             <td class="text-center">80.9%</td>
-                            <td class="text-center text-yellow">~88%</td>
-                            <td class="text-center text-yellow">~94%</td>
+                            <td class="text-center">~88%</td>
+                            <td class="text-center">~94%</td>
                             <td class="text-muted">Approaching "coding AGI" — autonomous dev work</td>
                         </tr>
                         <tr>
-                            <td class="text-cyan font-bold">GPQA Diamond</td>
+                            <td class="font-bold">GPQA Diamond</td>
                             <td class="text-center">93.2%</td>
-                            <td class="text-center text-yellow">~96%</td>
-                            <td class="text-center text-yellow">~98%</td>
+                            <td class="text-center">~96%</td>
+                            <td class="text-center">~98%</td>
                             <td class="text-muted">Saturating — PhD-level science solved</td>
                         </tr>
                         <tr>
-                            <td class="text-orange font-bold">ARC-AGI</td>
+                            <td class="font-bold">ARC-AGI</td>
                             <td class="text-center">45%</td>
-                            <td class="text-center text-yellow">~62%</td>
-                            <td class="text-center text-yellow">~78%</td>
+                            <td class="text-center">~62%</td>
+                            <td class="text-center">~78%</td>
                             <td class="text-muted">Closing on human 85% — true abstraction emerging</td>
                         </tr>
                         <tr>
-                            <td class="text-purple font-bold">METR Autonomy</td>
+                            <td class="font-bold">METR Autonomy</td>
                             <td class="text-center">4.8 hrs</td>
-                            <td class="text-center text-yellow">~10 hrs</td>
-                            <td class="text-center text-yellow">~20 hrs</td>
+                            <td class="text-center">~10 hrs</td>
+                            <td class="text-center">~20 hrs</td>
                             <td class="text-muted">Full workday+ autonomous operation possible</td>
                         </tr>
                         <tr>
-                            <td class="text-magenta font-bold">Frontier Cost</td>
+                            <td class="font-bold">Frontier Cost</td>
                             <td class="text-center">$1.00/M</td>
-                            <td class="text-center text-yellow">$0.50/M</td>
-                            <td class="text-center text-yellow">$0.25/M</td>
+                            <td class="text-center">$0.50/M</td>
+                            <td class="text-center">$0.25/M</td>
                             <td class="text-muted">GPT-4 level intelligence at 99.2% discount</td>
                         </tr>
                     </tbody>
@@ -1876,30 +1876,33 @@
                         <strong style="color: #FF8800;">Key threshold:</strong> When SWE-Bench hits ~85-90%, AI can handle most routine coding tasks end-to-end. Current: 80.9%. Forecast: Q2-Q3 2026.
                     </p>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Already happening (2025):</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Already happening (2025):</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li>Software teams report <strong>30-50% productivity gains</strong> with AI coding assistants</li>
+                        <li>Software teams report 30-50% productivity gains with AI coding assistants</li>
                         <li>Entry-level coding bootcamp graduates face reduced demand—junior tasks increasingly automated</li>
                         <li>Customer service, content moderation, and basic copywriting roles declining</li>
                         <li>Legal document review and basic paralegal work being automated</li>
                     </ul>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Expected by end of 2026:</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Expected by end of 2026:</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Software development:</strong> Senior developers become "AI managers" overseeing AI-written code. 2-3x output per engineer. Fewer new hires needed for same output.</li>
-                        <li><strong>Knowledge work:</strong> Analysts, researchers, consultants see dramatic productivity gains. Firms can do more with fewer people.</li>
-                        <li><strong>Creative work:</strong> AI handles first drafts, variations, iterations. Human role shifts to curation, direction, final polish.</li>
-                        <li><strong>Scientific research:</strong> AI accelerates literature review, hypothesis generation, data analysis. PhD productivity potentially doubles.</li>
+                        <li><strong>Software development:</strong> Senior developers become "AI managers" overseeing AI-written code. 2-3x output per engineer.</li>
+                        <li><strong>Knowledge work:</strong> Analysts, researchers, consultants see dramatic productivity gains.</li>
+                        <li><strong>Creative work:</strong> AI handles first drafts, variations, iterations. Human role shifts to curation and direction.</li>
+                        <li><strong>Scientific research:</strong> AI accelerates literature review, hypothesis generation, data analysis.</li>
                     </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Jobs most resilient (for now):</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Physical trades (plumbing, electrical, construction) — robotics lags language AI by years</li>
-                        <li>Healthcare requiring physical presence and judgment</li>
-                        <li>High-trust advisory roles (senior lawyers, doctors, executives)</li>
-                        <li>Novel creative direction and taste-making</li>
-                        <li>AI development and oversight itself</li>
-                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Job Automation Risk by Sector</div>
+                <div class="card-subtitle">Estimated task automation potential by 2027</div>
+                <div class="chart-container">
+                    <canvas id="automationChart"></canvas>
+                </div>
+                <div class="insight-box">
+                    <span class="insight-label">Note:</span>
+                    <span class="insight-text">These estimates reflect task automation, not job elimination. Many roles will transform rather than disappear. Physical presence and high-trust relationships remain difficult to automate.</span>
                 </div>
             </div>
 
@@ -1911,7 +1914,7 @@
                         <strong style="color: #00D4FF;">Key threshold:</strong> MATH benchmark at 95%+ means AI can assist with novel mathematical proofs. Current: 94.3% (GPT-5.2). We're essentially there.
                     </p>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Current capabilities:</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Current capabilities:</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
                         <li>AI can review and synthesize scientific literature orders of magnitude faster than humans</li>
                         <li>AlphaFold-style breakthroughs: AI solving protein structures that took decades</li>
@@ -1946,7 +1949,7 @@
                         <li><strong>$280B+</strong> hyperscaler CapEx (AWS, Azure, GCP) — mostly AI infrastructure</li>
                     </ul>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Where value is accruing:</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Where value is accruing:</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
                         <li><strong>Compute layer:</strong> NVIDIA dominates with 80%+ AI GPU market share. AMD, Broadcom gaining.</li>
                         <li><strong>Model layer:</strong> OpenAI, Anthropic, Google capturing subscription and API revenue.</li>
@@ -1954,12 +1957,12 @@
                         <li><strong>Enterprise:</strong> $37B enterprise AI software spend in 2025, growing 40%+ annually.</li>
                     </ul>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Macroeconomic implications:</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Macroeconomic implications:</strong></p>
                     <ul style="margin-left: 20px;">
                         <li><strong>Productivity:</strong> If AI delivers even 10% economy-wide productivity gain, that's ~$2.5T/year in the US alone.</li>
-                        <li><strong>Inflation:</strong> AI deflation in digital goods/services could offset inflation elsewhere. Software, content, analysis all getting cheaper.</li>
-                        <li><strong>Labor share:</strong> Risk that productivity gains flow to capital (AI owners) not labor. Policy responses being debated.</li>
-                        <li><strong>Concentration:</strong> Massive capital requirements favor large players. Startup funding concentrated in few winners.</li>
+                        <li><strong>Inflation:</strong> AI deflation in digital goods/services could offset inflation elsewhere.</li>
+                        <li><strong>Labor share:</strong> Risk that productivity gains flow to capital (AI owners) not labor.</li>
+                        <li><strong>Concentration:</strong> Massive capital requirements favor large players.</li>
                     </ul>
                 </div>
             </div>
@@ -1968,29 +1971,39 @@
                 <div class="card-title">🏠 Cost of Living & Daily Life</div>
                 <div class="card-subtitle">How AI affects household economics</div>
                 <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Already cheaper (2025):</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Already cheaper (2025):</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
                         <li><strong>Tutoring:</strong> AI tutors available 24/7 for ~$20/month vs. $50-100/hour human tutors</li>
                         <li><strong>Legal basics:</strong> Simple contracts, will drafting, legal research dramatically cheaper</li>
                         <li><strong>Tax prep:</strong> AI handles complex returns that previously required accountants</li>
                         <li><strong>Translation:</strong> Near-real-time translation essentially free vs. professional rates</li>
-                        <li><strong>Writing assistance:</strong> Editing, proofreading, drafting available to everyone</li>
                     </ul>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Getting cheaper (2026):</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Getting cheaper (2026):</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
                         <li><strong>Software:</strong> Custom apps built for specific needs at fraction of current cost</li>
                         <li><strong>Professional services:</strong> Basic consulting, analysis, research commoditized</li>
-                        <li><strong>Education:</strong> Personalized learning at scale. Credential value may shift.</li>
+                        <li><strong>Education:</strong> Personalized learning at scale</li>
                         <li><strong>Healthcare admin:</strong> Appointment scheduling, insurance navigation, basic triage</li>
                     </ul>
                     
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">Still expensive (physical world):</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Still expensive (physical world):</strong></p>
                     <ul style="margin-left: 20px;">
                         <li>Housing, healthcare delivery, childcare, food — require physical presence</li>
                         <li>Robotics and physical automation lag software AI significantly</li>
-                        <li>These "Baumol cost disease" sectors may become relatively more expensive as AI deflates digital services</li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Cost Impact by Category</div>
+                <div class="card-subtitle">Expected price change trajectory through 2027</div>
+                <div class="chart-container">
+                    <canvas id="costImpactChart"></canvas>
+                </div>
+                <div class="insight-box">
+                    <span class="insight-label">Key dynamic:</span>
+                    <span class="insight-text">Digital services deflate rapidly while physical services stay flat or inflate. This "cost bifurcation" creates winners and losers based on consumption patterns.</span>
                 </div>
             </div>
 
@@ -1998,7 +2011,7 @@
                 <div class="card-title">⚠️ Risks & Uncertainties</div>
                 <div class="card-subtitle">What could change the trajectory</div>
                 <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">Technical risks:</strong></p>
+                    <p style="margin-bottom: 12px;"><strong>Technical risks:</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 16px;">
                         <li><strong>Scaling limits:</strong> Current progress assumes scaling laws continue. They might plateau.</li>
                         <li><strong>Reliability:</strong> Models still hallucinate. High-stakes deployment requires near-perfect accuracy.</li>
@@ -2685,6 +2698,106 @@
                 }
             }
         });
+
+        // Automation Risk Chart (Implications tab)
+        const automationCtx = document.getElementById('automationChart');
+        if (automationCtx) {
+            new Chart(automationCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Data Entry', 'Customer Service', 'Copywriting', 'Code (Junior)', 'Legal Research', 'Financial Analysis', 'Code (Senior)', 'Healthcare Admin', 'Sales', 'Physical Trades'],
+                    datasets: [{
+                        label: 'Task Automation %',
+                        data: [85, 75, 70, 65, 60, 55, 40, 35, 25, 10],
+                        backgroundColor: [
+                            'rgba(255, 68, 68, 0.7)',
+                            'rgba(255, 100, 68, 0.7)',
+                            'rgba(255, 136, 0, 0.7)',
+                            'rgba(255, 180, 0, 0.7)',
+                            'rgba(255, 215, 0, 0.7)',
+                            'rgba(200, 230, 100, 0.7)',
+                            'rgba(100, 200, 100, 0.7)',
+                            'rgba(0, 180, 136, 0.7)',
+                            'rgba(0, 150, 180, 0.7)',
+                            'rgba(0, 136, 136, 0.7)'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: context => context.raw + '% of tasks automatable by 2027'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            max: 100,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Cost Impact Chart (Implications tab)
+        const costImpactCtx = document.getElementById('costImpactChart');
+        if (costImpactCtx) {
+            new Chart(costImpactCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['AI Inference', 'Tutoring', 'Translation', 'Legal Basics', 'Custom Software', 'Prof. Services', 'General Goods', 'Healthcare', 'Housing', 'Childcare'],
+                    datasets: [{
+                        label: 'Price Change by 2027',
+                        data: [-90, -70, -80, -60, -50, -40, 0, 15, 20, 25],
+                        backgroundColor: function(context) {
+                            const value = context.raw;
+                            if (value <= -50) return 'rgba(0, 255, 136, 0.7)';
+                            if (value < 0) return 'rgba(0, 212, 255, 0.7)';
+                            if (value === 0) return 'rgba(150, 150, 150, 0.7)';
+                            return 'rgba(255, 136, 0, 0.7)';
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: context => {
+                                    const val = context.raw;
+                                    if (val < 0) return val + '% (deflation)';
+                                    if (val > 0) return '+' + val + '% (inflation)';
+                                    return 'Flat';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            min: -100,
+                            max: 50,
+                            ticks: { 
+                                callback: value => {
+                                    if (value > 0) return '+' + value + '%';
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
