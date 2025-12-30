@@ -570,7 +570,9 @@
         <div class="nav">
             <button class="nav-btn active" onclick="showTab('overview')">◉ Overview</button>
             <button class="nav-btn" onclick="showTab('models')">⬡ Models & Pricing</button>
+            <button class="nav-btn" onclick="showTab('opensource')">🌐 Open Source</button>
             <button class="nav-btn" onclick="showTab('benchmarks')">◈ Benchmarks</button>
+            <button class="nav-btn" onclick="showTab('robotics')">🤖 Robotics</button>
             <button class="nav-btn" onclick="showTab('funding')">◇ Funding</button>
             <button class="nav-btn" onclick="showTab('hardware')">▣ Hardware</button>
             <button class="nav-btn" onclick="showTab('implications')">⚡ Implications</button>
@@ -891,6 +893,214 @@
             </div>
         </div>
 
+        <!-- Open Source / Non-US Models Tab -->
+        <div id="opensource" class="tab-content">
+            <div class="section-description">
+                <strong>Open Source & Non-US Models</strong> tracks AI development outside the US frontier labs. Open-weight models (Llama, Mistral) can be self-hosted and fine-tuned. Chinese labs (DeepSeek, Qwen, Yi) are advancing rapidly despite export controls. These models often offer dramatically lower costs and are critical for understanding the global AI landscape and geopolitical dynamics.
+            </div>
+
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-title">Open Source & Non-US Model Comparison</div>
+                <div class="card-subtitle">December 2025 • Click headers to sort</div>
+                <table id="openSourceTable">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Origin</th>
+                            <th>License</th>
+                            <th class="text-center sortable" onclick="sortTable('openSourceTable', 3)">Params</th>
+                            <th class="text-center sortable" onclick="sortTable('openSourceTable', 4)">MMLU</th>
+                            <th class="text-center sortable" onclick="sortTable('openSourceTable', 5)">MATH</th>
+                            <th class="text-center sortable" onclick="sortTable('openSourceTable', 6)">HumanEval</th>
+                            <th class="text-center sortable" onclick="sortTable('openSourceTable', 7)">API $/M</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="frontier">
+                            <td class="text-lime font-bold">Llama 3.1 405B</td>
+                            <td class="text-muted">Meta (US)</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="405">405B</td>
+                            <td class="text-center text-lime font-bold" data-value="88.6">88.6%</td>
+                            <td class="text-center text-yellow font-bold" data-value="73.8">73.8%</td>
+                            <td class="text-center text-lime font-bold" data-value="89.0">89.0%</td>
+                            <td class="text-center text-cyan" data-value="0.80">$0.80</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-lime font-bold">DeepSeek V3</td>
+                            <td class="text-orange">China</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="671">671B MoE</td>
+                            <td class="text-center text-lime font-bold" data-value="88.5">88.5%</td>
+                            <td class="text-center text-yellow font-bold" data-value="75.2">75.2%</td>
+                            <td class="text-center text-lime font-bold" data-value="82.6">82.6%</td>
+                            <td class="text-center text-cyan" data-value="0.27">$0.27</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-lime font-bold">Qwen 2.5 72B</td>
+                            <td class="text-orange">China (Alibaba)</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="72">72B</td>
+                            <td class="text-center text-lime font-bold" data-value="86.1">86.1%</td>
+                            <td class="text-center text-yellow font-bold" data-value="71.9">71.9%</td>
+                            <td class="text-center text-lime font-bold" data-value="86.4">86.4%</td>
+                            <td class="text-center text-cyan" data-value="0.15">$0.15</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Mistral Large 2</td>
+                            <td class="text-purple">France (EU)</td>
+                            <td class="text-yellow">Commercial</td>
+                            <td class="text-center text-muted" data-value="123">123B</td>
+                            <td class="text-center text-lime font-bold" data-value="86.0">86.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="69.1">69.1%</td>
+                            <td class="text-center text-yellow font-bold" data-value="81.2">81.2%</td>
+                            <td class="text-center text-cyan" data-value="2.00">$2.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Llama 3.3 70B</td>
+                            <td class="text-muted">Meta (US)</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="70">70B</td>
+                            <td class="text-center text-lime font-bold" data-value="86.0">86.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="68.4">68.4%</td>
+                            <td class="text-center text-yellow font-bold" data-value="78.9">78.9%</td>
+                            <td class="text-center text-cyan" data-value="0.20">$0.20</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Yi-Lightning</td>
+                            <td class="text-orange">China (01.AI)</td>
+                            <td class="text-yellow">Commercial</td>
+                            <td class="text-center text-muted" data-value="0">Unknown</td>
+                            <td class="text-center text-yellow font-bold" data-value="84.2">84.2%</td>
+                            <td class="text-center text-yellow font-bold" data-value="68.0">68.0%</td>
+                            <td class="text-center text-yellow font-bold" data-value="76.5">76.5%</td>
+                            <td class="text-center text-cyan" data-value="0.14">$0.14</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Qwen 2.5 32B</td>
+                            <td class="text-orange">China (Alibaba)</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="32">32B</td>
+                            <td class="text-center text-yellow font-bold" data-value="83.5">83.5%</td>
+                            <td class="text-center text-yellow font-bold" data-value="66.2">66.2%</td>
+                            <td class="text-center text-yellow font-bold" data-value="79.8">79.8%</td>
+                            <td class="text-center text-cyan" data-value="0.08">$0.08</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Mistral Nemo 12B</td>
+                            <td class="text-purple">France (EU)</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="12">12B</td>
+                            <td class="text-center text-yellow font-bold" data-value="75.2">75.2%</td>
+                            <td class="text-center text-orange font-bold" data-value="52.1">52.1%</td>
+                            <td class="text-center text-yellow font-bold" data-value="68.5">68.5%</td>
+                            <td class="text-center text-cyan" data-value="0.04">$0.04</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Llama 3.2 3B</td>
+                            <td class="text-muted">Meta (US)</td>
+                            <td class="text-cyan">Open</td>
+                            <td class="text-center text-muted" data-value="3">3B</td>
+                            <td class="text-center text-orange font-bold" data-value="63.4">63.4%</td>
+                            <td class="text-center text-orange font-bold" data-value="38.2">38.2%</td>
+                            <td class="text-center text-orange font-bold" data-value="52.1">52.1%</td>
+                            <td class="text-center text-cyan" data-value="0.01">$0.01</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="insight-box" style="margin-top: 12px;">
+                    <span class="insight-label">Cost advantage:</span>
+                    <span class="insight-text">DeepSeek V3 at $0.27/M delivers ~88% MMLU — comparable to GPT-4o — at <strong>10x lower cost</strong>. Qwen 2.5 32B at $0.08/M is excellent for high-volume, cost-sensitive applications.</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🇨🇳 Chinese AI Landscape</div>
+                <div class="card-subtitle">Despite US export controls, rapid advancement continues</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">Key Players:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>DeepSeek</strong> — Hedge fund-backed (High-Flyer). V3 is frontier-competitive at fraction of cost. MoE architecture innovation.</li>
+                        <li><strong>Alibaba (Qwen)</strong> — Largest open-source contributor from China. Qwen 2.5 series very strong. 72B rivals Llama 405B on many tasks.</li>
+                        <li><strong>01.AI (Yi)</strong> — Founded by ex-Google AI lead Kai-Fu Lee. Yi-Lightning competitive with GPT-4 class.</li>
+                        <li><strong>Baidu (ERNIE)</strong> — Integrated into Baidu search. Less open, more domestically focused.</li>
+                        <li><strong>Zhipu AI (GLM)</strong> — ChatGLM series. Strong in Chinese language tasks.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Export Control Impact:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>US restricts NVIDIA H100/A100 sales to China since Oct 2022</li>
+                        <li>China stockpiled chips before ban; using older H800/A800 variants</li>
+                        <li>Driving innovation in <strong>efficiency</strong> — DeepSeek's MoE uses less compute for similar results</li>
+                        <li>Domestic chip development accelerating (Huawei Ascend, etc.) but still 2-3 generations behind</li>
+                    </ul>
+                    
+                    <p style="padding: 12px; background: rgba(255, 136, 0, 0.1); border-radius: 8px; border-left: 3px solid #FF8800;">
+                        <strong style="color: #FF8800;">Geopolitical implication:</strong> Export controls have slowed but not stopped Chinese AI progress. Efficiency innovations (MoE, better training) partially compensate for compute constraints. The gap is narrower than many expected.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🌍 Open Source Ecosystem</div>
+                <div class="card-subtitle">Why open-weight models matter</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Advantages of Open Models:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Self-hosting:</strong> Run on your own infrastructure. No API costs at scale. Data stays private.</li>
+                        <li><strong>Fine-tuning:</strong> Customize for specific domains (legal, medical, finance). Closed models don't allow this.</li>
+                        <li><strong>No vendor lock-in:</strong> Switch providers, modify architecture, no rate limits.</li>
+                        <li><strong>Transparency:</strong> Inspect weights, understand behavior, audit for safety.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Key Open Model Families:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Llama (Meta):</strong> Most influential open series. 3.1 405B is flagship. Permissive license for most uses.</li>
+                        <li><strong>Mistral (France):</strong> European alternative. Strong efficiency focus. Mixtral MoE pioneered open MoE.</li>
+                        <li><strong>Qwen (Alibaba):</strong> Best Chinese open series. Apache 2.0 license. Excellent multilingual.</li>
+                        <li><strong>DeepSeek:</strong> Fully open weights. V3 architecture is novel. Research-friendly.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">The Capability Gap:</strong></p>
+                    <table style="margin-top: 8px; margin-bottom: 16px;">
+                        <thead>
+                            <tr>
+                                <th>Benchmark</th>
+                                <th class="text-center">Best Closed</th>
+                                <th class="text-center">Best Open</th>
+                                <th class="text-center">Gap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MMLU</td>
+                                <td class="text-center text-lime">97.1% (GPT-5.2)</td>
+                                <td class="text-center text-cyan">88.6% (Llama 405B)</td>
+                                <td class="text-center text-yellow">8.5%</td>
+                            </tr>
+                            <tr>
+                                <td>MATH</td>
+                                <td class="text-center text-lime">94.3% (GPT-5.2)</td>
+                                <td class="text-center text-cyan">75.2% (DeepSeek V3)</td>
+                                <td class="text-center text-orange">19.1%</td>
+                            </tr>
+                            <tr>
+                                <td>HumanEval</td>
+                                <td class="text-center text-lime">97.0% (Opus 4.5)</td>
+                                <td class="text-center text-cyan">89.0% (Llama 405B)</td>
+                                <td class="text-center text-yellow">8.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="insight-box">
+                        <span class="insight-label">Trend:</span>
+                        <span class="insight-text">The gap is shrinking. Open models today match closed models from ~12-18 months ago. For many production use cases, open models are "good enough" at 5-10x lower cost.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Benchmarks Tab -->
         <div id="benchmarks" class="tab-content">
             <div class="section-description">
@@ -1086,6 +1296,230 @@
                     <span class="insight-label">Trend:</span>
                     <span class="insight-text">13 frontier releases in 22 months • Labs now shipping major updates every ~6 weeks</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Robotics Tab -->
+        <div id="robotics" class="tab-content">
+            <div class="section-description">
+                <strong>Robotics</strong> tracks the physical AI revolution. While language AI has advanced rapidly, robotics is ~5-7 years behind on the capability curve. However, progress is accelerating as AI "brains" improve. Humanoid robots and general-purpose automation could be the key variable determining whether AI transformation remains digital or extends to the physical economy. This section covers major players, timelines, and implications.
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Humanoid Robot Startups</div>
+                    <div class="metric-value text-cyan">$10B+</div>
+                    <div class="metric-subtitle">Total funding raised</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tesla Optimus Target</div>
+                    <div class="metric-value text-yellow">$20-30K</div>
+                    <div class="metric-subtitle">Per unit (2027 goal)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Warehouse Robots</div>
+                    <div class="metric-value text-lime">500K+</div>
+                    <div class="metric-subtitle">Amazon deployed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Est. Commercial Humanoids</div>
+                    <div class="metric-value text-magenta">2027-28</div>
+                    <div class="metric-subtitle">First mass deployment</div>
+                </div>
+            </div>
+
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-title">Humanoid Robot Companies</div>
+                <div class="card-subtitle">Major players in general-purpose robotics</div>
+                <table id="roboticsTable">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Origin</th>
+                            <th>Robot</th>
+                            <th class="text-center">Funding</th>
+                            <th>Key Partners</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="frontier">
+                            <td class="text-lime font-bold">Tesla</td>
+                            <td class="text-muted">US</td>
+                            <td>Optimus (Gen 2)</td>
+                            <td class="text-center text-muted">Internal</td>
+                            <td class="text-muted">Tesla factories</td>
+                            <td class="text-yellow">Factory testing</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-lime font-bold">Figure</td>
+                            <td class="text-muted">US</td>
+                            <td>Figure 02</td>
+                            <td class="text-center text-cyan">$754M</td>
+                            <td class="text-muted">BMW, OpenAI, NVIDIA</td>
+                            <td class="text-lime">BMW deployment</td>
+                        </tr>
+                        <tr class="frontier">
+                            <td class="text-lime font-bold">1X Technologies</td>
+                            <td class="text-muted">Norway</td>
+                            <td>NEO</td>
+                            <td class="text-center text-cyan">$125M</td>
+                            <td class="text-muted">OpenAI (investor)</td>
+                            <td class="text-yellow">Pre-production</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Boston Dynamics</td>
+                            <td class="text-muted">US (Hyundai)</td>
+                            <td>Atlas (Electric)</td>
+                            <td class="text-center text-muted">Subsidiary</td>
+                            <td class="text-muted">Hyundai</td>
+                            <td class="text-cyan">R&D / Demo</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Agility Robotics</td>
+                            <td class="text-muted">US</td>
+                            <td>Digit</td>
+                            <td class="text-center text-cyan">$179M</td>
+                            <td class="text-muted">Amazon</td>
+                            <td class="text-lime">Amazon pilots</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Unitree</td>
+                            <td class="text-orange">China</td>
+                            <td>H1, G1</td>
+                            <td class="text-center text-cyan">$115M</td>
+                            <td class="text-muted">Various</td>
+                            <td class="text-lime">Commercial sales</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Apptronik</td>
+                            <td class="text-muted">US</td>
+                            <td>Apollo</td>
+                            <td class="text-center text-cyan">$50M</td>
+                            <td class="text-muted">Mercedes-Benz</td>
+                            <td class="text-yellow">Pilot programs</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">Sanctuary AI</td>
+                            <td class="text-muted">Canada</td>
+                            <td>Phoenix</td>
+                            <td class="text-center text-cyan">$140M</td>
+                            <td class="text-muted">Magna</td>
+                            <td class="text-yellow">Pilot programs</td>
+                        </tr>
+                        <tr>
+                            <td class="text-green font-bold">UBTECH</td>
+                            <td class="text-orange">China</td>
+                            <td>Walker X</td>
+                            <td class="text-center text-cyan">$940M</td>
+                            <td class="text-muted">Various Chinese</td>
+                            <td class="text-lime">Commercial sales</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="insight-box" style="margin-top: 12px;">
+                    <span class="insight-label">Investment surge:</span>
+                    <span class="insight-text">Figure's $754M round at $2.6B valuation (Feb 2024) marked a turning point. Investors now see path to humanoid robots as real, not sci-fi.</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📅 Robotics Timeline</div>
+                <div class="card-subtitle">Expected milestones if current progress continues</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">2025-2026: Factory Pilots</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>Tesla Optimus deployed in Tesla factories (internal use)</li>
+                        <li>Figure 02 in BMW manufacturing facilities</li>
+                        <li>Agility Digit expanding Amazon warehouse pilots</li>
+                        <li>Limited production runs — hundreds to low thousands of units</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">2027-2028: Early Commercial</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>First external sales of humanoid robots (not just pilots)</li>
+                        <li>Tesla targeting $20-30K price point for Optimus</li>
+                        <li>Warehouse, logistics, manufacturing primary markets</li>
+                        <li>Tens of thousands of units annually</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">2029-2032: Mass Deployment</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>Humanoid robots in retail, hospitality, healthcare support</li>
+                        <li>Costs drop toward $10-15K as manufacturing scales</li>
+                        <li>Hundreds of thousands to millions of units</li>
+                        <li>Consumer/home robots begin appearing</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FFD700;">2033-2035: Ubiquity (Optimistic)</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li>Robots competitive with human labor on cost for many physical tasks</li>
+                        <li>Home robots for elderly care, cleaning, assistance</li>
+                        <li>Significant labor market disruption in physical sectors</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🧠 Why AI Progress Enables Robotics</div>
+                <div class="card-subtitle">The software-hardware convergence</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    <p style="margin-bottom: 16px; padding: 12px; background: rgba(0, 255, 136, 0.1); border-radius: 8px; border-left: 3px solid #00FF88;">
+                        <strong style="color: #00FF88;">Key insight:</strong> The robotics bottleneck was always the "brain," not the body. Hardware (motors, actuators, sensors) has been ready. What changed is AI can now understand natural language instructions, perceive environments, and adapt to unexpected situations.
+                    </p>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">What LLMs enable:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Natural instruction:</strong> "Pick up the box and put it on the shelf" — no programming required</li>
+                        <li><strong>Common sense:</strong> Understanding that fragile items need gentle handling</li>
+                        <li><strong>Adaptation:</strong> Handling novel situations not explicitly programmed</li>
+                        <li><strong>Multi-modal:</strong> Vision + language + action in unified model</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">Remaining challenges:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Dexterity:</strong> Fine manipulation (threading a needle, tying shoes) still very hard</li>
+                        <li><strong>Reliability:</strong> Robots must work 24/7 without errors that harm people</li>
+                        <li><strong>Cost:</strong> Current humanoids cost $50-150K — need 10x reduction</li>
+                        <li><strong>Battery life:</strong> Current runtime 2-4 hours — need full workday</li>
+                        <li><strong>Edge cases:</strong> Handling truly unexpected environments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💼 Economic Implications</div>
+                <div class="card-subtitle">What robotics means for labor and cost of living</div>
+                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Jobs most affected (2027-2035):</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Warehouse/logistics:</strong> Already automating. Humanoids accelerate.</li>
+                        <li><strong>Manufacturing:</strong> Assembly line tasks most vulnerable.</li>
+                        <li><strong>Retail:</strong> Stocking, inventory, cleaning.</li>
+                        <li><strong>Food service:</strong> Cooking, prep, delivery (already starting).</li>
+                        <li><strong>Agriculture:</strong> Harvesting, sorting, packing.</li>
+                        <li><strong>Cleaning/janitorial:</strong> Commercial buildings first, then residential.</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Cost of living impact:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>Manufactured goods:</strong> Could drop significantly as robot labor scales</li>
+                        <li><strong>Food:</strong> Agricultural + food service automation reduces costs</li>
+                        <li><strong>Services:</strong> Cleaning, maintenance, delivery get cheaper</li>
+                        <li><strong>Healthcare:</strong> Robot assistants extend what nurses/aides can do</li>
+                    </ul>
+                    
+                    <p style="padding: 12px; background: rgba(255, 136, 0, 0.1); border-radius: 8px; border-left: 3px solid #FF8800;">
+                        <strong style="color: #FF8800;">The big picture:</strong> AI alone automates knowledge work (digital). AI + robotics automates physical work too. Combined, they represent potential automation of 60-80% of current jobs by 2040. Whether this is utopia or dystopia depends on policy, transition speed, and how gains are distributed.
+                    </p>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top: 24px; background: rgba(0, 255, 136, 0.1); border-left-color: #00FF88;">
+                <span class="insight-label" style="color: #00FF88;">Section note:</span>
+                <span class="insight-text">Robotics timelines are highly uncertain. Hardware iteration is slower than software. Regulatory approval, safety certification, and manufacturing scale-up add years. Treat projections as optimistic scenarios.</span>
             </div>
         </div>
 
