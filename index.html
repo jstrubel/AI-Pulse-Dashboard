@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Pulse - Real-time AI Progress Tracker</title>
     <meta name="description" content="Track AI progress in real-time. Benchmark scores, model comparisons, funding rounds, and hardware metrics.">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -29,7 +29,7 @@
 
         /* Header */
         .header {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .header-top {
@@ -65,36 +65,32 @@
             font-size: 13px;
         }
 
-        /* Navigation - Visible Tabs at Top */
+        /* Navigation */
         .nav {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             margin-bottom: 24px;
             flex-wrap: wrap;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
         }
 
         .nav-btn {
-            padding: 8px 14px;
+            padding: 10px 18px;
             background: rgba(20, 35, 30, 0.6);
             border: 1px solid rgba(0, 255, 136, 0.15);
             border-radius: 8px;
             color: rgba(0, 255, 136, 0.6);
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 6px;
             transition: all 0.2s ease;
-            white-space: nowrap;
         }
 
         .nav-btn:hover {
             border-color: rgba(0, 255, 136, 0.3);
             color: rgba(0, 255, 136, 0.8);
-            transform: translateY(-1px);
         }
 
         .nav-btn.active {
@@ -103,28 +99,13 @@
             color: #00FF88;
         }
 
-        .nav-btn .new-badge {
-            font-size: 8px;
-            padding: 2px 5px;
-            background: linear-gradient(135deg, #FF00FF, #FF8800);
-            border-radius: 3px;
-            color: white;
-            font-weight: 700;
-        }
-
         /* Tab Content */
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease;
         }
 
         .tab-content.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Section Description */
@@ -141,11 +122,6 @@
 
         .section-description strong {
             color: #00D4FF;
-        }
-
-        .section-description em {
-            color: #00FF88;
-            font-style: normal;
         }
 
         /* Metric Cards */
@@ -193,13 +169,6 @@
             margin-bottom: 24px;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
         .card-title {
             color: #00FF88;
             font-size: 16px;
@@ -213,28 +182,11 @@
             margin-bottom: 16px;
         }
 
-        .card-badge {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge-core { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
-        .badge-momentum { background: rgba(0, 212, 255, 0.2); color: #00D4FF; }
-        .badge-emerging { background: rgba(255, 0, 255, 0.2); color: #FF00FF; }
-
         /* Charts */
         .chart-container {
             position: relative;
             height: 300px;
             width: 100%;
-        }
-
-        .chart-container.tall {
-            height: 450px;
         }
 
         /* Tables */
@@ -290,13 +242,12 @@
         }
 
         .text-green { color: #00FF88; }
-        .text-lime { color: #00FF88; }
         .text-cyan { color: #00D4FF; }
         .text-magenta { color: #FF00FF; }
         .text-orange { color: #FF8800; }
         .text-yellow { color: #FFD700; }
         .text-purple { color: #AA44FF; }
-        .text-red { color: #FF4444; }
+        .text-lime { color: #00FF88; }
         .text-muted { color: rgba(150, 200, 170, 0.7); }
         .text-center { text-align: center; }
         .text-right { text-align: right; }
@@ -341,29 +292,10 @@
             border-left: 3px solid #FF00FF;
         }
 
-        .insight-box.cyan {
-            background: rgba(0, 212, 255, 0.1);
-            border-left-color: #00D4FF;
-        }
-
-        .insight-box.orange {
-            background: rgba(255, 136, 0, 0.1);
-            border-left-color: #FF8800;
-        }
-
-        .insight-box.lime {
-            background: rgba(0, 255, 136, 0.1);
-            border-left-color: #00FF88;
-        }
-
         .insight-label {
             color: #FF00FF;
             font-weight: 600;
         }
-
-        .insight-box.cyan .insight-label { color: #00D4FF; }
-        .insight-box.orange .insight-label { color: #FF8800; }
-        .insight-box.lime .insight-label { color: #00FF88; }
 
         .insight-text {
             color: rgba(200, 230, 210, 0.8);
@@ -467,6 +399,8 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
+            background: #00FF88;
+            border: 2px solid #0a1410;
             position: absolute;
             top: -4px;
             left: 50%;
@@ -481,41 +415,46 @@
 
         .timeline-label {
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
             white-space: nowrap;
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
         }
 
         .timeline-label.above {
             bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .timeline-label.below {
             top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .model-name {
+        .timeline-label .model-name {
             display: block;
-            font-size: 11px;
-            font-weight: 600;
+            color: #00FF88;
         }
 
-        .model-name.openai { color: #00D4FF; }
-        .model-name.anthropic { color: #FF8800; }
-        .model-name.google { color: #FF00FF; }
-        .model-name.meta { color: #AA44FF; }
-        .model-name.xai { color: #FFD700; }
+        .timeline-label .model-name.openai { color: #00D4FF; }
+        .timeline-label .model-name.anthropic { color: #FF8800; }
+        .timeline-label .model-name.google { color: #FF00FF; }
+        .timeline-label .model-name.meta { color: #AA44FF; }
+        .timeline-label .model-name.xai { color: #FFD700; }
 
-        .model-date {
-            font-size: 9px;
+        .timeline-label .model-date {
+            display: block;
             color: rgba(150, 200, 170, 0.5);
+            font-size: 9px;
+            font-weight: 400;
         }
 
         .timeline-legend {
             display: flex;
-            gap: 16px;
             justify-content: center;
+            gap: 20px;
             margin-top: 16px;
             flex-wrap: wrap;
         }
@@ -534,19 +473,18 @@
             border-radius: 50%;
         }
 
-        /* Hardware Grid */
+        /* Hardware Cards */
         .hardware-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 16px;
-            margin-top: 24px;
         }
 
         .hardware-card {
-            background: rgba(10, 20, 15, 0.6);
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            padding: 16px;
+            background: linear-gradient(135deg, rgba(20, 35, 30, 0.8), rgba(15, 25, 20, 0.9));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 20px;
         }
 
         .hardware-card.lime { border-left: 3px solid #00FF88; }
@@ -557,24 +495,24 @@
         .hardware-card.yellow { border-left: 3px solid #FFD700; }
 
         .hardware-name {
-            font-weight: 600;
+            color: #00FF88;
             font-size: 14px;
-            color: #e0f0e8;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
         .hardware-desc {
+            color: rgba(150, 200, 170, 0.6);
             font-size: 12px;
-            color: rgba(150, 200, 170, 0.7);
             margin-bottom: 12px;
         }
 
         .hardware-status {
-            font-size: 10px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 4px;
             display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
         }
 
         .hardware-status.lime { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
@@ -584,38 +522,119 @@
         .hardware-status.purple { background: rgba(170, 68, 255, 0.2); color: #AA44FF; }
         .hardware-status.yellow { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
 
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 11px;
+            color: rgba(150, 170, 200, 0.4);
+        }
+
+        /* Visible Tab Navigation */
+        .nav {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        .nav-btn {
+            padding: 8px 14px;
+            background: rgba(20, 35, 30, 0.6);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 8px;
+            color: rgba(0, 255, 136, 0.6);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+            color: rgba(0, 255, 136, 0.8);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.1));
+            border-color: rgba(0, 255, 136, 0.5);
+            color: #00FF88;
+        }
+
+        .nav-btn .new-badge {
+            font-size: 8px;
+            padding: 2px 5px;
+            background: linear-gradient(135deg, #FF00FF, #FF8800);
+            border-radius: 3px;
+            color: white;
+            font-weight: 700;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .metrics-grid {
+                flex-direction: column;
+            }
+            
+            .metric-card {
+                min-width: 100%;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th, td {
+                padding: 8px 4px;
+            }
+        }
+    
         /* Infrastructure Grid */
         .infra-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 16px;
         }
 
         .infra-card {
-            background: rgba(10, 20, 15, 0.6);
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            padding: 16px;
+            background: linear-gradient(135deg, rgba(20, 35, 30, 0.8), rgba(15, 25, 20, 0.9));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 20px;
         }
 
         .infra-card.lime { border-left: 3px solid #00FF88; }
         .infra-card.cyan { border-left: 3px solid #00D4FF; }
         .infra-card.magenta { border-left: 3px solid #FF00FF; }
         .infra-card.orange { border-left: 3px solid #FF8800; }
+        .infra-card.purple { border-left: 3px solid #AA44FF; }
         .infra-card.yellow { border-left: 3px solid #FFD700; }
 
         .infra-name {
+            color: #00FF88;
+            font-size: 14px;
             font-weight: 600;
-            font-size: 15px;
-            color: #e0f0e8;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .infra-stats {
             display: flex;
-            gap: 16px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 8px;
         }
 
         .infra-stat {
@@ -624,9 +643,9 @@
         }
 
         .infra-stat-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: #00FF88;
+            font-size: 18px;
+            font-weight: 700;
+            color: #00D4FF;
         }
 
         .infra-stat-label {
@@ -636,17 +655,17 @@
         }
 
         .infra-desc {
+            color: rgba(150, 200, 170, 0.6);
             font-size: 12px;
-            color: rgba(150, 200, 170, 0.7);
             margin-bottom: 12px;
         }
 
         .infra-status {
-            font-size: 10px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 4px;
             display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
         }
 
         .infra-status.lime { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
@@ -654,22 +673,29 @@
         .infra-status.magenta { background: rgba(255, 0, 255, 0.2); color: #FF00FF; }
         .infra-status.orange { background: rgba(255, 136, 0, 0.2); color: #FF8800; }
 
-        /* Portfolio Specific Styles */
-        .portfolio-value-display {
-            margin-bottom: 24px;
+        /* Portfolio Section */
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
-        .portfolio-total {
-            font-size: 38px;
+        .portfolio-value {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-current {
+            font-size: 36px;
             font-weight: 700;
             color: #00FF88;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-            margin-bottom: 4px;
         }
 
         .portfolio-change {
-            font-size: 15px;
-            font-weight: 500;
+            font-size: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -679,78 +705,35 @@
         .portfolio-change.negative { color: #FF4444; }
 
         .portfolio-meta {
-            display: flex;
-            gap: 20px;
-            margin-top: 12px;
-            color: rgba(150, 200, 170, 0.6);
+            text-align: right;
+        }
+
+        .portfolio-start {
+            color: rgba(150, 200, 170, 0.5);
             font-size: 12px;
-            flex-wrap: wrap;
         }
 
-        /* Strategy Selector */
-        .strategy-tabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .strategy-tab {
-            flex: 1;
-            padding: 16px;
-            background: rgba(10, 20, 15, 0.6);
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .strategy-tab:hover {
-            border-color: rgba(0, 255, 136, 0.3);
-        }
-
-        .strategy-tab.active {
-            border-color: #00FF88;
-            background: rgba(0, 255, 136, 0.08);
-        }
-
-        .strategy-icon {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .strategy-name {
-            font-weight: 600;
-            font-size: 13px;
-            color: #e0f0e8;
-            margin-bottom: 4px;
-        }
-
-        .strategy-desc {
+        .portfolio-date {
+            color: rgba(150, 200, 170, 0.7);
             font-size: 11px;
-            color: rgba(150, 200, 170, 0.6);
         }
 
         /* Holdings Grid */
         .holdings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 12px;
+            margin-top: 16px;
         }
 
         .holding-card {
-            background: rgba(10, 20, 15, 0.6);
+            background: rgba(15, 25, 20, 0.6);
             border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            padding: 14px 16px;
+            border-radius: 8px;
+            padding: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .holding-card:hover {
-            border-color: rgba(0, 255, 136, 0.3);
         }
 
         .holding-info {
@@ -760,10 +743,9 @@
         }
 
         .holding-ticker {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
             color: #00FF88;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
         }
 
         .holding-name {
@@ -772,10 +754,10 @@
         }
 
         .holding-weight {
-            font-size: 11px;
+            font-size: 12px;
             color: #00D4FF;
             background: rgba(0, 212, 255, 0.15);
-            padding: 2px 8px;
+            padding: 3px 8px;
             border-radius: 4px;
         }
 
@@ -786,7 +768,6 @@
         .holding-amount {
             font-weight: 600;
             font-size: 14px;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
         }
 
         .holding-return {
@@ -795,144 +776,6 @@
 
         .holding-return.positive { color: #00FF88; }
         .holding-return.negative { color: #FF4444; }
-
-        /* Signal Rows */
-        .signal-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(10, 20, 15, 0.5);
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        .signal-ticker {
-            font-weight: 600;
-            font-family: 'SF Mono', monospace;
-            min-width: 55px;
-            color: #e0f0e8;
-        }
-
-        .signal-status {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
-            min-width: 55px;
-            text-align: center;
-        }
-
-        .signal-buy { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
-        .signal-watch { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
-        .signal-avoid { background: rgba(255, 68, 68, 0.2); color: #FF4444; }
-
-        .signal-details {
-            flex: 1;
-            display: flex;
-            gap: 16px;
-            font-size: 11px;
-            color: rgba(150, 200, 170, 0.7);
-            flex-wrap: wrap;
-        }
-
-        .signal-price {
-            font-family: 'SF Mono', monospace;
-            color: #e0f0e8;
-        }
-
-        /* Live Indicator */
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: rgba(150, 200, 170, 0.7);
-        }
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #00FF88;
-            animation: livePulse 1.5s infinite;
-        }
-
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
-            50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(0, 255, 136, 0); }
-        }
-
-        /* Metrics Row */
-        .metrics-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .metric-box {
-            background: rgba(10, 20, 15, 0.5);
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .metric-box .metric-label {
-            margin-bottom: 4px;
-            font-size: 9px;
-        }
-
-        .metric-box .metric-value {
-            font-size: 18px;
-        }
-
-        /* Emerging Table */
-        .emerging-table td {
-            vertical-align: middle;
-        }
-
-        .company-ticker {
-            font-weight: 600;
-            font-family: 'SF Mono', monospace;
-            color: #00D4FF;
-        }
-
-        .company-name {
-            font-size: 11px;
-            color: rgba(150, 200, 170, 0.6);
-        }
-
-        .thesis-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 500;
-            background: rgba(255, 0, 255, 0.15);
-            color: #FF00FF;
-        }
-
-        .upside-cell {
-            font-weight: 600;
-            color: #00FF88;
-            font-family: 'SF Mono', monospace;
-        }
-
-        .risk-indicator {
-            display: flex;
-            gap: 3px;
-        }
-
-        .risk-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255, 136, 0, 0.2);
-        }
-
-        .risk-dot.active { background: #FF8800; }
 
         /* Space Section */
         .space-concept {
@@ -957,51 +800,106 @@
             content: '🛰️';
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(0, 255, 136, 0.1);
-            display: flex;
-            justify-content: space-between;
-            color: rgba(150, 200, 170, 0.4);
-            font-size: 11px;
-            flex-wrap: wrap;
-            gap: 12px;
+        /* Chart container tall variant */
+        .chart-container.tall {
+            height: 450px;
         }
 
-        /* Responsive */
+        .text-red { color: #FF4444; }
+
+        /* Hamburger Menu */
+.menu-toggle:hover {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: rgba(0, 255, 136, 0.5);
+        }
+
+.menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+.menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Slide-out Menu */
+.nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+.nav-menu.active {
+            right: 0;
+        }
+
+.nav-section-title {
+            color: rgba(0, 255, 136, 0.5);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            padding-left: 12px;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: rgba(200, 230, 210, 0.7);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 255, 136, 0.08);
+            color: rgba(0, 255, 136, 0.9);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 255, 0.08));
+            color: #00FF88;
+        }
+
+        .nav-btn .icon {
+            font-size: 16px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-btn .new-badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            background: linear-gradient(135deg, #FF00FF, #FF8800);
+            border-radius: 4px;
+            color: white;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        /* Current Section Indicator */
+.current-section .icon {
+            font-size: 14px;
+        }
+
         @media (max-width: 768px) {
-            body {
-                padding: 16px;
-            }
-            .nav {
-                gap: 4px;
-            }
-            .nav-btn {
-                padding: 6px 10px;
-                font-size: 10px;
-            }
-            .strategy-tabs {
+    .portfolio-header {
                 flex-direction: column;
+                align-items: flex-start;
             }
-            .holdings-grid {
-                grid-template-columns: 1fr;
-            }
-            .signal-details {
-                display: none;
-            }
-            .metrics-grid {
-                gap: 8px;
-            }
-            .metric-card {
-                min-width: 140px;
-                padding: 14px;
-            }
-            .metric-value {
-                font-size: 22px;
+
+            .portfolio-meta {
+                text-align: left;
             }
         }
+
     </style>
 </head>
 <body>
@@ -1012,10 +910,10 @@
                 <div class="pulse-dot"></div>
                 <h1>AI Pulse</h1>
             </div>
-            <p class="subtitle">Real-time AI progress tracker • Updated <span id="currentDate">Jan 7, 2026</span></p>
+            <p class="subtitle">Real-time AI progress tracker • Updated Jan 6, 2026</p>
         </div>
 
-        <!-- Navigation - Visible Tabs -->
+                <!-- Navigation - Visible Tabs -->
         <nav class="nav">
             <button class="nav-btn active" onclick="showTab('overview', this)">◉ Overview</button>
             <button class="nav-btn" onclick="showTab('models', this)">⬡ Models</button>
@@ -1029,6 +927,9 @@
             <button class="nav-btn" onclick="showTab('portfolio', this)">💼 AI Portfolio <span class="new-badge">LIVE</span></button>
             <button class="nav-btn" onclick="showTab('implications', this)">⚡ Implications</button>
         </nav>
+
+
+        <!-- Overview Tab -->
         <div id="overview" class="tab-content active">
             <div class="section-description">
                 <strong>Overview</strong> shows the current state of frontier AI at a glance. The metrics highlight today's best-performing models across key benchmarks. SWE-Bench measures real-world coding ability (fixing actual GitHub issues), GPQA tests PhD-level science reasoning, and METR measures how long AI can work autonomously. The charts below track how quickly these capabilities are improving over time.
@@ -3016,950 +2917,6 @@
             </div>
         </div>
 
-
-        <!-- AI Portfolio Tab - ENHANCED VERSION WITH LIVE PRICES -->
-        <div id="portfolio" class="tab-content">
-            <div class="section-description">
-                <strong>AI Investment Strategies</strong> tracks three hypothetical portfolios designed to capture AI's growth trajectory. 
-                Prices update hourly via financial APIs during market hours. 
-                <em>This is a tracking experiment, not investment advice.</em>
-            </div>
-
-            <!-- Strategy Selector -->
-            <div class="strategy-tabs">
-                <div class="strategy-tab active" onclick="showStrategy('core')">
-                    <div class="strategy-icon">🏛️</div>
-                    <div class="strategy-name">Core Infrastructure</div>
-                    <div class="strategy-desc">Set-and-forget AI leaders</div>
-                </div>
-                <div class="strategy-tab" onclick="showStrategy('momentum')">
-                    <div class="strategy-icon">⚡</div>
-                    <div class="strategy-name">Trend Following</div>
-                    <div class="strategy-desc">Momentum signals</div>
-                </div>
-                <div class="strategy-tab" onclick="showStrategy('emerging')">
-                    <div class="strategy-icon">🚀</div>
-                    <div class="strategy-name">Capability Plays</div>
-                    <div class="strategy-desc">Small/mid-cap watchlist</div>
-                </div>
-            </div>
-
-            <!-- CORE PORTFOLIO SECTION -->
-            <div id="strategy-core" class="strategy-content">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">🏛️ Core AI Infrastructure Portfolio</div>
-                            <div class="card-subtitle">Set-and-forget • Rebalanced quarterly • Started Jan 1, 2026</div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <span class="card-badge badge-core">Core</span>
-                            <div class="live-indicator">
-                                <div class="live-dot"></div>
-                                <span>Live</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="portfolio-value-display">
-                        <div class="portfolio-total" id="coreTotal">$100,000</div>
-                        <div class="portfolio-change positive" id="coreChange">
-                            ▲ $0 (+0.00%) since inception
-                        </div>
-                        <div class="portfolio-meta">
-                            <span>📅 Starting: $100,000</span>
-                            <span>📆 Inception: Jan 1, 2026</span>
-                            <span id="lastUpdate">🔄 Last Update: --</span>
-                        </div>
-                    </div>
-
-                    <div class="chart-container">
-                        <canvas id="portfolioChart"></canvas>
-                    </div>
-
-                    <div class="metrics-row" style="margin-top: 20px;">
-                        <div class="metric-box">
-                            <div class="metric-label">Est. Volatility</div>
-                            <div class="metric-value text-green">~38%</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">vs S&P 500</div>
-                            <div class="metric-value text-cyan" id="vsSpy">+0.00%</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">vs QQQ</div>
-                            <div class="metric-value text-cyan" id="vsQqq">+0.00%</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Best Performer</div>
-                            <div class="metric-value text-orange" id="bestPerformer">--</div>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 12px; color: rgba(150, 200, 170, 0.7); font-size: 13px; font-weight: 500;">
-                        Current Holdings
-                    </div>
-                    <div class="holdings-grid" id="holdingsGrid">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">Allocation Strategy</div>
-                    <div class="card-subtitle">How the portfolio allocates capital</div>
-                    <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                        <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Thesis:</strong> Invest in companies with the highest exposure to AI value creation across the stack.</p>
-                        
-                        <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Allocation tiers:</strong></p>
-                        <ul style="margin-left: 20px; margin-bottom: 16px;">
-                            <li><strong>Compute Infrastructure (45%):</strong> NVDA, TSM, AVGO, MRVL, MU — The "picks and shovels" of AI.</li>
-                            <li><strong>AI Labs / Cloud (36%):</strong> MSFT, GOOGL, META, AMZN — Direct exposure to frontier models.</li>
-                            <li><strong>AI Applications (13%):</strong> ASML (chips), VRT (power), PLTR (enterprise AI).</li>
-                            <li><strong>Cash Reserve (2%):</strong> For rebalancing and opportunities.</li>
-                        </ul>
-                    </div>
-                    <div class="insight-box orange">
-                        <span class="insight-label">Disclaimer:</span>
-                        <span class="insight-text">This is a hypothetical tracking portfolio for educational purposes. Not investment advice.</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MOMENTUM STRATEGY SECTION -->
-            <div id="strategy-momentum" class="strategy-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">⚡ Trend Following Strategy</div>
-                            <div class="card-subtitle">Momentum signals • 50 SMA / 200 SMA crossover system</div>
-                        </div>
-                        <span class="card-badge badge-momentum">Momentum</span>
-                    </div>
-
-                    <div class="section-description" style="margin: 0 0 20px 0;">
-                        <strong>Signal Rules:</strong> BUY when Price > 50 SMA AND 50 SMA > 200 SMA AND RSI(14) between 50-75. 
-                        WATCH when approaching signal. AVOID when trend broken or RSI overbought.
-                        Position size: 20% per signal (max 5 positions).
-                    </div>
-
-                    <div class="metrics-row">
-                        <div class="metric-box">
-                            <div class="metric-label">Active Signals</div>
-                            <div class="metric-value text-green">5</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Watch List</div>
-                            <div class="metric-value text-orange">2</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Avg Win Rate</div>
-                            <div class="metric-value text-cyan">~58%</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Est. Volatility</div>
-                            <div class="metric-value text-magenta">~55%</div>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 12px; color: rgba(150, 200, 170, 0.7); font-size: 13px;">
-                        Current Signals
-                    </div>
-                    <div id="momentumSignals">
-                        <!-- Populated by JavaScript -->
-                    </div>
-
-                    <div class="chart-container" style="margin-top: 24px; height: 250px;">
-                        <canvas id="momentumChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EMERGING / CAPABILITY PLAYS SECTION -->
-            <div id="strategy-emerging" class="strategy-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">🚀 Capability Improvement Plays</div>
-                            <div class="card-subtitle">Small & mid-caps with operating leverage to AI capability gains</div>
-                        </div>
-                        <span class="card-badge badge-emerging">Emerging</span>
-                    </div>
-
-                    <div class="section-description" style="margin: 0 0 20px 0;">
-                        These companies have <strong>asymmetric exposure</strong> to AI capability improvements. As models get better at reasoning, coding, and autonomous action, these businesses see <em>non-linear</em> benefits. Higher risk, higher potential reward. Individual position sizes: 2-5% max.
-                    </div>
-
-                    <div class="metrics-row">
-                        <div class="metric-box">
-                            <div class="metric-label">Watchlist Size</div>
-                            <div class="metric-value text-green">10</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Avg Market Cap</div>
-                            <div class="metric-value text-cyan">$8.2B</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Avg Upside Est.</div>
-                            <div class="metric-value text-orange">3-5x</div>
-                        </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Est. Volatility</div>
-                            <div class="metric-value text-magenta">~65%</div>
-                        </div>
-                    </div>
-
-                    <table class="emerging-table">
-                        <thead>
-                            <tr>
-                                <th>Company</th>
-                                <th>Market Cap</th>
-                                <th>Capability Thesis</th>
-                                <th>Catalyst</th>
-                                <th>Upside</th>
-                                <th>Risk</th>
-                            </tr>
-                        </thead>
-                        <tbody id="emergingTable">
-                            <!-- Populated by JavaScript -->
-                        </tbody>
-                    </table>
-
-                    <div class="insight-box orange" style="margin-top: 20px;">
-                        <span class="insight-label">⚠️ Higher Risk:</span>
-                        <span class="insight-text">These are speculative positions. Size accordingly (2-5% max per position). 
-                        Many will underperform, but potential winners could deliver 3-10x returns over 1-2 years.</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Data Source Note -->
-            <div class="insight-box cyan" style="margin-top: 0;">
-                <span class="insight-label">📊 Data Source:</span>
-                <span class="insight-text">Prices via Yahoo Finance API (hourly refresh during market hours). Dashboard fetches live prices every 60 minutes.</span>
-            </div>
-        </div>
-
-        <!-- Implications Tab -->
-        <div id="implications" class="tab-content">
-            <div class="section-description">
-                <strong>Implications Analysis</strong> examines what current AI capabilities and trajectories mean for the economy, workforce, science, and daily life. This analysis assumes current progress rates continue through 2026. <strong>Last updated: December 28, 2025.</strong> This section will be revised as capabilities evolve.
-            </div>
-
-            <div class="card">
-                <div class="card-title">📊 Executive Summary: Where We Stand</div>
-                <div class="card-subtitle">End of 2025 snapshot</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;">As of December 2025, frontier AI models can:</p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Code at ~80% of senior developer level</strong> on real-world tasks (SWE-Bench)</li>
-                        <li><strong>Reason at 93%+ PhD level</strong> on graduate science questions (GPQA)</li>
-                        <li><strong>Solve 94% of competition math problems</strong> that challenge olympiad contestants (MATH)</li>
-                        <li><strong>Work autonomously for ~5 hours</strong> before needing human intervention (METR)</li>
-                        <li><strong>Process 1-2 million tokens</strong> (~750K-1.5M words) in a single context</li>
-                    </ul>
-                    <p style="margin-bottom: 12px;">The cost of frontier AI inference has dropped <strong>97% in 20 months</strong> (from $30/M tokens to $1/M). Efficient models now cost $0.10/M tokens—cheaper than the electricity to run the query.</p>
-                    <p>At current trajectories, by December 2026 we expect: <strong>~94% SWE-Bench</strong> (senior+ dev level), <strong>~98% GPQA</strong> (near-ceiling), <strong>~78% ARC-AGI</strong> (approaching human abstraction), and <strong>~20 hour autonomy</strong> (multi-day unsupervised work).</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">💼 Workforce & Employment</div>
-                <div class="card-subtitle">Impact timeline: 2025-2027</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 16px; padding: 12px; background: rgba(255, 136, 0, 0.1); border-radius: 8px; border-left: 3px solid #FF8800;">
-                        <strong style="color: #FF8800;">Key threshold:</strong> When SWE-Bench hits ~85-90%, AI can handle most routine coding tasks end-to-end. Current: 80.9%. Forecast: Q2-Q3 2026.
-                    </p>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Already happening (2025):</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li>Software teams report 30-50% productivity gains with AI coding assistants</li>
-                        <li>Entry-level coding bootcamp graduates face reduced demand—junior tasks increasingly automated</li>
-                        <li>Customer service, content moderation, and basic copywriting roles declining</li>
-                        <li>Legal document review and basic paralegal work being automated</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Expected by end of 2026:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Software development:</strong> Senior developers become "AI managers" overseeing AI-written code. 2-3x output per engineer.</li>
-                        <li><strong>Knowledge work:</strong> Analysts, researchers, consultants see dramatic productivity gains.</li>
-                        <li><strong>Creative work:</strong> AI handles first drafts, variations, iterations. Human role shifts to curation and direction.</li>
-                        <li><strong>Scientific research:</strong> AI accelerates literature review, hypothesis generation, data analysis.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Job Automation Risk by Sector</div>
-                <div class="card-subtitle">Estimated task automation potential by 2027</div>
-                <div class="chart-container">
-                    <canvas id="automationChart"></canvas>
-                </div>
-                <div class="insight-box">
-                    <span class="insight-label">Note:</span>
-                    <span class="insight-text">These estimates reflect task automation, not job elimination. Many roles will transform rather than disappear. Physical presence and high-trust relationships remain difficult to automate.</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🔬 Science & Research</div>
-                <div class="card-subtitle">The acceleration of discovery</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 16px; padding: 12px; background: rgba(0, 212, 255, 0.1); border-radius: 8px; border-left: 3px solid #00D4FF;">
-                        <strong style="color: #00D4FF;">Key threshold:</strong> MATH benchmark at 95%+ means AI can assist with novel mathematical proofs. Current: 94.3% (GPT-5.2). We're essentially there.
-                    </p>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Current capabilities:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li>AI can review and synthesize scientific literature orders of magnitude faster than humans</li>
-                        <li>AlphaFold-style breakthroughs: AI solving protein structures that took decades</li>
-                        <li>AI-generated hypotheses being tested in labs (materials science, drug discovery)</li>
-                        <li>Mathematical proof assistants finding novel approaches to open problems</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">2026 expectations:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Drug discovery:</strong> AI identifies promising compounds 10-100x faster. Clinical trial design optimized. First AI-discovered drugs entering Phase 2/3 trials.</li>
-                        <li><strong>Materials science:</strong> AI predicts properties of novel materials, accelerating battery, solar, semiconductor research.</li>
-                        <li><strong>Mathematics:</strong> AI contributes to proofs of significant theorems. Not just verification—actual creative mathematical reasoning.</li>
-                        <li><strong>Climate modeling:</strong> Higher-resolution, faster climate simulations. Better prediction of extreme weather.</li>
-                    </ul>
-                    
-                    <p style="padding: 12px; background: rgba(0, 255, 136, 0.1); border-radius: 8px; border-left: 3px solid #00FF88;">
-                        <strong style="color: #00FF88;">The big picture:</strong> If AI can genuinely accelerate scientific discovery by even 2x, the compounding effects are enormous. Faster drug development, better materials, more efficient energy—each breakthrough enables others.
-                    </p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">💰 Economics & Markets</div>
-                <div class="card-subtitle">Capital flows and value creation</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Current state:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>$202B</strong> deployed into AI in 2025 (~50% of all VC)</li>
-                        <li><strong>$500B</strong> OpenAI valuation — larger than most countries' GDP</li>
-                        <li><strong>$4.65T</strong> NVIDIA market cap — #1 globally, up 185% YTD</li>
-                        <li><strong>$8T+</strong> combined market cap of AI chip makers</li>
-                        <li><strong>$280B+</strong> hyperscaler CapEx (AWS, Azure, GCP) — mostly AI infrastructure</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Where value is accruing:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Compute layer:</strong> NVIDIA dominates with 80%+ AI GPU market share. AMD, Broadcom gaining.</li>
-                        <li><strong>Model layer:</strong> OpenAI, Anthropic, Google capturing subscription and API revenue.</li>
-                        <li><strong>Application layer:</strong> Still nascent—Cursor, Perplexity, and others building AI-native products.</li>
-                        <li><strong>Enterprise:</strong> $37B enterprise AI software spend in 2025, growing 40%+ annually.</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Macroeconomic implications:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Productivity:</strong> If AI delivers even 10% economy-wide productivity gain, that's ~$2.5T/year in the US alone.</li>
-                        <li><strong>Inflation:</strong> AI deflation in digital goods/services could offset inflation elsewhere.</li>
-                        <li><strong>Labor share:</strong> Risk that productivity gains flow to capital (AI owners) not labor.</li>
-                        <li><strong>Concentration:</strong> Massive capital requirements favor large players.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🏠 Cost of Living & Daily Life</div>
-                <div class="card-subtitle">How AI affects household economics</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>Already cheaper (2025):</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Tutoring:</strong> AI tutors available 24/7 for ~$20/month vs. $50-100/hour human tutors</li>
-                        <li><strong>Legal basics:</strong> Simple contracts, will drafting, legal research dramatically cheaper</li>
-                        <li><strong>Tax prep:</strong> AI handles complex returns that previously required accountants</li>
-                        <li><strong>Translation:</strong> Near-real-time translation essentially free vs. professional rates</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Getting cheaper (2026):</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Software:</strong> Custom apps built for specific needs at fraction of current cost</li>
-                        <li><strong>Professional services:</strong> Basic consulting, analysis, research commoditized</li>
-                        <li><strong>Education:</strong> Personalized learning at scale</li>
-                        <li><strong>Healthcare admin:</strong> Appointment scheduling, insurance navigation, basic triage</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong>Still expensive (physical world):</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Housing, healthcare delivery, childcare, food — require physical presence</li>
-                        <li>Robotics and physical automation lag software AI significantly</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Cost Impact by Category</div>
-                <div class="card-subtitle">Expected price change trajectory through 2027</div>
-                <div class="chart-container">
-                    <canvas id="costImpactChart"></canvas>
-                </div>
-                <div class="insight-box">
-                    <span class="insight-label">Key dynamic:</span>
-                    <span class="insight-text">Digital services deflate rapidly while physical services stay flat or inflate. This "cost bifurcation" creates winners and losers based on consumption patterns.</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">⚠️ Risks & Uncertainties</div>
-                <div class="card-subtitle">What could change the trajectory</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>Technical risks:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Scaling limits:</strong> Current progress assumes scaling laws continue. They might plateau.</li>
-                        <li><strong>Reliability:</strong> Models still hallucinate. High-stakes deployment requires near-perfect accuracy.</li>
-                        <li><strong>Reasoning depth:</strong> ARC-AGI at 45% shows limits in novel abstraction. May not reach human level.</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Economic risks:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Displacement speed:</strong> If automation outpaces job creation, social instability possible.</li>
-                        <li><strong>Concentration:</strong> AI wealth concentrating in few companies/regions could worsen inequality.</li>
-                        <li><strong>Infrastructure costs:</strong> Power, chips, data centers require massive ongoing investment.</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong style="color: #AA44FF;">Geopolitical risks:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Chip supply:</strong> TSMC in Taiwan fabricates 90%+ of advanced AI chips. Geopolitical risk.</li>
-                        <li><strong>Regulation:</strong> EU AI Act, potential US regulation could slow deployment.</li>
-                        <li><strong>Competition:</strong> China's AI development (DeepSeek, Qwen) accelerating despite export controls.</li>
-                    </ul>
-                    
-                    <p style="padding: 12px; background: rgba(255, 136, 0, 0.1); border-radius: 8px; border-left: 3px solid #FF8800;">
-                        <strong style="color: #FF8800;">Bottom line:</strong> The forecasts in this dashboard assume continued exponential progress. History suggests disruptions, plateaus, and surprises are likely. Treat projections as scenarios, not certainties.
-                    </p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🎯 Key Dates to Watch</div>
-                <div class="card-subtitle">Milestones that would confirm or refute trajectory</div>
-                <table style="margin-top: 12px;">
-                    <thead>
-                        <tr>
-                            <th>Timeframe</th>
-                            <th>Milestone</th>
-                            <th>Significance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-cyan font-bold">Q1 2026</td>
-                            <td>SWE-Bench hits 85%</td>
-                            <td class="text-muted">Senior developer parity — massive coding automation potential</td>
-                        </tr>
-                        <tr>
-                            <td class="text-cyan font-bold">Q2 2026</td>
-                            <td>METR autonomy exceeds 8 hours</td>
-                            <td class="text-muted">Full workday autonomous operation — transforms knowledge work</td>
-                        </tr>
-                        <tr>
-                            <td class="text-cyan font-bold">Q3 2026</td>
-                            <td>ARC-AGI exceeds 70%</td>
-                            <td class="text-muted">Closing on human abstraction — strongest AGI signal</td>
-                        </tr>
-                        <tr>
-                            <td class="text-cyan font-bold">Q4 2026</td>
-                            <td>Frontier cost below $0.25/M</td>
-                            <td class="text-muted">GPT-4 level at 99%+ discount — AI accessible to everyone</td>
-                        </tr>
-                        <tr>
-                            <td class="text-yellow font-bold">2026</td>
-                            <td>First AI co-authored Nature paper</td>
-                            <td class="text-muted">AI contributing to novel scientific discovery, not just assistance</td>
-                        </tr>
-                        <tr>
-                            <td class="text-yellow font-bold">2026</td>
-                            <td>AI-discovered drug enters Phase 3</td>
-                            <td class="text-muted">Validation of AI-accelerated drug discovery pipeline</td>
-                        </tr>
-                        <tr>
-                            <td class="text-orange font-bold">Wildcard</td>
-                            <td>Scaling laws plateau</td>
-                            <td class="text-muted">Would slow progress, extend timeline significantly</td>
-                        </tr>
-                        <tr>
-                            <td class="text-orange font-bold">Wildcard</td>
-                            <td>Major AI incident/accident</td>
-                            <td class="text-muted">Could trigger regulatory slowdown or public backlash</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🔮 Long-Term Horizon: 2030-2035</div>
-                <div class="card-subtitle">If current trajectories continue • Robotics becomes critical variable</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    
-                    <p style="margin-bottom: 16px; padding: 12px; background: rgba(170, 68, 255, 0.1); border-radius: 8px; border-left: 3px solid #AA44FF;">
-                        <strong style="color: #AA44FF;">Extrapolated capabilities by 2030:</strong> Coding/reasoning benchmarks likely saturated (99%+). ARC-AGI approaching human parity (~95%). Autonomous work duration measured in days/weeks, not hours. Inference costs approaching zero ($0.001/M or less). Robotics transitioning from demos to commercial deployment.
-                    </p>
-
-                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Scientific Discovery:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li>AI systems routinely co-author papers in math, physics, biology, chemistry</li>
-                        <li>Drug discovery pipelines compressed from 10-15 years to 2-4 years</li>
-                        <li>Materials science breakthroughs accelerate (batteries, solar, superconductors)</li>
-                        <li>By 2035: AI potentially making discoveries humans cannot understand without AI assistance</li>
-                    </ul>
-
-                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Work & Employment:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>2030:</strong> Software largely automated for routine work. 10x fewer developers needed for same output. Knowledge work (analysis, research, writing) — AI does 80%+ of execution.</li>
-                        <li><strong>2035:</strong> Robotics matures. Physical labor automation accelerates (warehouse, manufacturing, retail, food service).</li>
-                        <li><strong>Remaining human work:</strong> Novel creative direction, high-trust relationships, unpredictable physical environments, AI oversight, legal accountability roles.</li>
-                    </ul>
-
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF00FF;">Economics & Cost of Living:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Deflationary:</strong> Software, professional services, education, content, drug development, eventually manufacturing — approach near-zero marginal cost</li>
-                        <li><strong>Still expensive:</strong> Housing (land scarcity), healthcare delivery (physical presence), childcare (trust + presence). These may become relatively MORE expensive as digital deflates.</li>
-                        <li><strong>Net effect:</strong> Information economy becomes nearly free. Physical economy remains scarce. Historical pattern inverts.</li>
-                    </ul>
-
-                    <p style="margin-bottom: 12px;"><strong style="color: #FFD700;">The Robotics Wildcard:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li>Robotics is ~5-7 years behind language AI on the capability curve</li>
-                        <li>Tesla Optimus, Figure, 1X, Chinese robotics all well-funded and iterating rapidly</li>
-                        <li><strong>Bull case:</strong> General-purpose robots in homes/businesses by 2032-2035</li>
-                        <li><strong>Bear case:</strong> Physical world much harder than digital; progress remains slow</li>
-                        <li>AI brains + robotic bodies = when physical-world automation truly arrives</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📊 Scenario Probabilities</div>
-                <div class="card-subtitle">Rough probability estimates for 2030-2035 outcomes</div>
-                <table style="margin-top: 12px;">
-                    <thead>
-                        <tr>
-                            <th>Scenario</th>
-                            <th class="text-center">Prob.</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-cyan font-bold">Managed Transition</td>
-                            <td class="text-center text-cyan">~60%</td>
-                            <td class="text-muted">Massive productivity gains. Job displacement real but manageable. Most people materially better off. Social adjustment is hard but navigable.</td>
-                        </tr>
-                        <tr>
-                            <td class="text-lime font-bold">Accelerated Abundance</td>
-                            <td class="text-center text-lime">~15%</td>
-                            <td class="text-muted">Robotics + energy breakthroughs. Most goods/services approach free. Work becomes optional. Scientific progress solves major challenges.</td>
-                        </tr>
-                        <tr>
-                            <td class="text-orange font-bold">Disruption & Instability</td>
-                            <td class="text-center text-orange">~20%</td>
-                            <td class="text-muted">Automation faster than adaptation. Inequality explodes. Political backlash. Benefits real but unevenly distributed, causing unrest.</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted font-bold">Technical Plateau</td>
-                            <td class="text-center text-muted">~5%</td>
-                            <td class="text-muted">Scaling laws hit wall. Current capabilities remain roughly static. Incremental progress only. Transition is gradual.</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="insight-box" style="margin-top: 12px;">
-                    <span class="insight-label">Key uncertainty:</span>
-                    <span class="insight-text">The difference between "Managed Transition" and "Disruption" largely comes down to policy responses, speed of adaptation, and how gains are distributed. Technology trajectory is more predictable than social/political response.</span>
-                </div>
-            </div>
-
-            <div class="insight-box" style="margin-top: 24px; background: rgba(0, 255, 136, 0.1); border-left-color: #00FF88;">
-                <span class="insight-label" style="color: #00FF88;">Analysis timestamp:</span>
-                <span class="insight-text">This implications analysis was written December 28, 2025, based on data available at that time. AI capabilities are evolving rapidly. Check back for updates as milestones are hit or missed.</span>
-            </div>
-        </div>
-
-
-        <!-- Infrastructure Tab -->
-        <div id="infrastructure" class="tab-content active">
-            <div class="section-description">
-                <strong>AI Infrastructure</strong> tracks the physical compute powering frontier AI. Data centers are the factories of the AI age—their scale determines training capacity and inference throughput. This section covers hyperscaler capacity, GPU cluster sizes, power consumption, and emerging concepts like space-based compute. Note: Exact capacity data is proprietary; estimates based on public filings, press releases, and industry analysis.
-            </div>
-
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-label">Global AI Data Center Capacity</div>
-                    <div class="metric-value text-lime">~45 GW</div>
-                    <div class="metric-subtitle">Est. end of 2025</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Largest Single Cluster</div>
-                    <div class="metric-value text-cyan">200K+ H100s</div>
-                    <div class="metric-subtitle">xAI Colossus (Memphis)</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">2025 DC CapEx</div>
-                    <div class="metric-value text-magenta">$280B+</div>
-                    <div class="metric-subtitle">Hyperscalers combined</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">US AI Power Demand</div>
-                    <div class="metric-value text-yellow">~20 GW</div>
-                    <div class="metric-subtitle">Growing 15-20%/yr</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Frontier Lab Compute Capacity</div>
-                <div class="card-subtitle">Estimated GPU clusters by company • H100 equivalents</div>
-                <div class="chart-container">
-                    <canvas id="computeCapacityChart"></canvas>
-                </div>
-                <div class="insight-box cyan">
-                    <span class="insight-label">Data quality note:</span>
-                    <span class="insight-text">These are estimates based on public announcements, CapEx analysis, and industry reporting. Actual figures are closely guarded secrets. xAI's Colossus is the only cluster with confirmed H100 counts.</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Hyperscaler Data Center Footprint</div>
-                <div class="card-subtitle">Estimated AI-focused capacity by provider</div>
-                <div class="infra-grid">
-                    <div class="infra-card lime">
-                        <div class="infra-name">Microsoft Azure</div>
-                        <div class="infra-stats">
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">60+</span>
-                                <span class="infra-stat-label">Regions</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">~8 GW</span>
-                                <span class="infra-stat-label">AI Capacity</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">$80B</span>
-                                <span class="infra-stat-label">2025 CapEx</span>
-                            </div>
-                        </div>
-                        <div class="infra-desc">Primary partner for OpenAI. Building massive GPU clusters for GPT-5+ training.</div>
-                        <span class="infra-status lime">Expanding rapidly</span>
-                    </div>
-                    <div class="infra-card cyan">
-                        <div class="infra-name">Google Cloud</div>
-                        <div class="infra-stats">
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">40+</span>
-                                <span class="infra-stat-label">Regions</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">~6 GW</span>
-                                <span class="infra-stat-label">AI Capacity</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">$75B</span>
-                                <span class="infra-stat-label">2025 CapEx</span>
-                            </div>
-                        </div>
-                        <div class="infra-desc">TPU-focused architecture. Gemini trained on proprietary TPU v5p pods.</div>
-                        <span class="infra-status cyan">TPU scaling</span>
-                    </div>
-                    <div class="infra-card magenta">
-                        <div class="infra-name">Amazon AWS</div>
-                        <div class="infra-stats">
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">33</span>
-                                <span class="infra-stat-label">Regions</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">~7 GW</span>
-                                <span class="infra-stat-label">AI Capacity</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">$100B</span>
-                                <span class="infra-stat-label">2025 CapEx</span>
-                            </div>
-                        </div>
-                        <div class="infra-desc">Trainium/Inferentia custom chips. Major Anthropic investor and compute provider.</div>
-                        <span class="infra-status magenta">Custom silicon</span>
-                    </div>
-                    <div class="infra-card orange">
-                        <div class="infra-name">xAI (Colossus)</div>
-                        <div class="infra-stats">
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">1</span>
-                                <span class="infra-stat-label">Location</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">200K+</span>
-                                <span class="infra-stat-label">H100 GPUs</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">~150 MW</span>
-                                <span class="infra-stat-label">Power</span>
-                            </div>
-                        </div>
-                        <div class="infra-desc">World's largest single AI cluster. Memphis, TN. Built in record 122 days.</div>
-                        <span class="infra-status orange">Operational</span>
-                    </div>
-                    <div class="infra-card purple">
-                        <div class="infra-name">Meta AI</div>
-                        <div class="infra-stats">
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">21</span>
-                                <span class="infra-stat-label">DC Sites</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">~600K</span>
-                                <span class="infra-stat-label">GPUs (Est)</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">$40B</span>
-                                <span class="infra-stat-label">2025 CapEx</span>
-                            </div>
-                        </div>
-                        <div class="infra-desc">Distributed training for Llama. Building 2GW Louisiana campus.</div>
-                        <span class="infra-status magenta">Building out</span>
-                    </div>
-                    <div class="infra-card yellow">
-                        <div class="infra-name">Oracle Cloud</div>
-                        <div class="infra-stats">
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">50+</span>
-                                <span class="infra-stat-label">Regions</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">~2 GW</span>
-                                <span class="infra-stat-label">AI Capacity</span>
-                            </div>
-                            <div class="infra-stat">
-                                <span class="infra-stat-value">131K</span>
-                                <span class="infra-stat-label">GPUs</span>
-                            </div>
-                        </div>
-                        <div class="infra-desc">Provides compute for xAI. Building Stargate with OpenAI/SoftBank.</div>
-                        <span class="infra-status cyan">Growing fast</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Power Consumption Trajectory</div>
-                <div class="card-subtitle">US AI data center electricity demand (GW) • Exponential growth</div>
-                <div class="chart-container">
-                    <canvas id="powerChart"></canvas>
-                </div>
-                <div class="insight-box orange">
-                    <span class="insight-label">Energy bottleneck:</span>
-                    <span class="insight-text">AI data centers could consume 8% of US electricity by 2030 (vs ~2% today). Nuclear and natural gas are primary solutions—renewables struggle with 24/7 baseload requirements. Several labs exploring co-location with nuclear plants.</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🛰️ Space-Based Compute (Emerging)</div>
-                <div class="card-subtitle">Next frontier: data centers in orbit</div>
-                <div class="space-concept">
-                    <div class="space-title">Why Space?</div>
-                    <div style="color: rgba(200, 230, 210, 0.8); font-size: 13px; line-height: 1.6;">
-                        <p style="margin-bottom: 12px;">Space offers theoretical advantages for AI compute:</p>
-                        <ul style="margin-left: 20px; margin-bottom: 16px;">
-                            <li><strong>Cooling:</strong> Near-absolute zero temperatures mean no cooling infrastructure (40% of DC costs)</li>
-                            <li><strong>Solar power:</strong> 24/7 sunlight, no weather, ~8x more efficient than Earth surface</li>
-                            <li><strong>No land constraints:</strong> Infinite expansion potential</li>
-                            <li><strong>Latency:</strong> LEO satellites can serve global users with ~20ms latency</li>
-                        </ul>
-                    </div>
-                </div>
-                <table style="margin-top: 16px;">
-                    <thead>
-                        <tr>
-                            <th>Company</th>
-                            <th>Status</th>
-                            <th>Approach</th>
-                            <th>Timeline</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-purple font-bold">Lumen Orbit</td>
-                            <td class="text-yellow">Funded</td>
-                            <td class="text-muted">Modular space DC architecture</td>
-                            <td class="text-cyan">Demo 2027</td>
-                        </tr>
-                        <tr>
-                            <td class="text-purple font-bold">Starcloud</td>
-                            <td class="text-yellow">Concept</td>
-                            <td class="text-muted">LEO compute constellation</td>
-                            <td class="text-cyan">2028+</td>
-                        </tr>
-                        <tr>
-                            <td class="text-purple font-bold">SpaceX (rumored)</td>
-                            <td class="text-orange">Unconfirmed</td>
-                            <td class="text-muted">Starlink compute extension</td>
-                            <td class="text-cyan">Unknown</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="insight-box">
-                    <span class="insight-label">Reality check:</span>
-                    <span class="insight-text">Space compute is 5-10+ years from practical deployment. Launch costs (~$1,500/kg to LEO), radiation hardening, maintenance, and bandwidth remain major challenges. Currently more sci-fi than infrastructure reality.</span>
-                </div>
-            </div>
-
-            <div class="insight-box lime" style="margin-top: 24px;">
-                <span class="insight-label">Data sources for this section:</span>
-                <span class="insight-text">Company earnings calls, SEC filings, Synergy Research Group, DC Byte, SemiAnalysis, press releases. Capacity figures are estimates—exact numbers are proprietary.</span>
-            </div>
-        </div>
-
-        <!-- AGI Timeline Tab -->
-        <div id="timeline" class="tab-content">
-            <div class="section-description">
-                <strong>AGI/ASI Timeline</strong> visualizes the path toward artificial general intelligence. The "Intelligence Explosion" chart shows the classic exponential takeoff scenario. The Gartner-style hype cycle tracks where different AI technologies sit on the adoption curve. Expert predictions aggregate forecasts from researchers and industry leaders. These are scenarios and opinions, not certainties.
-            </div>
-
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-label">Median AGI Prediction</div>
-                    <div class="metric-value text-cyan">2029</div>
-                    <div class="metric-subtitle">AI researcher surveys</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Metaculus Crowd Forecast</div>
-                    <div class="metric-value text-lime">2031</div>
-                    <div class="metric-subtitle">50% probability</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Most Optimistic</div>
-                    <div class="metric-value text-yellow">2026</div>
-                    <div class="metric-subtitle">Musk, Altman</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Most Conservative</div>
-                    <div class="metric-value text-orange">2040+</div>
-                    <div class="metric-subtitle">Gary Marcus et al.</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Intelligence Explosion / Takeoff Scenario</div>
-                <div class="card-subtitle">Conceptual: Capability growth acceleration toward singularity</div>
-                <div class="chart-container tall">
-                    <canvas id="singularityChart"></canvas>
-                </div>
-                <div class="insight-box">
-                    <span class="insight-label">What this shows:</span>
-                    <span class="insight-text">The classic "takeoff" visualization. Gradual progress → inflection point → explosive growth as AI systems improve themselves. The x-axis is illustrative, not predictive. Key debate: "soft takeoff" (years) vs "hard takeoff" (months/weeks).</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">AI Technology Hype Cycle (Gartner-style)</div>
-                <div class="card-subtitle">Where different AI technologies sit on the adoption curve • Jan 2026</div>
-                <div class="chart-container tall">
-                    <canvas id="hypeCycleChart"></canvas>
-                </div>
-                <div class="insight-box cyan">
-                    <span class="insight-label">Reading the chart:</span>
-                    <span class="insight-text"><strong>Peak of Inflated Expectations:</strong> Hype exceeds reality. <strong>Trough of Disillusionment:</strong> Reality check, failures visible. <strong>Slope of Enlightenment:</strong> Practical applications emerge. <strong>Plateau of Productivity:</strong> Mainstream adoption, stable value.</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Expert AGI Timeline Predictions</div>
-                <div class="card-subtitle">When will human-level AI arrive? Selected forecasts</div>
-                <div class="chart-container">
-                    <canvas id="predictionsChart"></canvas>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📊 Benchmark-Based AGI Proximity</div>
-                <div class="card-subtitle">How close are we based on objective measures?</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Benchmark</th>
-                            <th class="text-center">Current Best</th>
-                            <th class="text-center">Human Level</th>
-                            <th class="text-center">Gap</th>
-                            <th>AGI Significance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="font-bold">MMLU (Knowledge)</td>
-                            <td class="text-center text-lime">97.1%</td>
-                            <td class="text-center text-cyan">~90%</td>
-                            <td class="text-center text-green">✓ Exceeded</td>
-                            <td class="text-muted">Broad knowledge solved</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">GPQA (PhD Reasoning)</td>
-                            <td class="text-center text-lime">93.2%</td>
-                            <td class="text-center text-cyan">~65%</td>
-                            <td class="text-center text-green">✓ Exceeded</td>
-                            <td class="text-muted">Expert reasoning solved</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">MATH (Competition)</td>
-                            <td class="text-center text-lime">94.3%</td>
-                            <td class="text-center text-cyan">~70%</td>
-                            <td class="text-center text-green">✓ Exceeded</td>
-                            <td class="text-muted">Mathematical reasoning strong</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">SWE-Bench (Coding)</td>
-                            <td class="text-center text-lime">80.9%</td>
-                            <td class="text-center text-cyan">~85%</td>
-                            <td class="text-center text-yellow">~4%</td>
-                            <td class="text-muted">Nearly senior dev level</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">ARC-AGI (Abstraction)</td>
-                            <td class="text-center text-yellow">45%</td>
-                            <td class="text-center text-cyan">~85%</td>
-                            <td class="text-center text-orange">~40%</td>
-                            <td class="text-muted">Key AGI indicator—still lagging</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">METR (Autonomy)</td>
-                            <td class="text-center text-lime">4.8 hrs</td>
-                            <td class="text-center text-cyan">8+ hrs</td>
-                            <td class="text-center text-yellow">~3 hrs</td>
-                            <td class="text-muted">Approaching workday autonomy</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="insight-box lime">
-                    <span class="insight-label">Interpretation:</span>
-                    <span class="insight-text">Most benchmarks are saturated or exceeded. ARC-AGI (novel abstraction/reasoning) is the key remaining gap. If ARC-AGI reaches 85%+, we're in AGI territory by most definitions. Current trajectory: ~78% by Dec 2026.</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">⚠️ Timeline Uncertainty</div>
-                <div class="card-subtitle">Why predictions vary so widely</div>
-                <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Definition disagreement:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li>"AGI" has no consensus definition. Some say we're already there (GPT-4+ passes most human tests). Others require physical embodiment, consciousness, or open-ended learning.</li>
-                        <li>Goalposts keep moving—tasks considered "AGI-hard" in 2020 are now routine.</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong style="color: #00D4FF;">Technical uncertainty:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 16px;">
-                        <li><strong>Scaling laws:</strong> Will current architectures continue improving with more compute? Or hit diminishing returns?</li>
-                        <li><strong>Novel capabilities:</strong> Will new architectures unlock capabilities current models can't achieve?</li>
-                        <li><strong>Data constraints:</strong> Running out of high-quality training data could slow progress.</li>
-                    </ul>
-                    
-                    <p style="margin-bottom: 12px;"><strong style="color: #FF8800;">External factors:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Regulation:</strong> EU AI Act, potential US laws could slow deployment.</li>
-                        <li><strong>Compute access:</strong> Chip supply, power availability, geopolitics.</li>
-                        <li><strong>Safety concerns:</strong> Labs may slow down if alignment problems emerge.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <!-- AI Portfolio Tab -->
         <div id="portfolio" class="tab-content">
             <div class="section-description">
@@ -4290,28 +3247,56 @@
     </div>
 
     <script>
-        // ===========================================
-        // TAB NAVIGATION
-        // ===========================================
-        
+        // Menu toggle
+        function toggleMenu() {
+            document.querySelector('.menu-toggle').classList.toggle('active');
+            document.querySelector('.nav-menu').classList.toggle('active');
+            document.querySelector('.nav-overlay').classList.toggle('active');
+        }
+
+        // Tab switching with hamburger menu
+        const tabInfo = {
+            'overview': { icon: '◉', name: 'Overview' },
+            'models': { icon: '⬡', name: 'Models & Pricing' },
+            'opensource': { icon: '🌐', name: 'Open Source' },
+            'benchmarks': { icon: '◈', name: 'Benchmarks' },
+            'robotics': { icon: '🤖', name: 'Robotics' },
+            'funding': { icon: '◇', name: 'Funding' },
+            'hardware': { icon: '▣', name: 'Hardware' },
+            'infrastructure': { icon: '🏗️', name: 'Infrastructure' },
+            'timeline': { icon: '📈', name: 'AGI Timeline' },
+            'portfolio': { icon: '💼', name: 'AI Portfolio' },
+            'implications': { icon: '⚡', name: 'Implications' }
+        };
+
         function showTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active from all buttons
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            // Show selected tab
             document.getElementById(tabId).classList.add('active');
-            if (btn) btn.classList.add('active');
+            // Add active to clicked button
+            if (btn) {
+                btn.classList.add('active');
+            }
+            // Update current section indicator
+            const info = tabInfo[tabId];
+            if (info) {
+                document.getElementById('currentIcon').textContent = info.icon;
+                document.getElementById('currentSectionName').textContent = info.name;
+            }
+            // Close menu
+            document.querySelector('.menu-toggle').classList.remove('active');
+            document.querySelector('.nav-menu').classList.remove('active');
+            document.querySelector('.nav-overlay').classList.remove('active');
         }
 
-        function showStrategy(strategy) {
-            document.querySelectorAll('.strategy-content').forEach(s => s.style.display = 'none');
-            document.querySelectorAll('.strategy-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('strategy-' + strategy).style.display = 'block';
-            event.currentTarget.classList.add('active');
-        }
-
-        // ===========================================
-        // TABLE SORTING
-        // ===========================================
-        
+        // Table sorting
         let sortState = {};
         function sortTable(tableId, colIndex) {
             const table = document.getElementById(tableId);
@@ -4319,669 +3304,930 @@
             const rows = Array.from(tbody.querySelectorAll('tr'));
             const headers = table.querySelectorAll('th.sortable');
             
+            // Determine sort direction
             const currentDir = sortState[tableId + colIndex] || 'none';
             const newDir = currentDir === 'asc' ? 'desc' : 'asc';
             sortState[tableId + colIndex] = newDir;
             
-            headers.forEach((h, i) => {
-                h.classList.remove('asc', 'desc');
-                if (i === colIndex - (table.querySelectorAll('th').length - headers.length)) {
-                    h.classList.add(newDir);
-                }
-            });
+            // Clear all header classes
+            headers.forEach(h => h.classList.remove('asc', 'desc'));
+            // Set current header class
+            const currentHeader = table.querySelectorAll('th')[colIndex];
+            currentHeader.classList.add(newDir);
             
+            // Sort rows
             rows.sort((a, b) => {
                 const aCell = a.cells[colIndex];
                 const bCell = b.cells[colIndex];
-                let aVal = aCell.dataset.value || aCell.textContent.replace(/[$%,KMB]/g, '');
-                let bVal = bCell.dataset.value || bCell.textContent.replace(/[$%,KMB]/g, '');
                 
-                aVal = parseFloat(aVal) || aVal;
-                bVal = parseFloat(bVal) || bVal;
+                // Get numeric value from data-value attribute or text
+                let aVal = aCell.dataset.value ? parseFloat(aCell.dataset.value) : aCell.textContent;
+                let bVal = bCell.dataset.value ? parseFloat(bCell.dataset.value) : bCell.textContent;
                 
-                if (typeof aVal === 'number' && typeof bVal === 'number') {
+                // Handle numeric comparison
+                if (!isNaN(aVal) && !isNaN(bVal)) {
                     return newDir === 'asc' ? aVal - bVal : bVal - aVal;
                 }
-                return newDir === 'asc' ? String(aVal).localeCompare(String(bVal)) : String(bVal).localeCompare(String(aVal));
+                
+                // String comparison
+                return newDir === 'asc' 
+                    ? String(aVal).localeCompare(String(bVal))
+                    : String(bVal).localeCompare(String(aVal));
             });
             
+            // Re-append sorted rows
             rows.forEach(row => tbody.appendChild(row));
         }
 
-        // ===========================================
-        // PORTFOLIO DATA & CONFIGURATION
-        // ===========================================
-        
-        const STARTING_BALANCE = 100000;
-        const INCEPTION_DATE = '2026-01-01';
+        // Chart.js defaults
+        Chart.defaults.color = 'rgba(150, 200, 170, 0.7)';
+        Chart.defaults.borderColor = 'rgba(0, 255, 136, 0.1)';
 
-        const coreHoldings = [
-            { ticker: 'NVDA', name: 'NVIDIA Corp', weight: 0.18, inceptionPrice: 134.29 },
-            { ticker: 'TSM', name: 'Taiwan Semiconductor', weight: 0.12, inceptionPrice: 203.75 },
-            { ticker: 'AVGO', name: 'Broadcom', weight: 0.10, inceptionPrice: 232.14 },
-            { ticker: 'MSFT', name: 'Microsoft', weight: 0.10, inceptionPrice: 421.50 },
-            { ticker: 'GOOGL', name: 'Alphabet', weight: 0.08, inceptionPrice: 191.25 },
-            { ticker: 'META', name: 'Meta Platforms', weight: 0.08, inceptionPrice: 589.34 },
-            { ticker: 'AMZN', name: 'Amazon', weight: 0.08, inceptionPrice: 224.00 },
-            { ticker: 'ASML', name: 'ASML Holding', weight: 0.06, inceptionPrice: 698.50 },
-            { ticker: 'MRVL', name: 'Marvell Technology', weight: 0.05, inceptionPrice: 111.20 },
-            { ticker: 'VRT', name: 'Vertiv Holdings', weight: 0.05, inceptionPrice: 131.45 },
-            { ticker: 'PLTR', name: 'Palantir', weight: 0.05, inceptionPrice: 75.50 },
-            { ticker: 'MU', name: 'Micron Technology', weight: 0.03, inceptionPrice: 89.75 },
-            { ticker: 'CASH', name: 'Cash Reserve', weight: 0.02, inceptionPrice: 1.00 }
-        ];
-
-        let currentPrices = {
-            'NVDA': 138.52, 'TSM': 207.85, 'AVGO': 238.45, 'MSFT': 425.30,
-            'GOOGL': 195.80, 'META': 605.25, 'AMZN': 228.15, 'ASML': 712.30,
-            'MRVL': 113.45, 'VRT': 134.80, 'PLTR': 78.20, 'MU': 91.25, 'CASH': 1.00,
-            'SPY': 478.50, 'QQQ': 525.80
-        };
-
-        const benchmarkInception = { SPY: 475.00, QQQ: 520.00 };
-
-        const momentumSignals = [
-            { ticker: 'NVDA', price: 138.50, sma50: 135.20, sma200: 118.50, rsi: 58, signal: 'BUY' },
-            { ticker: 'PLTR', price: 78.20, sma50: 72.50, sma200: 45.80, rsi: 62, signal: 'BUY' },
-            { ticker: 'VRT', price: 134.80, sma50: 128.90, sma200: 95.40, rsi: 55, signal: 'BUY' },
-            { ticker: 'ARM', price: 152.30, sma50: 145.60, sma200: 112.80, rsi: 64, signal: 'BUY' },
-            { ticker: 'ANET', price: 412.50, sma50: 398.20, sma200: 325.60, rsi: 57, signal: 'BUY' },
-            { ticker: 'MRVL', price: 113.40, sma50: 108.80, sma200: 78.50, rsi: 52, signal: 'WATCH' },
-            { ticker: 'AMD', price: 124.80, sma50: 132.40, sma200: 145.20, rsi: 44, signal: 'AVOID' },
-            { ticker: 'SMCI', price: 32.50, sma50: 35.80, sma200: 42.60, rsi: 38, signal: 'AVOID' }
-        ];
-
-        const emergingCompanies = [
-            { ticker: 'SYM', name: 'Symbotic', marketCap: '$11B', thesis: 'Warehouse Robotics', 
-              catalyst: 'Vision model improvements → better robot navigation', upside: '3-5x', risk: 4 },
-            { ticker: 'SOUN', name: 'SoundHound AI', marketCap: '$5B', thesis: 'Voice AI Agents', 
-              catalyst: 'Agentic voice → autonomous customer service', upside: '3-5x', risk: 5 },
-            { ticker: 'PATH', name: 'UiPath', marketCap: '$8B', thesis: 'AI-Powered RPA', 
-              catalyst: 'Reasoning models → fully autonomous workflows', upside: '2-3x', risk: 3 },
-            { ticker: 'CRDO', name: 'Credo Technology', marketCap: '$8B', thesis: 'AI Data Center Connectivity', 
-              catalyst: 'Every GPU cluster needs high-speed interconnect', upside: '2-4x', risk: 3 },
-            { ticker: 'RXRX', name: 'Recursion Pharma', marketCap: '$4B', thesis: 'AI Drug Discovery', 
-              catalyst: 'Better models → faster molecule screening', upside: '3-10x', risk: 5 },
-            { ticker: 'ALAB', name: 'Astera Labs', marketCap: '$15B', thesis: 'Connectivity Semiconductors', 
-              catalyst: 'Direct beneficiary of AI infrastructure buildout', upside: '2-3x', risk: 3 },
-            { ticker: 'BBAI', name: 'BigBear.ai', marketCap: '$1B', thesis: 'Defense AI', 
-              catalyst: 'Sovereign AI + DoD modernization', upside: '3-10x', risk: 5 },
-            { ticker: 'NET', name: 'Cloudflare', marketCap: '$35B', thesis: 'Edge AI Inference', 
-              catalyst: 'Inference at the edge → massive distribution advantage', upside: '2-3x', risk: 2 },
-            { ticker: 'AXON', name: 'Axon Enterprise', marketCap: '$45B', thesis: 'AI for Law Enforcement', 
-              catalyst: 'Draft One AI reports → productivity gains', upside: '2x', risk: 2 },
-            { ticker: 'SNOW', name: 'Snowflake', marketCap: '$55B', thesis: 'Data Layer for AI', 
-              catalyst: 'Palantir partnership + AI workload growth', upside: '2-3x', risk: 2 }
-        ];
-
-        let historicalData = {
-            labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 6', 'Jan 7'],
-            portfolio: [100000, 100125, 100580, 100890, 101245],
-            spy: [100000, 100050, 100180, 100320, 100410],
-            qqq: [100000, 100080, 100350, 100520, 100680]
-        };
-
-        // ===========================================
-        // PRICE FETCHING
-        // ===========================================
-
-        async function fetchPrices() {
-            const tickers = [
-                'NVDA', 'TSM', 'AVGO', 'MSFT', 'GOOGL', 'META', 'AMZN', 
-                'ASML', 'MRVL', 'VRT', 'PLTR', 'MU', 'SPY', 'QQQ',
-                'ARM', 'ANET', 'AMD', 'SMCI'
-            ].join(',');
-            
-            try {
-                const response = await fetch(`/api/prices?symbols=${tickers}`);
-                
-                if (!response.ok) {
-                    throw new Error('API request failed');
-                }
-                
-                const result = await response.json();
-                
-                if (result.success && result.data) {
-                    result.data.forEach(quote => {
-                        currentPrices[quote.symbol] = quote.price;
-                    });
-                    
-                    console.log('Prices updated:', new Date().toLocaleTimeString());
-                    updatePortfolioDisplay();
-                    renderHoldings();
-                }
-            } catch (error) {
-                console.log('API not available, using simulated prices');
-                simulatePriceMovement();
-            }
-        }
-
-        function simulatePriceMovement() {
-            Object.keys(currentPrices).forEach(ticker => {
-                if (ticker !== 'CASH') {
-                    const change = (Math.random() - 0.48) * 0.003;
-                    currentPrices[ticker] *= (1 + change);
-                }
-            });
-            updatePortfolioDisplay();
-            renderHoldings();
-        }
-
-        // ===========================================
-        // PORTFOLIO CALCULATIONS
-        // ===========================================
-
-        function calculatePortfolio() {
-            let totalValue = 0;
-            const holdingsData = [];
-
-            coreHoldings.forEach(h => {
-                const price = currentPrices[h.ticker] || h.inceptionPrice;
-                const shares = (STARTING_BALANCE * h.weight) / h.inceptionPrice;
-                const value = shares * price;
-                const change = ((price - h.inceptionPrice) / h.inceptionPrice) * 100;
-                
-                totalValue += value;
-                holdingsData.push({ ...h, price, shares, value, change });
-            });
-
-            return { totalValue, holdings: holdingsData };
-        }
-
-        function updatePortfolioDisplay() {
-            const { totalValue, holdings } = calculatePortfolio();
-            const change = totalValue - STARTING_BALANCE;
-            const changePct = (change / STARTING_BALANCE) * 100;
-            const isPositive = change >= 0;
-
-            document.getElementById('coreTotal').textContent = '$' + totalValue.toLocaleString('en-US', {
-                minimumFractionDigits: 2, maximumFractionDigits: 2
-            });
-
-            const changeEl = document.getElementById('coreChange');
-            changeEl.className = 'portfolio-change ' + (isPositive ? 'positive' : 'negative');
-            changeEl.textContent = `${isPositive ? '▲' : '▼'} $${Math.abs(change).toLocaleString('en-US', {
-                minimumFractionDigits: 2, maximumFractionDigits: 2
-            })} (${isPositive ? '+' : ''}${changePct.toFixed(2)}%) since inception`;
-
-            document.getElementById('lastUpdate').textContent = '🔄 ' + new Date().toLocaleTimeString();
-
-            const spyChange = ((currentPrices.SPY - benchmarkInception.SPY) / benchmarkInception.SPY) * 100;
-            const qqqChange = ((currentPrices.QQQ - benchmarkInception.QQQ) / benchmarkInception.QQQ) * 100;
-            document.getElementById('vsSpy').textContent = (changePct - spyChange >= 0 ? '+' : '') + 
-                (changePct - spyChange).toFixed(2) + '%';
-            document.getElementById('vsQqq').textContent = (changePct - qqqChange >= 0 ? '+' : '') + 
-                (changePct - qqqChange).toFixed(2) + '%';
-
-            const sorted = holdings.filter(h => h.ticker !== 'CASH').sort((a, b) => b.change - a.change);
-            document.getElementById('bestPerformer').textContent = sorted[0].ticker + ' +' + sorted[0].change.toFixed(1) + '%';
-
-            if (window.portfolioChart) {
-                const lastIdx = window.portfolioChart.data.datasets[0].data.length - 1;
-                window.portfolioChart.data.datasets[0].data[lastIdx] = totalValue;
-                window.portfolioChart.update('none');
-            }
-        }
-
-        function renderHoldings() {
-            const { holdings } = calculatePortfolio();
-            const grid = document.getElementById('holdingsGrid');
-            if (!grid) return;
-            
-            grid.innerHTML = holdings.map(h => `
-                <div class="holding-card">
-                    <div class="holding-info">
-                        <div>
-                            <div class="holding-ticker">${h.ticker}</div>
-                            <div class="holding-name">${h.name}</div>
-                        </div>
-                        <div class="holding-weight">${(h.weight * 100).toFixed(0)}%</div>
-                    </div>
-                    <div class="holding-value">
-                        <div class="holding-amount">$${h.value.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-                        <div class="holding-return ${h.change >= 0 ? 'positive' : 'negative'}">
-                            ${h.change >= 0 ? '+' : ''}${h.change.toFixed(2)}%
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderMomentumSignals() {
-            const container = document.getElementById('momentumSignals');
-            if (!container) return;
-            
-            container.innerHTML = momentumSignals.map(s => {
-                const signalClass = s.signal === 'BUY' ? 'signal-buy' : 
-                                   s.signal === 'WATCH' ? 'signal-watch' : 'signal-avoid';
-                const trend = s.price > s.sma50 && s.sma50 > s.sma200 ? '✓ Uptrend' : '✗ No trend';
-                
-                return `
-                    <div class="signal-row">
-                        <span class="signal-ticker">${s.ticker}</span>
-                        <span class="signal-status ${signalClass}">${s.signal}</span>
-                        <div class="signal-details">
-                            <span class="signal-price">$${s.price.toFixed(2)}</span>
-                            <span>50 SMA: $${s.sma50.toFixed(0)}</span>
-                            <span>200 SMA: $${s.sma200.toFixed(0)}</span>
-                            <span>RSI: ${s.rsi}</span>
-                            <span style="color: ${s.price > s.sma50 ? '#00FF88' : '#FF4444'}">${trend}</span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function renderEmergingTable() {
-            const tbody = document.getElementById('emergingTable');
-            if (!tbody) return;
-            
-            tbody.innerHTML = emergingCompanies.map(c => {
-                const dots = Array(5).fill(0).map((_, i) => 
-                    `<div class="risk-dot ${i < c.risk ? 'active' : ''}"></div>`
-                ).join('');
-
-                return `
-                    <tr>
-                        <td>
-                            <div class="company-ticker">${c.ticker}</div>
-                            <div class="company-name">${c.name}</div>
-                        </td>
-                        <td>${c.marketCap}</td>
-                        <td><span class="thesis-badge">${c.thesis}</span></td>
-                        <td class="text-muted" style="font-size: 12px;">${c.catalyst}</td>
-                        <td class="upside-cell">${c.upside}</td>
-                        <td><div class="risk-indicator">${dots}</div></td>
-                    </tr>
-                `;
-            }).join('');
-        }
-
-        // ===========================================
-        // CHART INITIALIZATION
-        // ===========================================
-
+        // Color palette
         const colors = {
             lime: '#00FF88',
             cyan: '#00D4FF',
             magenta: '#FF00FF',
             orange: '#FF8800',
-            yellow: '#FFD700',
             purple: '#AA44FF',
-            pink: '#FF69B4',
-            blue: '#4488FF',
-            grid: 'rgba(0, 255, 136, 0.1)',
-            text: 'rgba(150, 200, 170, 0.6)'
+            yellow: '#FFD700',
+            pink: '#FF6B9D',
+            blue: '#4488FF'
         };
 
-        function initCharts() {
-            // SWE-Bench Chart
-            const sweCtx = document.getElementById('sweBenchChart');
-            if (sweCtx) {
-                new Chart(sweCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Nov 22', 'Mar 23', 'Nov 23', 'Mar 24', 'Jul 24', 'Nov 24', 'Jan 25', 'Jun 25', 'Dec 25', 'Jun 26', 'Dec 26'],
-                        datasets: [{
-                            label: 'SWE-Bench Score',
-                            data: [0, 0.5, 4.5, 13, 33, 49, 58, 72, 80.9, null, null],
-                            borderColor: colors.lime,
-                            backgroundColor: 'rgba(0, 255, 136, 0.1)',
-                            fill: true,
-                            tension: 0.3,
-                            pointRadius: 4
-                        },
-                        {
-                            label: 'Forecast',
-                            data: [null, null, null, null, null, null, null, null, 80.9, 88, 94],
-                            borderColor: colors.lime,
-                            borderDash: [6, 3],
-                            tension: 0.3,
-                            pointRadius: 3,
-                            pointStyle: 'triangle'
-                        }]
+        // SWE-Bench Chart (extended history + forecast)
+        const sweBenchCtx = document.getElementById('sweBenchChart').getContext('2d');
+        new Chart(sweBenchCtx, {
+            type: 'line',
+            data: {
+                labels: ['Oct 22', 'Mar 23', 'Nov 23', 'Mar 24', 'Jun 24', 'Oct 24', 'Feb 25', 'Jul 25', 'Dec 25', 'Jun 26', 'Dec 26'],
+                datasets: [{
+                    label: 'SWE-Bench Score',
+                    data: [0.2, 0.5, 3.8, 13.8, 33.2, 49.0, 62.8, 71.7, 80.9, null, null],
+                    borderColor: colors.lime,
+                    backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: colors.lime
+                },
+                {
+                    label: 'Forecast',
+                    data: [null, null, null, null, null, null, null, null, 80.9, 88, 94],
+                    borderColor: colors.yellow,
+                    borderDash: [8, 4],
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointStyle: 'triangle',
+                    pointBackgroundColor: colors.yellow
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        display: true,
+                        labels: { usePointStyle: true }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { 
-                                position: 'top',
-                                labels: { color: colors.text }
+                    annotation: {
+                        annotations: {
+                            humanLine: {
+                                type: 'line',
+                                yMin: 4.8,
+                                yMax: 4.8,
+                                borderColor: colors.orange,
+                                borderDash: [5, 5],
+                                borderWidth: 2,
+                                label: {
+                                    display: true,
+                                    content: 'Human baseline (4.8%)',
+                                    position: 'end',
+                                    backgroundColor: 'rgba(255, 136, 0, 0.8)',
+                                    font: { size: 10 }
+                                }
                             },
-                            annotation: {
-                                annotations: {
-                                    seniorLine: {
-                                        type: 'line',
-                                        yMin: 85, yMax: 85,
-                                        borderColor: colors.orange,
-                                        borderDash: [5, 5],
-                                        borderWidth: 2,
-                                        label: {
-                                            display: true,
-                                            content: 'Senior Dev (~85%)',
-                                            position: 'end',
-                                            backgroundColor: 'rgba(255, 136, 0, 0.8)',
-                                            font: { size: 10 }
-                                        }
-                                    }
+                            juniorDevLine: {
+                                type: 'line',
+                                yMin: 50,
+                                yMax: 50,
+                                borderColor: colors.cyan,
+                                borderDash: [3, 3],
+                                borderWidth: 1,
+                                label: {
+                                    display: true,
+                                    content: 'Junior dev productivity (~50%)',
+                                    position: 'start',
+                                    backgroundColor: 'rgba(0, 212, 255, 0.8)',
+                                    font: { size: 10 }
+                                }
+                            },
+                            seniorDevLine: {
+                                type: 'line',
+                                yMin: 85,
+                                yMax: 85,
+                                borderColor: colors.magenta,
+                                borderDash: [3, 3],
+                                borderWidth: 1,
+                                label: {
+                                    display: true,
+                                    content: 'Senior dev level (~85%)',
+                                    position: 'start',
+                                    backgroundColor: 'rgba(255, 0, 255, 0.8)',
+                                    font: { size: 10 }
                                 }
                             }
-                        },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text } },
-                            y: {
-                                min: 0, max: 100,
-                                grid: { color: colors.grid },
-                                ticks: { color: colors.text, callback: v => v + '%' }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+
+        // Multi-Benchmark Chart (extended history + forecasts)
+        const multiBenchCtx = document.getElementById('multiBenchmarkChart').getContext('2d');
+        new Chart(multiBenchCtx, {
+            type: 'line',
+            data: {
+                labels: ['Nov 22', 'Mar 23', 'Nov 23', 'Mar 24', 'Jul 24', 'Dec 24', 'Jun 25', 'Dec 25', 'Jun 26', 'Dec 26'],
+                datasets: [
+                    {
+                        label: 'SWE-Bench',
+                        data: [0.2, 0.5, 3.8, 13.8, 33.2, 49.0, 71.7, 80.9, null, null],
+                        borderColor: colors.lime,
+                        tension: 0.3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'SWE Forecast',
+                        data: [null, null, null, null, null, null, null, 80.9, 88, 94],
+                        borderColor: colors.lime,
+                        borderDash: [6, 3],
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointStyle: 'triangle'
+                    },
+                    {
+                        label: 'GPQA Diamond',
+                        data: [28, 36, 48, 56, 65, 78, 88, 93.2, null, null],
+                        borderColor: colors.cyan,
+                        tension: 0.3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'GPQA Forecast',
+                        data: [null, null, null, null, null, null, null, 93.2, 96, 98],
+                        borderColor: colors.cyan,
+                        borderDash: [6, 3],
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointStyle: 'triangle'
+                    },
+                    {
+                        label: 'ARC-AGI',
+                        data: [0, 0, 5, 9, 21, 32, 43, 45, null, null],
+                        borderColor: colors.orange,
+                        tension: 0.3,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'ARC Forecast',
+                        data: [null, null, null, null, null, null, null, 45, 62, 78],
+                        borderColor: colors.orange,
+                        borderDash: [6, 3],
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointStyle: 'triangle'
+                    },
+                    {
+                        label: 'HumanEval',
+                        data: [48, 67, 72, 84, 91, 93, 95, 97, null, null],
+                        borderColor: colors.magenta,
+                        tension: 0.3,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            filter: function(item) {
+                                return !item.text.includes('Forecast');
+                            }
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            humanArc: {
+                                type: 'line',
+                                yMin: 85,
+                                yMax: 85,
+                                borderColor: 'rgba(255, 136, 0, 0.4)',
+                                borderDash: [2, 2],
+                                borderWidth: 1,
+                                label: {
+                                    display: true,
+                                    content: 'Human ARC-AGI (~85%)',
+                                    position: 'end',
+                                    backgroundColor: 'rgba(255, 136, 0, 0.6)',
+                                    font: { size: 9 }
+                                }
                             }
                         }
                     }
-                });
-            }
-
-            // Multi-Benchmark Chart
-            const multiCtx = document.getElementById('multiBenchmarkChart');
-            if (multiCtx) {
-                new Chart(multiCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Nov 22', 'Mar 23', 'Sep 23', 'Mar 24', 'Sep 24', 'Dec 25', 'Jun 26', 'Dec 26'],
-                        datasets: [
-                            {
-                                label: 'SWE-Bench',
-                                data: [0, 0.5, 4, 13, 49, 80.9, null, null],
-                                borderColor: colors.lime,
-                                tension: 0.3
-                            },
-                            {
-                                label: 'GPQA Diamond',
-                                data: [25, 32, 45, 56, 78, 93.2, null, null],
-                                borderColor: colors.cyan,
-                                tension: 0.3
-                            },
-                            {
-                                label: 'ARC-AGI',
-                                data: [0, 0, 0, 5, 21, 45, null, null],
-                                borderColor: colors.yellow,
-                                tension: 0.3
-                            },
-                            {
-                                label: 'SWE Forecast',
-                                data: [null, null, null, null, null, 80.9, 88, 94],
-                                borderColor: colors.lime,
-                                borderDash: [5, 5],
-                                tension: 0.3,
-                                pointRadius: 2
-                            },
-                            {
-                                label: 'GPQA Forecast',
-                                data: [null, null, null, null, null, 93.2, 96, 98],
-                                borderColor: colors.cyan,
-                                borderDash: [5, 5],
-                                tension: 0.3,
-                                pointRadius: 2
-                            },
-                            {
-                                label: 'ARC Forecast',
-                                data: [null, null, null, null, null, 45, 62, 78],
-                                borderColor: colors.yellow,
-                                borderDash: [5, 5],
-                                tension: 0.3,
-                                pointRadius: 2
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'top', labels: { color: colors.text, usePointStyle: true } }
-                        },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text } },
-                            y: { min: 0, max: 100, grid: { color: colors.grid }, ticks: { color: colors.text, callback: v => v + '%' } }
-                        }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        ticks: { callback: value => value + '%' }
                     }
-                });
+                }
             }
+        });
 
-            // Cost Chart
-            const costCtx = document.getElementById('costChart');
-            if (costCtx) {
-                new Chart(costCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Mar 23', 'Sep 23', 'Mar 24', 'Sep 24', 'Dec 24', 'Jun 25', 'Dec 25', 'Jun 26', 'Dec 26'],
-                        datasets: [
-                            {
-                                label: 'Frontier ($/M)',
-                                data: [30, 20, 10, 5, 2.5, 1.5, 1.0, null, null],
-                                borderColor: colors.magenta,
-                                tension: 0.3
-                            },
-                            {
-                                label: 'Efficient ($/M)',
-                                data: [null, null, 0.5, 0.25, 0.15, 0.10, 0.075, null, null],
-                                borderColor: colors.cyan,
-                                tension: 0.3
-                            },
-                            {
-                                label: 'Frontier Forecast',
-                                data: [null, null, null, null, null, null, 1.0, 0.5, 0.25],
-                                borderColor: colors.magenta,
-                                borderDash: [5, 5],
-                                tension: 0.3
-                            },
-                            {
-                                label: 'Efficient Forecast',
-                                data: [null, null, null, null, null, null, 0.075, 0.03, 0.015],
-                                borderColor: colors.cyan,
-                                borderDash: [5, 5],
-                                tension: 0.3
-                            }
-                        ]
+        // Cost Deflation Chart (with forecast)
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mar 23', 'Jun 23', 'Nov 23', 'Mar 24', 'Jun 24', 'Dec 24', 'Jun 25', 'Dec 25', 'Jun 26', 'Dec 26'],
+                datasets: [
+                    {
+                        label: 'Frontier Tier',
+                        data: [30, 30, 15, 10, 5, 2.5, 1.5, 1.0, null, null],
+                        borderColor: colors.magenta,
+                        stepped: true,
+                        pointRadius: 4
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { position: 'top', labels: { color: colors.text } } },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text } },
-                            y: {
-                                type: 'logarithmic',
-                                min: 0.01, max: 50,
-                                grid: { color: colors.grid },
-                                ticks: { color: colors.text, callback: v => '$' + v }
+                    {
+                        label: 'Frontier Forecast',
+                        data: [null, null, null, null, null, null, null, 1.0, 0.5, 0.25],
+                        borderColor: colors.magenta,
+                        borderDash: [6, 3],
+                        stepped: true,
+                        pointRadius: 3,
+                        pointStyle: 'triangle'
+                    },
+                    {
+                        label: 'Efficient Tier',
+                        data: [30, 15, 8, 3, 1.5, 0.6, 0.15, 0.10, null, null],
+                        borderColor: colors.cyan,
+                        stepped: true,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Efficient Forecast',
+                        data: [null, null, null, null, null, null, null, 0.10, 0.04, 0.015],
+                        borderColor: colors.cyan,
+                        borderDash: [6, 3],
+                        stepped: true,
+                        pointRadius: 3,
+                        pointStyle: 'triangle'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            filter: function(item) {
+                                return !item.text.includes('Forecast');
                             }
                         }
                     }
-                });
-            }
-
-            // Valuation Chart
-            const valCtx = document.getElementById('valuationChart');
-            if (valCtx) {
-                new Chart(valCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['OpenAI', 'xAI', 'Anthropic', 'Databricks', 'Figure AI', 'SSI', 'Scale AI', 'Cursor', 'Perplexity', 'Mistral'],
-                        datasets: [{
-                            label: 'Valuation ($B)',
-                            data: [500, 230, 183, 134, 39, 32, 29, 29.3, 18, 14],
-                            backgroundColor: [colors.cyan, colors.yellow, colors.orange, colors.magenta, colors.lime, colors.purple, colors.cyan, colors.orange, colors.magenta, colors.lime],
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text, callback: v => '$' + v + 'B' } },
-                            y: { grid: { display: false }, ticks: { color: colors.text } }
-                        }
+                },
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        min: 0.01,
+                        max: 50,
+                        ticks: { callback: value => '$' + value }
                     }
-                });
+                }
             }
+        });
 
-            // Semiconductor Chart
-            const semiCtx = document.getElementById('semiconductorChart');
-            if (semiCtx) {
-                new Chart(semiCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['NVIDIA', 'TSMC', 'Broadcom', 'ASML', 'AMD', 'Qualcomm', 'Intel'],
-                        datasets: [{
-                            label: 'Market Cap ($B)',
-                            data: [4650, 1520, 1150, 380, 249, 195, 98],
-                            backgroundColor: colors.lime,
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text, callback: v => '$' + v + 'B' } },
-                            y: { grid: { display: false }, ticks: { color: colors.text } }
-                        }
-                    }
-                });
-            }
-
-            // Compute Capacity Chart
-            const compCtx = document.getElementById('computeCapacityChart');
-            if (compCtx) {
-                new Chart(compCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['xAI', 'Microsoft/OpenAI', 'Google', 'Meta', 'Amazon', 'Anthropic'],
-                        datasets: [{
-                            label: 'H100 Equivalent GPUs (K)',
-                            data: [200, 150, 120, 100, 80, 50],
-                            backgroundColor: [colors.yellow, colors.cyan, colors.magenta, colors.purple, colors.orange, colors.lime],
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text, callback: v => v + 'K' } },
-                            y: { grid: { display: false }, ticks: { color: colors.text } }
-                        }
-                    }
-                });
-            }
-
-            // Portfolio Chart
-            const portCtx = document.getElementById('portfolioChart');
-            if (portCtx) {
-                window.portfolioChart = new Chart(portCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: historicalData.labels,
-                        datasets: [
-                            {
-                                label: 'AI Portfolio',
-                                data: [...historicalData.portfolio],
-                                borderColor: colors.lime,
-                                backgroundColor: 'rgba(0, 255, 136, 0.1)',
-                                fill: true,
-                                tension: 0.3,
-                                pointRadius: 4
-                            },
-                            {
-                                label: 'S&P 500',
-                                data: historicalData.spy,
-                                borderColor: colors.cyan,
-                                borderDash: [5, 5],
-                                tension: 0.3,
-                                pointRadius: 2
-                            },
-                            {
-                                label: 'QQQ',
-                                data: historicalData.qqq,
-                                borderColor: colors.magenta,
-                                borderDash: [5, 5],
-                                tension: 0.3,
-                                pointRadius: 2
+        // METR Chart (with forecast)
+        const metrCtx = document.getElementById('metrChart').getContext('2d');
+        new Chart(metrCtx, {
+            type: 'bar',
+            data: {
+                labels: ['GPT-2 (2019)', 'GPT-3 (2020)', 'GPT-4 (2023)', 'Claude 3 (2024)', 'o1/Sonnet (2024)', 'Opus 4.5 (Now)', '6mo Forecast', '12mo Forecast'],
+                datasets: [{
+                    label: 'Seconds of Autonomy',
+                    data: [3, 30, 180, 900, 3600, 17340, 36000, 72000],
+                    backgroundColor: [colors.cyan, colors.cyan, colors.cyan, colors.magenta, colors.magenta, colors.lime, colors.yellow, colors.yellow],
+                    borderRadius: 4,
+                    borderWidth: [0, 0, 0, 0, 0, 0, 2, 2],
+                    borderColor: [null, null, null, null, null, null, colors.yellow, colors.yellow],
+                    borderDash: [0, 0, 0, 0, 0, 0, 5, 5]
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const seconds = context.raw;
+                                if (seconds < 60) return seconds + ' seconds';
+                                if (seconds < 3600) return (seconds / 60).toFixed(0) + ' minutes';
+                                return (seconds / 3600).toFixed(1) + ' hours';
                             }
-                        ]
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'top', labels: { color: colors.text, usePointStyle: true } },
-                            tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.raw.toLocaleString() } }
-                        },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text } },
-                            y: { grid: { color: colors.grid }, ticks: { color: colors.text, callback: v => '$' + v.toLocaleString() } }
+                    annotation: {
+                        annotations: {
+                            workdayLine: {
+                                type: 'line',
+                                xMin: 28800,
+                                xMax: 28800,
+                                borderColor: colors.orange,
+                                borderDash: [5, 5],
+                                borderWidth: 2,
+                                label: {
+                                    display: true,
+                                    content: '8hr workday',
+                                    position: 'start',
+                                    backgroundColor: 'rgba(255, 136, 0, 0.8)',
+                                    font: { size: 10 }
+                                }
+                            }
                         }
                     }
-                });
+                },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        min: 1,
+                        max: 100000,
+                        ticks: {
+                            callback: function(value) {
+                                if (value === 1) return '1s';
+                                if (value === 10) return '10s';
+                                if (value === 60) return '1m';
+                                if (value === 600) return '10m';
+                                if (value === 3600) return '1hr';
+                                if (value === 36000) return '10hr';
+                                return '';
+                            }
+                        }
+                    }
+                }
             }
+        });
 
-            // Momentum Chart
-            const momCtx = document.getElementById('momentumChart');
-            if (momCtx) {
-                const buySignals = momentumSignals.filter(s => s.signal === 'BUY');
-                new Chart(momCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: buySignals.map(s => s.ticker),
-                        datasets: [{
-                            label: 'Distance from 50 SMA (%)',
-                            data: buySignals.map(s => ((s.price - s.sma50) / s.sma50 * 100).toFixed(1)),
-                            backgroundColor: 'rgba(0, 255, 136, 0.6)',
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            title: { display: true, text: 'Active BUY Signals: Price vs 50-Day SMA', color: colors.text, font: { size: 12 } }
-                        },
-                        scales: {
-                            x: { grid: { color: colors.grid }, ticks: { color: colors.text } },
-                            y: { grid: { color: colors.grid }, ticks: { color: colors.text, callback: v => v + '%' } }
+        // Context Window Chart
+        const contextCtx = document.getElementById('contextChart').getContext('2d');
+        new Chart(contextCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mar 23', 'Nov 23', 'Feb 24', 'May 24', 'Feb 25', 'Jun 25', 'Dec 25'],
+                datasets: [{
+                    label: 'Context Window (K tokens)',
+                    data: [8, 128, 200, 1000, 1000, 1000, 1000],
+                    borderColor: colors.purple,
+                    backgroundColor: 'rgba(170, 68, 255, 0.1)',
+                    fill: true,
+                    stepped: true,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        ticks: { callback: value => value + 'K' }
+                    }
+                }
+            }
+        });
+
+        // Valuation Chart
+        const valuationCtx = document.getElementById('valuationChart').getContext('2d');
+        new Chart(valuationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['OpenAI', 'xAI', 'Anthropic', 'Databricks', 'Figure AI', 'SSI', 'Cursor', 'Scale AI'],
+                datasets: [{
+                    label: 'Valuation ($B)',
+                    data: [500, 230, 183, 134, 39, 32, 29.3, 29],
+                    backgroundColor: [colors.magenta, colors.lime, colors.cyan, colors.purple, colors.orange, colors.yellow, colors.pink, colors.blue],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => '$' + context.raw + 'B'
                         }
                     }
-                });
+                },
+                scales: {
+                    y: {
+                        ticks: { callback: value => '$' + value + 'B' }
+                    }
+                }
             }
+        });
+
+        // Semiconductor Chart
+        const semiCtx = document.getElementById('semiconductorChart').getContext('2d');
+        new Chart(semiCtx, {
+            type: 'bar',
+            data: {
+                labels: ['NVIDIA', 'Broadcom', 'TSMC', 'ASML', 'AMD', 'Qualcomm', 'Intel'],
+                datasets: [{
+                    label: 'Market Cap ($B)',
+                    data: [4654, 1700, 1520, 410, 249, 180, 95],
+                    backgroundColor: [colors.lime, colors.cyan, colors.magenta, colors.orange, colors.purple, colors.yellow, colors.pink],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => '$' + context.raw + 'B'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { callback: value => '$' + value + 'B' }
+                    }
+                }
+            }
+        });
+
+        // Automation Risk Chart (Implications tab)
+        const automationCtx = document.getElementById('automationChart');
+        if (automationCtx) {
+            new Chart(automationCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Data Entry', 'Customer Service', 'Copywriting', 'Code (Junior)', 'Legal Research', 'Financial Analysis', 'Code (Senior)', 'Healthcare Admin', 'Sales', 'Physical Trades'],
+                    datasets: [{
+                        label: 'Task Automation %',
+                        data: [85, 75, 70, 65, 60, 55, 40, 35, 25, 10],
+                        backgroundColor: [
+                            'rgba(255, 68, 68, 0.7)',
+                            'rgba(255, 100, 68, 0.7)',
+                            'rgba(255, 136, 0, 0.7)',
+                            'rgba(255, 180, 0, 0.7)',
+                            'rgba(255, 215, 0, 0.7)',
+                            'rgba(200, 230, 100, 0.7)',
+                            'rgba(100, 200, 100, 0.7)',
+                            'rgba(0, 180, 136, 0.7)',
+                            'rgba(0, 150, 180, 0.7)',
+                            'rgba(0, 136, 136, 0.7)'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: context => context.raw + '% of tasks automatable by 2027'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            max: 100,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
         }
 
-        // ===========================================
-        // INITIALIZATION
-        // ===========================================
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', { 
-                month: 'short', day: 'numeric', year: 'numeric' 
+        // Cost Impact Chart (Implications tab)
+        const costImpactCtx = document.getElementById('costImpactChart');
+        if (costImpactCtx) {
+            new Chart(costImpactCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['AI Inference', 'Tutoring', 'Translation', 'Legal Basics', 'Custom Software', 'Prof. Services', 'General Goods', 'Healthcare', 'Housing', 'Childcare'],
+                    datasets: [{
+                        label: 'Price Change by 2027',
+                        data: [-90, -70, -80, -60, -50, -40, 0, 15, 20, 25],
+                        backgroundColor: function(context) {
+                            const value = context.raw;
+                            if (value <= -50) return 'rgba(0, 255, 136, 0.7)';
+                            if (value < 0) return 'rgba(0, 212, 255, 0.7)';
+                            if (value === 0) return 'rgba(150, 150, 150, 0.7)';
+                            return 'rgba(255, 136, 0, 0.7)';
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: context => {
+                                    const val = context.raw;
+                                    if (val < 0) return val + '% (deflation)';
+                                    if (val > 0) return '+' + val + '% (inflation)';
+                                    return 'Flat';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            min: -100,
+                            max: 50,
+                            ticks: { 
+                                callback: value => {
+                                    if (value > 0) return '+' + value + '%';
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
             });
+        }
+    
+        // ===== NEW SECTION CHARTS =====
 
-            updatePortfolioDisplay();
-            renderHoldings();
-            renderMomentumSignals();
-            renderEmergingTable();
-            initCharts();
+        // Compute Capacity Chart
+        const computeCtx = document.getElementById('computeCapacityChart').getContext('2d');
+        new Chart(computeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['xAI', 'Meta', 'Microsoft/OpenAI', 'Google', 'Amazon/Anthropic', 'Oracle'],
+                datasets: [{
+                    label: 'H100 Equivalents (thousands)',
+                    data: [200, 600, 500, 400, 300, 130],
+                    backgroundColor: [colors.yellow, colors.purple, colors.cyan, colors.magenta, colors.orange, colors.lime],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.raw + 'K GPUs (estimated)'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { callback: value => value + 'K' }
+                    }
+                }
+            }
+        });
 
-            // Try to fetch live prices
-            fetchPrices();
+        // Power Consumption Chart
+        const powerCtx = document.getElementById('powerChart').getContext('2d');
+        new Chart(powerCtx, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026E', '2027E', '2028E', '2030E'],
+                datasets: [{
+                    label: 'AI DC Power (GW)',
+                    data: [2, 3, 5, 8, 14, 20, 28, 38, 52, 90],
+                    borderColor: colors.orange,
+                    backgroundColor: 'rgba(255, 136, 0, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        ticks: { callback: value => value + ' GW' }
+                    }
+                }
+            }
+        });
 
-            // Refresh every 10 minutes (600000ms)
-            setInterval(fetchPrices, 600000);
+        // Singularity / Takeoff Chart
+        const singularityCtx = document.getElementById('singularityChart').getContext('2d');
+        new Chart(singularityCtx, {
+            type: 'line',
+            data: {
+                labels: ['1950', '1970', '1990', '2000', '2010', '2020', '2023', '2025', '2027', '2029', '2030', '2031', '2032'],
+                datasets: [{
+                    label: 'AI Capability (Log Scale)',
+                    data: [0.1, 0.2, 0.5, 1, 2, 10, 30, 80, 200, 600, 1500, 5000, 20000],
+                    borderColor: colors.magenta,
+                    backgroundColor: 'rgba(255, 0, 255, 0.05)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: function(context) {
+                        return context.dataIndex >= 7 ? 6 : 4;
+                    },
+                    pointBackgroundColor: function(context) {
+                        if (context.dataIndex >= 9) return colors.yellow;
+                        if (context.dataIndex >= 7) return colors.lime;
+                        return colors.magenta;
+                    }
+                },
+                {
+                    label: 'Human-Level',
+                    data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+                    borderColor: colors.cyan,
+                    borderDash: [10, 5],
+                    pointRadius: 0,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        display: true,
+                        labels: { usePointStyle: true }
+                    },
+                    annotation: {
+                        annotations: {
+                            agiZone: {
+                                type: 'box',
+                                xMin: '2027',
+                                xMax: '2032',
+                                backgroundColor: 'rgba(255, 215, 0, 0.05)',
+                                borderColor: 'rgba(255, 215, 0, 0.2)',
+                                borderWidth: 1
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        min: 0.1,
+                        max: 50000,
+                        ticks: {
+                            callback: function(value) {
+                                if (value === 0.1) return 'Narrow AI';
+                                if (value === 1) return 'Early ML';
+                                if (value === 10) return 'Deep Learning';
+                                if (value === 100) return 'Human-Level';
+                                if (value === 1000) return 'Superhuman';
+                                if (value === 10000) return 'ASI?';
+                                return '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Hype Cycle Chart
+        const hypeCtx = document.getElementById('hypeCycleChart').getContext('2d');
+        
+        // Generate hype cycle curve
+        function generateHypeCurve() {
+            const points = [];
+            for (let i = 0; i <= 100; i++) {
+                let y;
+                if (i < 20) {
+                    y = Math.pow(i / 20, 2) * 100; // Rise to peak
+                } else if (i < 35) {
+                    y = 100 - Math.pow((i - 20) / 15, 1.5) * 70; // Fall to trough
+                } else if (i < 70) {
+                    y = 30 + Math.pow((i - 35) / 35, 0.7) * 40; // Slope of enlightenment
+                } else {
+                    y = 70 + Math.pow((i - 70) / 30, 0.5) * 10; // Plateau
+                }
+                points.push(y);
+            }
+            return points;
+        }
+
+        const hypeCurve = generateHypeCurve();
+        const hypeLabels = Array.from({length: 101}, (_, i) => i);
+
+        new Chart(hypeCtx, {
+            type: 'line',
+            data: {
+                labels: hypeLabels,
+                datasets: [{
+                    label: 'Hype Cycle Curve',
+                    data: hypeCurve,
+                    borderColor: 'rgba(0, 255, 136, 0.3)',
+                    backgroundColor: 'rgba(0, 255, 136, 0.05)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                },
+                scales: {
+                    x: {
+                        display: false
+                    },
+                    y: {
+                        display: false,
+                        min: 0,
+                        max: 120
+                    }
+                }
+            },
+            plugins: [{
+                afterDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const chartArea = chart.chartArea;
+                    
+                    // Technology positions on hype cycle
+                    const techs = [
+                        { name: 'AI Agents', x: 15, color: colors.magenta },
+                        { name: 'AGI', x: 8, color: colors.yellow },
+                        { name: 'Humanoid Robots', x: 12, color: colors.orange },
+                        { name: 'GenAI (Images)', x: 28, color: colors.cyan },
+                        { name: 'LLM Chatbots', x: 38, color: colors.lime },
+                        { name: 'AI Coding', x: 45, color: colors.purple },
+                        { name: 'AI Search', x: 55, color: colors.pink },
+                        { name: 'ML/Deep Learning', x: 85, color: colors.blue }
+                    ];
+                    
+                    techs.forEach(tech => {
+                        const xPos = chartArea.left + (tech.x / 100) * (chartArea.right - chartArea.left);
+                        const yVal = hypeCurve[tech.x];
+                        const yPos = chartArea.bottom - (yVal / 120) * (chartArea.bottom - chartArea.top);
+                        
+                        // Draw dot
+                        ctx.beginPath();
+                        ctx.arc(xPos, yPos, 8, 0, Math.PI * 2);
+                        ctx.fillStyle = tech.color;
+                        ctx.fill();
+                        
+                        // Draw label
+                        ctx.fillStyle = tech.color;
+                        ctx.font = '11px -apple-system, BlinkMacSystemFont, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(tech.name, xPos, yPos - 15);
+                    });
+                    
+                    // Draw phase labels
+                    ctx.fillStyle = 'rgba(150, 200, 170, 0.4)';
+                    ctx.font = '9px -apple-system, BlinkMacSystemFont, sans-serif';
+                    ctx.textAlign = 'center';
+                    
+                    const phases = [
+                        { name: 'TRIGGER', x: 5 },
+                        { name: 'PEAK OF INFLATED\nEXPECTATIONS', x: 18 },
+                        { name: 'TROUGH OF\nDISILLUSIONMENT', x: 35 },
+                        { name: 'SLOPE OF\nENLIGHTENMENT', x: 55 },
+                        { name: 'PLATEAU OF\nPRODUCTIVITY', x: 85 }
+                    ];
+                    
+                    phases.forEach(phase => {
+                        const xPos = chartArea.left + (phase.x / 100) * (chartArea.right - chartArea.left);
+                        const lines = phase.name.split('\n');
+                        lines.forEach((line, i) => {
+                            ctx.fillText(line, xPos, chartArea.bottom + 15 + (i * 11));
+                        });
+                    });
+                }
+            }]
+        });
+
+        // Expert Predictions Chart
+        const predictionsCtx = document.getElementById('predictionsChart').getContext('2d');
+        new Chart(predictionsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Elon Musk', 'Sam Altman', 'Demis Hassabis', 'Dario Amodei', 'Metaculus Crowd', 'AI Researchers (Median)', 'Gary Marcus'],
+                datasets: [{
+                    label: 'AGI Prediction Year',
+                    data: [2026, 2027, 2028, 2029, 2031, 2029, 2045],
+                    backgroundColor: [colors.yellow, colors.cyan, colors.magenta, colors.orange, colors.lime, colors.purple, colors.pink],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        min: 2024,
+                        max: 2050
+                    }
+                }
+            }
+        });
+
+        // Portfolio Performance Chart
+        const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
+        new Chart(portfolioCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5'],
+                datasets: [
+                    {
+                        label: 'AI Portfolio',
+                        data: [100000, 100124, 100356, 100512, 100847],
+                        borderColor: colors.lime,
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'S&P 500',
+                        data: [100000, 100089, 100178, 100298, 100420],
+                        borderColor: colors.cyan,
+                        borderDash: [5, 5],
+                        tension: 0.3,
+                        pointRadius: 3
+                    },
+                    {
+                        label: 'QQQ',
+                        data: [100000, 100112, 100289, 100445, 100680],
+                        borderColor: colors.purple,
+                        borderDash: [5, 5],
+                        tension: 0.3,
+                        pointRadius: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'top',
+                        labels: { usePointStyle: true }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': $' + ctx.raw.toLocaleString()
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 99500,
+                        max: 101500,
+                        ticks: { callback: value => '$' + value.toLocaleString() }
+                    }
+                }
+            }
         });
     </script>
 </body>
