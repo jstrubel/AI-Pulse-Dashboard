@@ -3289,6 +3289,49 @@
         };
         const benchmarkInception = { SPY: 475.00, QQQ: 520.00 };
 
+        // Fetch live prices from API
+        async function fetchLivePrices() {
+            const tickers = ['NVDA', 'TSM', 'AVGO', 'MSFT', 'GOOGL', 'META', 'AMZN', 
+                           'ASML', 'MRVL', 'VRT', 'PLTR', 'MU', 'SPY', 'QQQ'];
+            try {
+                const response = await fetch('/api/prices?symbols=' + tickers.join(','));
+                if (!response.ok) throw new Error('API error: ' + response.status);
+                const result = await response.json();
+                
+                if (result.success && result.data) {
+                    // Update currentPrices with live data
+                    result.data.forEach(quote => {
+                        if (quote.symbol && quote.price) {
+                            currentPrices[quote.symbol] = quote.price;
+                        }
+                    });
+                    
+                    // Update display
+                    updatePortfolioDisplay();
+                    renderHoldings();
+                    
+                    const updateEl = document.getElementById('lastUpdate');
+                    if (updateEl) {
+                        updateEl.textContent = '🔄 Live @ ' + new Date().toLocaleTimeString();
+                        updateEl.style.color = '#00FF88';
+                    }
+                    
+                    console.log('✓ Prices updated from API:', new Date().toLocaleTimeString());
+                }
+            } catch (error) {
+                console.log('Using fallback prices (API unavailable):', error.message);
+                const updateEl = document.getElementById('lastUpdate');
+                if (updateEl) {
+                    updateEl.textContent = '⚠️ Fallback prices';
+                    updateEl.style.color = '#FF8800';
+                }
+            }
+        }
+
+        // Fetch prices on load and every 5 minutes
+        fetchLivePrices();
+        setInterval(fetchLivePrices, 5 * 60 * 1000);
+
         const momentumSignals = [
             { ticker: 'NVDA', price: 138.50, sma50: 135.20, sma200: 118.50, rsi: 58, signal: 'BUY' },
             { ticker: 'PLTR', price: 78.20, sma50: 72.50, sma200: 45.80, rsi: 62, signal: 'BUY' },
