@@ -66,14 +66,7 @@
         }
 
         /* Navigation */
-        .nav {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .nav-btn {
+.nav-btn {
             padding: 10px 18px;
             background: rgba(20, 35, 30, 0.6);
             border: 1px solid rgba(0, 255, 136, 0.15);
@@ -88,12 +81,7 @@
             transition: all 0.2s ease;
         }
 
-        .nav-btn:hover {
-            border-color: rgba(0, 255, 136, 0.3);
-            color: rgba(0, 255, 136, 0.8);
-        }
-
-        .nav-btn.active {
+.nav-btn.active {
             background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.1));
             border-color: rgba(0, 255, 136, 0.5);
             color: #00FF88;
@@ -536,18 +524,8 @@
             color: rgba(150, 170, 200, 0.4);
         }
 
-        /* Visible Tab Navigation - Horizontal Compact */
-        .nav {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
-        }
-
-        .nav-btn {
+        
+.nav-btn {
             padding: 6px 10px;
             background: rgba(20, 35, 30, 0.6);
             border: 1px solid rgba(0, 255, 136, 0.15);
@@ -563,30 +541,13 @@
             white-space: nowrap;
         }
 
-        .nav-btn:hover {
-            border-color: rgba(0, 255, 136, 0.3);
-            color: rgba(0, 255, 136, 0.8);
-        }
-
-        .nav-btn.active {
+.nav-btn.active {
             background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.1));
             border-color: rgba(0, 255, 136, 0.5);
             color: #00FF88;
         }
 
-        .nav-btn .new-badge {
-            font-size: 7px;
-            padding: 1px 4px;
-            background: linear-gradient(135deg, #FF00FF, #FF8800);
-            border-radius: 3px;
-            color: white;
-            font-weight: 700;
-            margin-left: 2px;
-        }
-
-
-
-        /* Strategy Tabs */
+/* Strategy Tabs */
         .strategy-tabs {
             display: flex;
             gap: 12px;
@@ -985,51 +946,18 @@
             padding-left: 12px;
         }
 
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 12px 16px;
-            background: transparent;
-            border: none;
-            border-radius: 8px;
-            color: rgba(200, 230, 210, 0.7);
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: left;
-            transition: all 0.2s ease;
-            margin-bottom: 4px;
-        }
-
-        .nav-btn:hover {
+.nav-btn:hover {
             background: rgba(0, 255, 136, 0.08);
             color: rgba(0, 255, 136, 0.9);
         }
 
-        .nav-btn.active {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 255, 0.08));
-            color: #00FF88;
-        }
-
-        .nav-btn .icon {
+.nav-btn .icon {
             font-size: 16px;
             width: 24px;
             text-align: center;
         }
 
-        .nav-btn .new-badge {
-            font-size: 9px;
-            padding: 2px 6px;
-            background: linear-gradient(135deg, #FF00FF, #FF8800);
-            border-radius: 4px;
-            color: white;
-            font-weight: 700;
-            margin-left: auto;
-        }
-
-        /* Current Section Indicator */
+/* Current Section Indicator */
 .current-section .icon {
             font-size: 14px;
         }
@@ -1045,7 +973,57 @@
             }
         }
 
-    </style>
+
+        /* === NAVIGATION TABS === */
+        nav.nav {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+            margin-bottom: 16px !important;
+            padding: 12px 0 !important;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.15) !important;
+        }
+
+        nav.nav .nav-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            padding: 6px 12px !important;
+            background: rgba(15, 25, 20, 0.8) !important;
+            border: 1px solid rgba(0, 255, 136, 0.2) !important;
+            border-radius: 6px !important;
+            color: rgba(0, 255, 136, 0.7) !important;
+            font-size: 11px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: all 0.15s ease !important;
+            white-space: nowrap !important;
+        }
+
+        nav.nav .nav-btn:hover {
+            border-color: rgba(0, 255, 136, 0.4) !important;
+            color: #00FF88 !important;
+            background: rgba(0, 255, 136, 0.1) !important;
+        }
+
+        nav.nav .nav-btn.active {
+            background: rgba(0, 255, 136, 0.15) !important;
+            border-color: #00FF88 !important;
+            color: #00FF88 !important;
+        }
+
+        nav.nav .nav-btn .new-badge {
+            font-size: 8px !important;
+            padding: 2px 4px !important;
+            background: linear-gradient(135deg, #FF00FF, #FF8800) !important;
+            border-radius: 3px !important;
+            color: white !important;
+            font-weight: 700 !important;
+            margin-left: 4px !important;
+        }
+
+        </style>
 </head>
 <body>
     <div class="container">
@@ -1055,7 +1033,7 @@
                 <div class="pulse-dot"></div>
                 <h1>AI Pulse</h1>
             </div>
-            <p class="subtitle">Real-time AI progress tracker • Updated Jan 6, 2026</p>
+            <p class="subtitle">Real-time AI progress tracker • Updated Jan 7, 2026</p>
         </div>
 
                 <!-- Navigation - Visible Tabs -->
@@ -4333,11 +4311,11 @@
         new Chart(portfolioCtx, {
             type: 'line',
             data: {
-                labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5'],
+                labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 6', 'Jan 7'],
                 datasets: [
                     {
                         label: 'AI Portfolio',
-                        data: [100000, 100124, 100356, 100512, 100847],
+                        data: [100000, 100124, 100356, 100890, 102301],
                         borderColor: colors.lime,
                         backgroundColor: 'rgba(0, 255, 136, 0.1)',
                         fill: true,
@@ -4346,7 +4324,7 @@
                     },
                     {
                         label: 'S&P 500',
-                        data: [100000, 100089, 100178, 100298, 100420],
+                        data: [100000, 100089, 100178, 100420, 100740],
                         borderColor: colors.cyan,
                         borderDash: [5, 5],
                         tension: 0.3,
@@ -4354,7 +4332,7 @@
                     },
                     {
                         label: 'QQQ',
-                        data: [100000, 100112, 100289, 100445, 100680],
+                        data: [100000, 100112, 100289, 100680, 101120],
                         borderColor: colors.purple,
                         borderDash: [5, 5],
                         tension: 0.3,
@@ -4379,7 +4357,7 @@
                 scales: {
                     y: {
                         min: 99500,
-                        max: 101500,
+                        max: 103000,
                         ticks: { callback: value => '$' + value.toLocaleString() }
                     }
                 }
