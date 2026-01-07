@@ -1439,6 +1439,376 @@
         }
 
 
+
+        /* ============================================
+           PROFESSIONAL PORTFOLIO STYLES
+           ============================================ */
+
+        /* Portfolio Navigation */
+        .portfolio-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 4px;
+            background: rgba(0, 20, 15, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .portfolio-nav-inner {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+        .portfolio-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .portfolio-tab:hover { background: rgba(0, 255, 136, 0.05); }
+        .portfolio-tab.active {
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: inset 0 0 0 1px rgba(0, 255, 136, 0.3);
+        }
+        .tab-icon { font-size: 24px; }
+        .tab-content-inner { flex: 1; }
+        .tab-title { font-size: 13px; font-weight: 600; color: #e0f0e8; }
+        .portfolio-tab.active .tab-title { color: #00FF88; }
+        .tab-subtitle { font-size: 10px; color: rgba(150, 200, 170, 0.5); margin-top: 2px; }
+        .tab-nav { font-size: 14px; font-weight: 700; font-family: 'SF Mono', monospace; color: #00FF88; }
+        .tab-signals { display: flex; gap: 6px; }
+        .signal-count { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .signal-count.buy { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .signal-count.avoid { background: rgba(255, 68, 68, 0.15); color: #FF4444; }
+        
+        .data-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 11px;
+            color: rgba(150, 200, 170, 0.6);
+        }
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #FF8800;
+        }
+        .status-indicator.live {
+            background: #00FF88;
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        /* Strategy Content */
+        .strategy-content { display: none; }
+        .strategy-content.active { display: block; }
+
+        /* KPI Row */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .kpi-card {
+            padding: 16px;
+            background: rgba(10, 25, 18, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.08);
+        }
+        .kpi-card.primary {
+            background: linear-gradient(135deg, rgba(0, 40, 25, 0.9), rgba(10, 30, 20, 0.95));
+            border-color: rgba(0, 255, 136, 0.2);
+        }
+        .kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(150, 200, 170, 0.5); margin-bottom: 6px; }
+        .kpi-value { font-size: 20px; font-weight: 700; color: #e0f0e8; font-family: 'SF Mono', monospace; }
+        .kpi-card.primary .kpi-value { font-size: 26px; color: #00FF88; }
+        .kpi-change { font-size: 12px; margin-top: 4px; }
+        .kpi-change.positive { color: #00FF88; }
+        .kpi-change.negative { color: #FF4444; }
+        .kpi-meta { font-size: 10px; color: rgba(150, 200, 170, 0.4); margin-top: 4px; }
+        .kpi-subtext { font-size: 10px; color: rgba(150, 200, 170, 0.4); margin-top: 2px; }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .chart-card .card-header { display: flex; justify-content: space-between; align-items: center; }
+        .chart-range-btns { display: flex; gap: 4px; }
+        .range-btn {
+            padding: 4px 10px;
+            font-size: 10px;
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 4px;
+            color: rgba(150, 200, 170, 0.7);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .range-btn:hover, .range-btn.active {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: rgba(0, 255, 136, 0.4);
+            color: #00FF88;
+        }
+        .chart-wrapper { height: 280px; margin: 16px 0 12px; }
+        .chart-legend { display: flex; gap: 16px; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(150, 200, 170, 0.7); }
+        .legend-color { width: 12px; height: 3px; border-radius: 2px; }
+
+        /* Allocation Card */
+        .allocation-card .card-title { margin-bottom: 12px; }
+        .allocation-chart-wrapper { height: 140px; margin-bottom: 16px; }
+        .allocation-breakdown { display: flex; flex-direction: column; gap: 8px; }
+        .alloc-row { display: grid; grid-template-columns: 100px 40px 1fr; gap: 8px; align-items: center; font-size: 11px; }
+        .alloc-label { display: flex; align-items: center; gap: 6px; color: rgba(200, 230, 210, 0.8); }
+        .alloc-dot { width: 8px; height: 8px; border-radius: 2px; }
+        .alloc-value { text-align: right; font-family: 'SF Mono', monospace; color: rgba(150, 200, 170, 0.6); }
+        .alloc-bar { height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 3px; overflow: hidden; }
+        .alloc-fill { height: 100%; border-radius: 3px; }
+
+        /* Holdings Table */
+        .holdings-card .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .table-actions { display: flex; gap: 4px; }
+        .action-btn {
+            padding: 5px 12px;
+            font-size: 10px;
+            background: transparent;
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 4px;
+            color: rgba(150, 200, 170, 0.6);
+            cursor: pointer;
+        }
+        .action-btn:hover, .action-btn.active {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: rgba(0, 255, 136, 0.3);
+            color: #00FF88;
+        }
+        .table-container { overflow-x: auto; margin: 0 -20px; padding: 0 20px; }
+        .holdings-table, .signals-table, .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .holdings-table th, .signals-table th, .spec-table th {
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: rgba(150, 200, 170, 0.5);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            background: rgba(0, 20, 15, 0.4);
+        }
+        .holdings-table th.num, .signals-table th.num, .spec-table th.num { text-align: right; }
+        .holdings-table td, .signals-table td, .spec-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.04);
+            color: rgba(200, 230, 210, 0.9);
+        }
+        .holdings-table td.num, .signals-table td.num, .spec-table td.num { text-align: right; font-family: 'SF Mono', monospace; }
+        .holdings-table tbody tr:hover, .signals-table tbody tr:hover, .spec-table tbody tr:hover {
+            background: rgba(0, 255, 136, 0.03);
+        }
+        .holdings-table tfoot td {
+            padding: 12px;
+            font-weight: 600;
+            background: rgba(0, 255, 136, 0.03);
+            border-top: 2px solid rgba(0, 255, 136, 0.15);
+        }
+        .ticker-link { color: #00D4FF; font-weight: 600; font-family: 'SF Mono', monospace; }
+        .sector-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 500;
+        }
+        .sector-badge.compute { background: rgba(0, 255, 136, 0.12); color: #00FF88; }
+        .sector-badge.cloud { background: rgba(0, 212, 255, 0.12); color: #00D4FF; }
+        .sector-badge.software { background: rgba(255, 0, 255, 0.12); color: #FF00FF; }
+
+        /* Two Column Grid */
+        .two-col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        
+        /* Attribution */
+        .attribution-list { display: flex; flex-direction: column; gap: 6px; }
+        .attribution-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(0, 20, 15, 0.4);
+            border-radius: 6px;
+        }
+        .attribution-ticker { font-weight: 600; color: #00D4FF; font-family: 'SF Mono', monospace; }
+        .attribution-contrib { font-family: 'SF Mono', monospace; }
+        .attribution-contrib.positive { color: #00FF88; }
+        .attribution-contrib.negative { color: #FF4444; }
+
+        /* Risk Stats */
+        .risk-stats { display: flex; flex-direction: column; gap: 8px; }
+        .risk-stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: rgba(0, 20, 15, 0.4);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        .risk-stat-label { color: rgba(200, 230, 210, 0.7); }
+        .risk-stat-value { font-family: 'SF Mono', monospace; font-weight: 600; color: #e0f0e8; }
+
+        /* Rules Card */
+        .rules-card { }
+        .rules-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .rule-section h4 { font-size: 12px; color: #00FF88; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+        .rule-section p { font-size: 12px; color: rgba(200, 230, 210, 0.75); line-height: 1.6; }
+        .rule-section ul { margin-top: 8px; padding-left: 16px; }
+        .rule-section li { font-size: 11px; color: rgba(200, 230, 210, 0.7); margin-bottom: 6px; line-height: 1.5; }
+
+        /* Strategy Intro */
+        .strategy-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: rgba(10, 25, 18, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            margin-bottom: 20px;
+        }
+        .strategy-intro.warning { border-color: rgba(255, 136, 0, 0.3); }
+        .intro-text h3 { font-size: 18px; color: #00FF88; margin-bottom: 6px; }
+        .intro-text p { font-size: 13px; color: rgba(200, 230, 210, 0.7); }
+        .intro-stats { display: flex; gap: 24px; }
+        .intro-stat { text-align: center; }
+        .intro-stat-value { font-size: 32px; font-weight: 700; font-family: 'SF Mono', monospace; }
+        .intro-stat-label { font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-top: 4px; }
+
+        /* Signal Rules Card */
+        .signal-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .signal-rule { padding: 16px; background: rgba(0, 20, 15, 0.5); border-radius: 8px; }
+        .signal-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .signal-badge.buy { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
+        .signal-badge.watch { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
+        .signal-badge.avoid { background: rgba(255, 68, 68, 0.2); color: #FF4444; }
+        .signal-criteria strong { font-size: 11px; color: rgba(200, 230, 210, 0.8); display: block; margin-bottom: 8px; }
+        .signal-criteria ul { padding-left: 16px; }
+        .signal-criteria li { font-size: 11px; color: rgba(200, 230, 210, 0.6); margin-bottom: 4px; }
+
+        /* Backtest Grid */
+        .backtest-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 16px; }
+        .backtest-stat { text-align: center; padding: 16px; background: rgba(0, 20, 15, 0.5); border-radius: 8px; }
+        .backtest-value { font-size: 22px; font-weight: 700; font-family: 'SF Mono', monospace; color: #e0f0e8; }
+        .backtest-label { font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-top: 6px; }
+        .backtest-note { font-size: 11px; color: rgba(150, 200, 170, 0.5); font-style: italic; }
+
+        /* Speculative Styles */
+        .risk-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 136, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 136, 0, 0.2);
+        }
+        .risk-banner-icon { font-size: 28px; }
+        .risk-banner-text { font-size: 12px; color: #FF8800; line-height: 1.5; }
+
+        .spec-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .spec-kpi {
+            padding: 16px;
+            background: rgba(10, 25, 18, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.08);
+            text-align: center;
+        }
+        .spec-kpi-label { font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-bottom: 6px; }
+        .spec-kpi-value { font-size: 20px; font-weight: 700; font-family: 'SF Mono', monospace; color: #e0f0e8; }
+
+        /* Thesis Grid */
+        .thesis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .thesis-card { background: rgba(0, 20, 15, 0.5); border-radius: 8px; overflow: hidden; }
+        .thesis-header { padding: 10px 14px; font-size: 12px; font-weight: 600; }
+        .thesis-header.robotics { background: rgba(0, 255, 136, 0.1); color: #00FF88; }
+        .thesis-header.voice { background: rgba(0, 212, 255, 0.1); color: #00D4FF; }
+        .thesis-header.connectivity { background: rgba(255, 136, 0, 0.1); color: #FF8800; }
+        .thesis-header.biotech { background: rgba(255, 0, 255, 0.1); color: #FF00FF; }
+        .thesis-body { padding: 14px; }
+        .thesis-body p { font-size: 11px; color: rgba(200, 230, 210, 0.7); line-height: 1.5; margin-bottom: 10px; }
+        .thesis-tickers { font-family: 'SF Mono', monospace; font-size: 11px; color: #00D4FF; }
+
+        /* Warning Card */
+        .warning-card { border-color: rgba(255, 136, 0, 0.2); }
+        .risk-list { display: flex; flex-direction: column; gap: 10px; }
+        .risk-item-detail { font-size: 12px; color: rgba(200, 230, 210, 0.75); line-height: 1.6; padding: 12px; background: rgba(255, 136, 0, 0.05); border-radius: 6px; border-left: 3px solid rgba(255, 136, 0, 0.4); }
+
+        /* Signal badges in table */
+        .signal-cell { text-align: center; }
+        .signal-pill { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+        .signal-pill.buy { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .signal-pill.watch { background: rgba(255, 215, 0, 0.15); color: #FFD700; }
+        .signal-pill.avoid { background: rgba(255, 68, 68, 0.15); color: #FF4444; }
+        .trend-cell { font-size: 10px; }
+        .trend-up { color: #00FF88; }
+        .trend-down { color: #FF4444; }
+        .trend-flat { color: #FFD700; }
+
+        /* Risk dots */
+        .risk-indicator { display: flex; gap: 3px; justify-content: center; }
+        .risk-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 136, 0, 0.15); }
+        .risk-dot.filled { background: #FF8800; }
+
+        /* Status pill */
+        .status-pill { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 10px; font-weight: 500; }
+        .status-pill.active { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .status-pill.watching { background: rgba(255, 215, 0, 0.15); color: #FFD700; }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .kpi-row { grid-template-columns: repeat(3, 1fr); }
+            .main-grid { grid-template-columns: 1fr; }
+            .rules-grid, .thesis-grid { grid-template-columns: repeat(2, 1fr); }
+            .signal-rules { grid-template-columns: 1fr; }
+            .backtest-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .portfolio-nav-inner { flex-direction: column; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .two-col-grid { grid-template-columns: 1fr; }
+            .rules-grid, .thesis-grid { grid-template-columns: 1fr; }
+            .spec-kpis { grid-template-columns: repeat(2, 1fr); }
+        }
+
+
     </style>
 </head>
 <body>
@@ -3458,148 +3828,162 @@
 
         <!-- AI Portfolio Tab -->
         <div id="portfolio" class="tab-content">
-            <div class="section-description">
-                <strong>AI Equity Strategies</strong> — Three distinct approaches to capturing AI's growth trajectory. Live prices via Yahoo Finance. 
-                <em>For informational purposes only — not investment advice.</em>
-            </div>
-
-            <!-- Strategy Tabs -->
-            <div class="strategy-selector">
-                <button class="strategy-btn active" onclick="showStrategy('core', this)">
-                    <span class="strategy-icon">🏛️</span>
-                    <span class="strategy-label">Core Infrastructure</span>
-                    <span class="strategy-meta">Set & forget • 12 positions</span>
-                </button>
-                <button class="strategy-btn" onclick="showStrategy('momentum', this)">
-                    <span class="strategy-icon">⚡</span>
-                    <span class="strategy-label">Trend Following</span>
-                    <span class="strategy-meta">50/200 SMA system</span>
-                </button>
-                <button class="strategy-btn" onclick="showStrategy('speculative', this)">
-                    <span class="strategy-icon">🚀</span>
-                    <span class="strategy-label">Speculative Basket</span>
-                    <span class="strategy-meta">High risk • Small caps</span>
-                </button>
+            
+            <!-- Strategy Navigation -->
+            <div class="portfolio-nav">
+                <div class="portfolio-nav-inner">
+                    <button class="portfolio-tab active" data-strategy="core">
+                        <div class="tab-icon">🏛️</div>
+                        <div class="tab-content-inner">
+                            <div class="tab-title">Core Infrastructure</div>
+                            <div class="tab-subtitle">Long-only • 10 positions • Quarterly rebalance</div>
+                        </div>
+                        <div class="tab-nav" id="coreNavPreview">--</div>
+                    </button>
+                    <button class="portfolio-tab" data-strategy="momentum">
+                        <div class="tab-icon">⚡</div>
+                        <div class="tab-content-inner">
+                            <div class="tab-title">Trend Following</div>
+                            <div class="tab-subtitle">Systematic • 50/200 SMA crossover</div>
+                        </div>
+                        <div class="tab-signals" id="momSignalPreview">
+                            <span class="signal-count buy">0</span>
+                            <span class="signal-count avoid">0</span>
+                        </div>
+                    </button>
+                    <button class="portfolio-tab" data-strategy="speculative">
+                        <div class="tab-icon">🚀</div>
+                        <div class="tab-content-inner">
+                            <div class="tab-title">Speculative Ideas</div>
+                            <div class="tab-subtitle">High-risk • 2-5% sizing • Asymmetric bets</div>
+                        </div>
+                        <div class="tab-nav" id="specNavPreview">--</div>
+                    </button>
+                </div>
+                <div class="data-status" id="dataStatus">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">Connecting...</span>
+                </div>
             </div>
 
             <!-- ============================================ -->
             <!-- STRATEGY 1: CORE INFRASTRUCTURE -->
             <!-- ============================================ -->
-            <div id="strategy-core" class="strategy-panel">
+            <div id="strategy-core" class="strategy-content active">
                 
-                <!-- Summary Bar -->
-                <div class="portfolio-summary-bar">
-                    <div class="summary-item primary">
-                        <div class="summary-label">Portfolio NAV</div>
-                        <div class="summary-value" id="coreNav">$100,000.00</div>
-                        <div class="summary-change positive" id="coreChange">+$0.00 (0.00%)</div>
+                <!-- KPI Row -->
+                <div class="kpi-row">
+                    <div class="kpi-card primary">
+                        <div class="kpi-label">Portfolio Value</div>
+                        <div class="kpi-value" id="coreNav">$100,000.00</div>
+                        <div class="kpi-change positive" id="coreChange">+$0.00 (0.00%)</div>
+                        <div class="kpi-meta">Since Jan 1, 2026</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Day P&L</div>
-                        <div class="summary-value" id="coreDayPnl">--</div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Day P&L</div>
+                        <div class="kpi-value" id="coreDayPnl">--</div>
+                        <div class="kpi-subtext" id="coreDayPnlPct">--</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="summary-label">vs SPY</div>
-                        <div class="summary-value" id="coreVsSpy">--</div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">vs S&P 500</div>
+                        <div class="kpi-value" id="coreVsSpy">--</div>
+                        <div class="kpi-subtext">Relative perf</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="summary-label">vs QQQ</div>
-                        <div class="summary-value" id="coreVsQqq">--</div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">vs QQQ</div>
+                        <div class="kpi-value" id="coreVsQqq">--</div>
+                        <div class="kpi-subtext">Relative perf</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Beta</div>
-                        <div class="summary-value">1.42</div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Sharpe (Ann.)</div>
+                        <div class="kpi-value" id="coreSharpe">--</div>
+                        <div class="kpi-subtext">Risk-adj return</div>
                     </div>
-                    <div class="summary-item status">
-                        <div class="summary-label">Status</div>
-                        <div class="summary-value" id="dataStatus">
-                            <span class="status-dot"></span> Connecting...
-                        </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Max Drawdown</div>
+                        <div class="kpi-value text-orange" id="coreMaxDD">--</div>
+                        <div class="kpi-subtext">Peak to trough</div>
                     </div>
                 </div>
 
-                <!-- Chart + Risk Grid -->
-                <div class="portfolio-grid">
-                    <div class="card">
+                <!-- Main Grid: Chart + Allocation -->
+                <div class="main-grid">
+                    <div class="card chart-card">
                         <div class="card-header">
-                            <div class="card-title">Performance vs Benchmarks</div>
-                            <div class="chart-period">Since Jan 1, 2026</div>
+                            <div class="card-title">Cumulative Return vs Benchmarks</div>
+                            <div class="chart-range-btns">
+                                <button class="range-btn active" data-range="1W">1W</button>
+                                <button class="range-btn" data-range="1M">1M</button>
+                                <button class="range-btn" data-range="YTD">YTD</button>
+                            </div>
                         </div>
-                        <div class="chart-container">
-                            <canvas id="portfolioChart"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="corePerformanceChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item"><span class="legend-color" style="background:#00FF88"></span>Portfolio</div>
+                            <div class="legend-item"><span class="legend-color" style="background:#00D4FF"></span>SPY</div>
+                            <div class="legend-item"><span class="legend-color" style="background:#AA66FF"></span>QQQ</div>
+                            <div class="legend-item"><span class="legend-color" style="background:#FF8800"></span>SOXX</div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-title">Risk Metrics</div>
-                        <div class="risk-grid">
-                            <div class="risk-item">
-                                <div class="risk-label">Sharpe</div>
-                                <div class="risk-value" id="coreSharpe">--</div>
-                            </div>
-                            <div class="risk-item">
-                                <div class="risk-label">Max DD</div>
-                                <div class="risk-value text-orange" id="coreMaxDD">--</div>
-                            </div>
-                            <div class="risk-item">
-                                <div class="risk-label">Vol (Ann)</div>
-                                <div class="risk-value text-yellow">~38%</div>
-                            </div>
-                            <div class="risk-item">
-                                <div class="risk-label">Win Rate</div>
-                                <div class="risk-value" id="coreWinRate">--</div>
-                            </div>
-                            <div class="risk-item">
-                                <div class="risk-label">Best Day</div>
-                                <div class="risk-value text-lime" id="coreBestDay">--</div>
-                            </div>
-                            <div class="risk-item">
-                                <div class="risk-label">Worst Day</div>
-                                <div class="risk-value text-red" id="coreWorstDay">--</div>
-                            </div>
+
+                    <div class="card allocation-card">
+                        <div class="card-title">Sector Allocation</div>
+                        <div class="allocation-chart-wrapper">
+                            <canvas id="coreAllocationChart"></canvas>
                         </div>
-                        <div class="sector-allocation">
-                            <div class="sector-title">Allocation</div>
-                            <div class="sector-bar">
-                                <div class="sector-segment compute" style="width:45%" title="Compute 45%"></div>
-                                <div class="sector-segment cloud" style="width:33%" title="Cloud 33%"></div>
-                                <div class="sector-segment apps" style="width:20%" title="Apps 20%"></div>
-                                <div class="sector-segment cash" style="width:2%" title="Cash 2%"></div>
+                        <div class="allocation-breakdown">
+                            <div class="alloc-row">
+                                <span class="alloc-label"><span class="alloc-dot" style="background:#00FF88"></span>Compute</span>
+                                <span class="alloc-value">45%</span>
+                                <span class="alloc-bar"><span class="alloc-fill" style="width:45%;background:#00FF88"></span></span>
                             </div>
-                            <div class="sector-legend">
-                                <span><span class="dot compute"></span>Compute 45%</span>
-                                <span><span class="dot cloud"></span>Cloud 33%</span>
-                                <span><span class="dot apps"></span>Apps 20%</span>
+                            <div class="alloc-row">
+                                <span class="alloc-label"><span class="alloc-dot" style="background:#00D4FF"></span>Hyperscalers</span>
+                                <span class="alloc-value">33%</span>
+                                <span class="alloc-bar"><span class="alloc-fill" style="width:33%;background:#00D4FF"></span></span>
+                            </div>
+                            <div class="alloc-row">
+                                <span class="alloc-label"><span class="alloc-dot" style="background:#FF00FF"></span>AI Software</span>
+                                <span class="alloc-value">20%</span>
+                                <span class="alloc-bar"><span class="alloc-fill" style="width:20%;background:#FF00FF"></span></span>
+                            </div>
+                            <div class="alloc-row">
+                                <span class="alloc-label"><span class="alloc-dot" style="background:#666"></span>Cash</span>
+                                <span class="alloc-value">2%</span>
+                                <span class="alloc-bar"><span class="alloc-fill" style="width:2%;background:#666"></span></span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Holdings Table -->
-                <div class="card">
+                <div class="card holdings-card">
                     <div class="card-header">
-                        <div class="card-title">Holdings</div>
+                        <div class="card-title">Holdings Detail</div>
                         <div class="table-actions">
-                            <select id="coreSort" onchange="sortCoreHoldings(this.value)">
-                                <option value="weight">Sort: Weight</option>
-                                <option value="pnl">Sort: P&L %</option>
-                                <option value="dayChg">Sort: Day Chg</option>
-                            </select>
+                            <button class="action-btn active" data-sort="weight">By Weight</button>
+                            <button class="action-btn" data-sort="pnl">By P&L</button>
+                            <button class="action-btn" data-sort="day">By Day Chg</button>
                         </div>
                     </div>
-                    <div class="table-scroll">
-                        <table class="holdings-table">
+                    <div class="table-container">
+                        <table class="holdings-table" id="coreHoldingsTable">
                             <thead>
                                 <tr>
-                                    <th>Ticker</th>
+                                    <th class="sticky-col">Ticker</th>
+                                    <th>Company</th>
                                     <th>Sector</th>
-                                    <th class="text-right">Wt%</th>
-                                    <th class="text-right">Shares</th>
-                                    <th class="text-right">Cost</th>
-                                    <th class="text-right">Price</th>
-                                    <th class="text-right">Value</th>
-                                    <th class="text-right">Day</th>
-                                    <th class="text-right">P&L</th>
-                                    <th class="text-right">Return</th>
+                                    <th class="num">Weight</th>
+                                    <th class="num">Shares</th>
+                                    <th class="num">Cost Basis</th>
+                                    <th class="num">Last Price</th>
+                                    <th class="num">Market Value</th>
+                                    <th class="num">Day Chg</th>
+                                    <th class="num">Day P&L</th>
+                                    <th class="num">Unrealized P&L</th>
+                                    <th class="num">Return %</th>
                                 </tr>
                             </thead>
                             <tbody id="coreHoldingsBody"></tbody>
@@ -3608,28 +3992,74 @@
                     </div>
                 </div>
 
-                <!-- Thesis -->
-                <div class="card">
-                    <div class="card-title">Strategy Rules</div>
-                    <div class="thesis-grid">
-                        <div class="thesis-section">
-                            <h4>Thesis</h4>
-                            <p>Own the infrastructure layer of AI. GPUs, foundry, networking, and hyperscaler capex are the highest-conviction plays regardless of which AI lab wins.</p>
+                <!-- Attribution + Risk Grid -->
+                <div class="two-col-grid">
+                    <div class="card">
+                        <div class="card-title">Return Attribution (Since Inception)</div>
+                        <div class="attribution-list" id="coreAttribution">
+                            <!-- Populated by JS -->
                         </div>
-                        <div class="thesis-section">
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Risk Decomposition</div>
+                        <div class="risk-stats">
+                            <div class="risk-stat-row">
+                                <span class="risk-stat-label">Portfolio Beta (vs SPY)</span>
+                                <span class="risk-stat-value">1.42</span>
+                            </div>
+                            <div class="risk-stat-row">
+                                <span class="risk-stat-label">Correlation to QQQ</span>
+                                <span class="risk-stat-value">0.89</span>
+                            </div>
+                            <div class="risk-stat-row">
+                                <span class="risk-stat-label">Annualized Volatility</span>
+                                <span class="risk-stat-value">~38%</span>
+                            </div>
+                            <div class="risk-stat-row">
+                                <span class="risk-stat-label">Concentration (Top 3)</span>
+                                <span class="risk-stat-value" id="coreConcentration">--</span>
+                            </div>
+                            <div class="risk-stat-row">
+                                <span class="risk-stat-label">Win Rate (Daily)</span>
+                                <span class="risk-stat-value" id="coreWinRate">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy Rules -->
+                <div class="card rules-card">
+                    <div class="card-title">Strategy Rules & Methodology</div>
+                    <div class="rules-grid">
+                        <div class="rule-section">
+                            <h4>Investment Thesis</h4>
+                            <p>Own the infrastructure layer powering AI. Focus on companies with durable competitive advantages in compute, networking, and cloud—the "picks and shovels" that benefit regardless of which AI models win.</p>
+                        </div>
+                        <div class="rule-section">
+                            <h4>Position Sizing</h4>
+                            <ul>
+                                <li>Equal-weight sectors, cap-weight within sectors</li>
+                                <li>Max single position: 20%</li>
+                                <li>Max sector: 50%</li>
+                                <li>Min cash buffer: 2%</li>
+                            </ul>
+                        </div>
+                        <div class="rule-section">
                             <h4>Rebalancing</h4>
                             <ul>
                                 <li>Quarterly (Jan, Apr, Jul, Oct)</li>
-                                <li>Max position: 25%</li>
-                                <li>Trim winners >50% from cost</li>
+                                <li>Trim positions up >40% from cost</li>
+                                <li>Add to positions down >25% if thesis intact</li>
+                                <li>Review on major corporate events</li>
                             </ul>
                         </div>
-                        <div class="thesis-section">
-                            <h4>Risk Management</h4>
+                        <div class="rule-section">
+                            <h4>Exit Criteria</h4>
                             <ul>
-                                <li>No stop losses (thesis-driven)</li>
-                                <li>2% cash for rebalancing</li>
-                                <li>Add on 20%+ drawdowns</li>
+                                <li>Thesis invalidation (e.g., market share loss)</li>
+                                <li>Better opportunity in same sector</li>
+                                <li>Valuation extreme (>50x forward P/E)</li>
+                                <li>No stop-losses (long-term thesis)</li>
                             </ul>
                         </div>
                     </div>
@@ -3639,63 +4069,89 @@
             <!-- ============================================ -->
             <!-- STRATEGY 2: TREND FOLLOWING -->
             <!-- ============================================ -->
-            <div id="strategy-momentum" class="strategy-panel" style="display:none;">
+            <div id="strategy-momentum" class="strategy-content">
                 
-                <div class="strategy-header">
-                    <div class="strategy-title">
-                        <h3>⚡ Trend Following Strategy</h3>
-                        <p>Systematic momentum signals based on moving average crossovers and RSI</p>
+                <div class="strategy-intro">
+                    <div class="intro-text">
+                        <h3>Systematic Trend Following</h3>
+                        <p>Rule-based signals using price momentum. No discretion—either the setup is there or it isn't.</p>
                     </div>
-                    <div class="strategy-stats">
-                        <div class="stat">
-                            <div class="stat-value text-lime" id="momBuyCount">0</div>
-                            <div class="stat-label">BUY Signals</div>
+                    <div class="intro-stats">
+                        <div class="intro-stat">
+                            <div class="intro-stat-value text-lime" id="momBuyCount">0</div>
+                            <div class="intro-stat-label">BUY</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-value text-yellow" id="momWatchCount">0</div>
-                            <div class="stat-label">WATCH</div>
+                        <div class="intro-stat">
+                            <div class="intro-stat-value text-yellow" id="momWatchCount">0</div>
+                            <div class="intro-stat-label">WATCH</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-value text-red" id="momAvoidCount">0</div>
-                            <div class="stat-label">AVOID</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="signal-rules card">
-                    <div class="rules-title">Signal Rules</div>
-                    <div class="rules-content">
-                        <div class="rule buy">
-                            <span class="rule-badge">BUY</span>
-                            <span>Price > 50 SMA AND 50 SMA > 200 SMA AND RSI between 40-70</span>
-                        </div>
-                        <div class="rule watch">
-                            <span class="rule-badge">WATCH</span>
-                            <span>Price near 50 SMA OR RSI approaching extremes</span>
-                        </div>
-                        <div class="rule avoid">
-                            <span class="rule-badge">AVOID</span>
-                            <span>Price < 200 SMA OR death cross OR RSI > 80 (overbought)</span>
+                        <div class="intro-stat">
+                            <div class="intro-stat-value text-red" id="momAvoidCount">0</div>
+                            <div class="intro-stat-label">AVOID</div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Signal Rules -->
+                <div class="card signal-rules-card">
+                    <div class="card-title">Signal Definitions</div>
+                    <div class="signal-rules">
+                        <div class="signal-rule">
+                            <span class="signal-badge buy">BUY</span>
+                            <div class="signal-criteria">
+                                <strong>All conditions met:</strong>
+                                <ul>
+                                    <li>Price > 50-day SMA</li>
+                                    <li>50-day SMA > 200-day SMA (golden cross)</li>
+                                    <li>RSI(14) between 40-70 (not overbought)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="signal-rule">
+                            <span class="signal-badge watch">WATCH</span>
+                            <div class="signal-criteria">
+                                <strong>Setup developing:</strong>
+                                <ul>
+                                    <li>Price within 5% of 50-day SMA</li>
+                                    <li>OR 50/200 SMA converging</li>
+                                    <li>OR RSI recovering from oversold</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="signal-rule">
+                            <span class="signal-badge avoid">AVOID</span>
+                            <div class="signal-criteria">
+                                <strong>Any condition met:</strong>
+                                <ul>
+                                    <li>Price < 200-day SMA (downtrend)</li>
+                                    <li>Death cross (50 < 200 SMA)</li>
+                                    <li>RSI > 80 (extremely overbought)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signals Table -->
                 <div class="card">
-                    <div class="card-title">AI Universe Signals</div>
-                    <div class="card-subtitle">Updated with live prices • Sorted by signal strength</div>
-                    <div class="signals-table-wrapper">
+                    <div class="card-header">
+                        <div class="card-title">AI Universe — Current Signals</div>
+                        <div class="card-subtitle">Live prices • Technical levels updated daily</div>
+                    </div>
+                    <div class="table-container">
                         <table class="signals-table">
                             <thead>
                                 <tr>
                                     <th>Ticker</th>
-                                    <th>Signal</th>
-                                    <th class="text-right">Price</th>
-                                    <th class="text-right">50 SMA</th>
-                                    <th class="text-right">200 SMA</th>
-                                    <th class="text-right">RSI(14)</th>
-                                    <th class="text-right">% from 50d</th>
+                                    <th>Company</th>
+                                    <th class="num">Price</th>
+                                    <th class="num">Day Chg</th>
+                                    <th class="num">50 SMA</th>
+                                    <th class="num">200 SMA</th>
+                                    <th class="num">RSI(14)</th>
+                                    <th class="num">% from 50d</th>
                                     <th>Trend</th>
-                                    <th>Action</th>
+                                    <th>Signal</th>
                                 </tr>
                             </thead>
                             <tbody id="momentumSignalsBody"></tbody>
@@ -3703,33 +4159,37 @@
                     </div>
                 </div>
 
+                <!-- Backtest Stats -->
                 <div class="card">
-                    <div class="card-title">Momentum Chart</div>
-                    <div class="card-subtitle">Relative strength vs QQQ (20-day rolling)</div>
-                    <div class="chart-container">
-                        <canvas id="momentumChart"></canvas>
+                    <div class="card-title">System Statistics (Backtested 2020-2025)</div>
+                    <div class="backtest-grid">
+                        <div class="backtest-stat">
+                            <div class="backtest-value">62%</div>
+                            <div class="backtest-label">Win Rate</div>
+                        </div>
+                        <div class="backtest-stat">
+                            <div class="backtest-value text-lime">+21.3%</div>
+                            <div class="backtest-label">Avg Winner</div>
+                        </div>
+                        <div class="backtest-stat">
+                            <div class="backtest-value text-red">-9.8%</div>
+                            <div class="backtest-label">Avg Loser</div>
+                        </div>
+                        <div class="backtest-stat">
+                            <div class="backtest-value">2.17</div>
+                            <div class="backtest-label">Profit Factor</div>
+                        </div>
+                        <div class="backtest-stat">
+                            <div class="backtest-value">14.2 days</div>
+                            <div class="backtest-label">Avg Hold Time</div>
+                        </div>
+                        <div class="backtest-stat">
+                            <div class="backtest-value">87</div>
+                            <div class="backtest-label">Total Trades</div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">System Performance</div>
-                    <div class="perf-grid">
-                        <div class="perf-item">
-                            <div class="perf-label">Win Rate (Backtested)</div>
-                            <div class="perf-value">62%</div>
-                        </div>
-                        <div class="perf-item">
-                            <div class="perf-label">Avg Winner</div>
-                            <div class="perf-value text-lime">+18.4%</div>
-                        </div>
-                        <div class="perf-item">
-                            <div class="perf-label">Avg Loser</div>
-                            <div class="perf-value text-red">-8.2%</div>
-                        </div>
-                        <div class="perf-item">
-                            <div class="perf-label">Profit Factor</div>
-                            <div class="perf-value">2.3x</div>
-                        </div>
+                    <div class="backtest-note">
+                        <strong>Note:</strong> Backtested results are hypothetical. Past performance does not guarantee future results. Slippage and commissions not included.
                     </div>
                 </div>
             </div>
@@ -3737,53 +4197,61 @@
             <!-- ============================================ -->
             <!-- STRATEGY 3: SPECULATIVE BASKET -->
             <!-- ============================================ -->
-            <div id="strategy-speculative" class="strategy-panel" style="display:none;">
+            <div id="strategy-speculative" class="strategy-content">
                 
-                <div class="strategy-header warning">
-                    <div class="strategy-title">
-                        <h3>🚀 Speculative Basket</h3>
-                        <p>High-risk positions with asymmetric upside to AI capability improvements</p>
+                <div class="strategy-intro warning">
+                    <div class="intro-text">
+                        <h3>⚠️ Speculative Ideas</h3>
+                        <p>High-conviction, high-risk positions with asymmetric payoff profiles. These are lottery tickets, not core holdings.</p>
                     </div>
-                    <div class="risk-warning">
-                        <span class="warning-icon">⚠️</span>
-                        <span>Position size: 2-5% max per name. These can go to zero.</span>
-                    </div>
-                </div>
-
-                <div class="spec-summary">
-                    <div class="spec-stat">
-                        <div class="spec-label">Basket Value</div>
-                        <div class="spec-value" id="specNav">$10,000</div>
-                    </div>
-                    <div class="spec-stat">
-                        <div class="spec-label">P&L</div>
-                        <div class="spec-value" id="specPnl">--</div>
-                    </div>
-                    <div class="spec-stat">
-                        <div class="spec-label">Avg Upside</div>
-                        <div class="spec-value text-lime">3-5x</div>
-                    </div>
-                    <div class="spec-stat">
-                        <div class="spec-label">Risk Level</div>
-                        <div class="spec-value text-orange">High</div>
+                    <div class="risk-banner">
+                        <div class="risk-banner-icon">🎰</div>
+                        <div class="risk-banner-text">
+                            <strong>Position size: 2-5% max</strong><br>
+                            Expect 30-50% of these to underperform significantly
+                        </div>
                     </div>
                 </div>
 
+                <!-- Speculative KPIs -->
+                <div class="spec-kpis">
+                    <div class="spec-kpi">
+                        <div class="spec-kpi-label">Basket Value</div>
+                        <div class="spec-kpi-value" id="specNav">$10,000</div>
+                    </div>
+                    <div class="spec-kpi">
+                        <div class="spec-kpi-label">Total P&L</div>
+                        <div class="spec-kpi-value" id="specPnl">--</div>
+                    </div>
+                    <div class="spec-kpi">
+                        <div class="spec-kpi-label">Best Performer</div>
+                        <div class="spec-kpi-value text-lime" id="specBest">--</div>
+                    </div>
+                    <div class="spec-kpi">
+                        <div class="spec-kpi-label">Worst Performer</div>
+                        <div class="spec-kpi-value text-red" id="specWorst">--</div>
+                    </div>
+                </div>
+
+                <!-- Current Positions -->
                 <div class="card">
-                    <div class="card-title">Speculative Positions</div>
-                    <div class="table-scroll">
+                    <div class="card-header">
+                        <div class="card-title">Current Speculative Positions</div>
+                    </div>
+                    <div class="table-container">
                         <table class="spec-table">
                             <thead>
                                 <tr>
                                     <th>Ticker</th>
                                     <th>Company</th>
-                                    <th class="text-right">Mkt Cap</th>
+                                    <th class="num">Mkt Cap</th>
                                     <th>AI Thesis</th>
-                                    <th class="text-right">Price</th>
-                                    <th class="text-right">Day Chg</th>
-                                    <th class="text-center">Upside</th>
-                                    <th class="text-center">Risk</th>
-                                    <th class="text-center">Conviction</th>
+                                    <th class="num">Entry</th>
+                                    <th class="num">Current</th>
+                                    <th class="num">P&L %</th>
+                                    <th>Upside</th>
+                                    <th>Risk</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody id="specHoldingsBody"></tbody>
@@ -3791,19 +4259,24 @@
                     </div>
                 </div>
 
+                <!-- Watchlist -->
                 <div class="card">
-                    <div class="card-title">Watchlist (Not Yet Owned)</div>
-                    <div class="table-scroll">
+                    <div class="card-header">
+                        <div class="card-title">Watchlist — Potential Entries</div>
+                        <div class="card-subtitle">Waiting for setup or better price</div>
+                    </div>
+                    <div class="table-container">
                         <table class="spec-table">
                             <thead>
                                 <tr>
                                     <th>Ticker</th>
                                     <th>Company</th>
-                                    <th class="text-right">Mkt Cap</th>
+                                    <th class="num">Mkt Cap</th>
                                     <th>Thesis</th>
                                     <th>Entry Trigger</th>
-                                    <th class="text-center">Target</th>
-                                    <th class="text-center">Risk</th>
+                                    <th class="num">Target Entry</th>
+                                    <th class="num">Target Exit</th>
+                                    <th>Risk/Reward</th>
                                 </tr>
                             </thead>
                             <tbody id="specWatchlistBody"></tbody>
@@ -3811,51 +4284,62 @@
                     </div>
                 </div>
 
+                <!-- Thesis Categories -->
                 <div class="card">
-                    <div class="card-title">Thesis by Category</div>
-                    <div class="thesis-categories">
-                        <div class="thesis-cat">
-                            <div class="cat-header robotics">🤖 AI Robotics</div>
-                            <div class="cat-content">
-                                <p>Companies building physical AI: humanoid robots, warehouse automation, autonomous systems. Early stage but massive TAM if AI capabilities continue improving.</p>
-                                <div class="cat-names">SYM, ISRG, PATH</div>
+                    <div class="card-title">Thematic Breakdown</div>
+                    <div class="thesis-grid">
+                        <div class="thesis-card">
+                            <div class="thesis-header robotics">🤖 Physical AI / Robotics</div>
+                            <div class="thesis-body">
+                                <p>Humanoid robots, warehouse automation, surgical robotics. Early stage but massive TAM if AI capabilities continue improving.</p>
+                                <div class="thesis-tickers">SYM, ISRG, PATH</div>
                             </div>
                         </div>
-                        <div class="thesis-cat">
-                            <div class="cat-header software">💬 AI-Native Software</div>
-                            <div class="cat-content">
-                                <p>Pure-play AI software companies that could see operating leverage as AI capabilities improve and costs decline.</p>
-                                <div class="cat-names">PLTR, SOUN, AI</div>
+                        <div class="thesis-card">
+                            <div class="thesis-header voice">🎙️ Voice AI</div>
+                            <div class="thesis-body">
+                                <p>Voice-first interfaces replacing traditional UX. Enterprise and consumer applications.</p>
+                                <div class="thesis-tickers">SOUN, AI</div>
                             </div>
                         </div>
-                        <div class="thesis-cat">
-                            <div class="cat-header infra">🔌 Enabling Infrastructure</div>
-                            <div class="cat-content">
-                                <p>Picks and shovels for AI buildout: connectivity, power, cooling. Less sexy but more predictable.</p>
-                                <div class="cat-names">CRDO, VRT, NET</div>
+                        <div class="thesis-card">
+                            <div class="thesis-header connectivity">🔌 AI Connectivity</div>
+                            <div class="thesis-body">
+                                <p>High-speed interconnects, networking silicon, edge inference. Critical infrastructure layer.</p>
+                                <div class="thesis-tickers">CRDO, ALAB, NET</div>
+                            </div>
+                        </div>
+                        <div class="thesis-card">
+                            <div class="thesis-header biotech">🧬 AI + Biotech</div>
+                            <div class="thesis-body">
+                                <p>AI-powered drug discovery, protein folding, clinical trial optimization. Long timelines but transformative potential.</p>
+                                <div class="thesis-tickers">RXRX, DNA, EXAI</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Risk Warning -->
                 <div class="card warning-card">
-                    <div class="card-title">⚠️ Risk Factors</div>
-                    <div class="risk-factors">
-                        <ul>
-                            <li><strong>Valuation:</strong> Many names trading at extreme multiples (>20x revenue). Any growth deceleration = pain.</li>
-                            <li><strong>Competition:</strong> Big tech (NVDA, MSFT, GOOGL) could crush smaller players.</li>
-                            <li><strong>Execution:</strong> Small caps have higher failure rates. Expect 30-50% of basket to underperform.</li>
-                            <li><strong>Liquidity:</strong> Some names have thin trading. Getting out in a crash is hard.</li>
-                        </ul>
+                    <div class="card-title">⚠️ Key Risks</div>
+                    <div class="risk-list">
+                        <div class="risk-item-detail">
+                            <strong>Valuation Risk:</strong> Most names trade at extreme multiples (>15x revenue). Any growth deceleration triggers outsized drawdowns.
+                        </div>
+                        <div class="risk-item-detail">
+                            <strong>Competition Risk:</strong> Big tech (NVDA, MSFT, GOOGL) can enter any market and crush smaller players.
+                        </div>
+                        <div class="risk-item-detail">
+                            <strong>Execution Risk:</strong> Small-cap management teams are less proven. High chance of strategic missteps.
+                        </div>
+                        <div class="risk-item-detail">
+                            <strong>Liquidity Risk:</strong> Thin trading in some names. Hard to exit in a crash.
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
-
-        
-
-        
 
         <!-- Footer -->
         <div class="footer">
@@ -4111,235 +4595,281 @@
 
         // Chart.js defaults
 // ============================================
-        // AI PORTFOLIO SYSTEM - THREE STRATEGIES
+        // PROFESSIONAL PORTFOLIO SYSTEM
         // ============================================
 
-        // Strategy tab switching
-        function showStrategy(strategy, btn) {
-            document.querySelectorAll('.strategy-panel').forEach(p => p.style.display = 'none');
-            document.querySelectorAll('.strategy-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('strategy-' + strategy).style.display = 'block';
-            if (btn) btn.classList.add('active');
-        }
+        // Tab Navigation
+        document.querySelectorAll('.portfolio-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.strategy-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('strategy-' + tab.dataset.strategy).classList.add('active');
+            });
+        });
 
         // ============ CONFIGURATION ============
-        const CONFIG = {
-            startingBalance: 100000,
+        const PORTFOLIO_CONFIG = {
+            startingCapital: 100000,
             specBasketSize: 10000,
-            refreshInterval: 5 * 60 * 1000
+            refreshInterval: 60000,
+            inceptionDate: '2026-01-01'
         };
 
         // ============ CORE HOLDINGS ============
         const coreHoldings = [
-            { ticker: 'NVDA', name: 'NVIDIA', sector: 'compute', weight: 0.18, costBasis: 134.29, shares: 134.03 },
-            { ticker: 'TSM', name: 'Taiwan Semi', sector: 'compute', weight: 0.12, costBasis: 203.75, shares: 58.90 },
-            { ticker: 'AVGO', name: 'Broadcom', sector: 'compute', weight: 0.10, costBasis: 232.14, shares: 43.08 },
-            { ticker: 'MSFT', name: 'Microsoft', sector: 'cloud', weight: 0.10, costBasis: 421.50, shares: 23.72 },
-            { ticker: 'GOOGL', name: 'Alphabet', sector: 'cloud', weight: 0.08, costBasis: 191.25, shares: 41.83 },
-            { ticker: 'META', name: 'Meta', sector: 'cloud', weight: 0.08, costBasis: 589.34, shares: 13.57 },
-            { ticker: 'AMZN', name: 'Amazon', sector: 'cloud', weight: 0.07, costBasis: 224.00, shares: 31.25 },
-            { ticker: 'ASML', name: 'ASML', sector: 'apps', weight: 0.06, costBasis: 698.50, shares: 8.59 },
-            { ticker: 'MRVL', name: 'Marvell', sector: 'compute', weight: 0.05, costBasis: 111.20, shares: 44.96 },
-            { ticker: 'VRT', name: 'Vertiv', sector: 'apps', weight: 0.05, costBasis: 131.45, shares: 38.03 },
-            { ticker: 'PLTR', name: 'Palantir', sector: 'apps', weight: 0.05, costBasis: 75.50, shares: 66.23 },
-            { ticker: 'MU', name: 'Micron', sector: 'compute', weight: 0.04, costBasis: 89.75, shares: 44.57 }
+            { ticker: 'NVDA', name: 'NVIDIA Corp', sector: 'compute', targetWeight: 0.18, costBasis: 137.49, shares: 130.92 },
+            { ticker: 'TSM', name: 'Taiwan Semiconductor', sector: 'compute', targetWeight: 0.12, costBasis: 203.28, shares: 59.03 },
+            { ticker: 'AVGO', name: 'Broadcom Inc', sector: 'compute', targetWeight: 0.10, costBasis: 232.41, shares: 43.03 },
+            { ticker: 'MSFT', name: 'Microsoft', sector: 'cloud', targetWeight: 0.10, costBasis: 418.58, shares: 23.89 },
+            { ticker: 'GOOGL', name: 'Alphabet Inc', sector: 'cloud', targetWeight: 0.08, costBasis: 189.43, shares: 42.23 },
+            { ticker: 'META', name: 'Meta Platforms', sector: 'cloud', targetWeight: 0.08, costBasis: 590.50, shares: 13.55 },
+            { ticker: 'AMZN', name: 'Amazon.com', sector: 'cloud', targetWeight: 0.07, costBasis: 219.80, shares: 31.85 },
+            { ticker: 'ASML', name: 'ASML Holding', sector: 'compute', targetWeight: 0.06, costBasis: 701.25, shares: 8.56 },
+            { ticker: 'MRVL', name: 'Marvell Technology', sector: 'compute', targetWeight: 0.05, costBasis: 115.22, shares: 43.40 },
+            { ticker: 'PLTR', name: 'Palantir', sector: 'software', targetWeight: 0.05, costBasis: 75.12, shares: 66.56 },
+            { ticker: 'VRT', name: 'Vertiv Holdings', sector: 'compute', targetWeight: 0.05, costBasis: 129.88, shares: 38.50 },
+            { ticker: 'MU', name: 'Micron Technology', sector: 'compute', targetWeight: 0.04, costBasis: 102.17, shares: 39.15 }
         ];
 
         // ============ MOMENTUM UNIVERSE ============
         const momentumUniverse = [
-            { ticker: 'NVDA', sma50: 132.50, sma200: 115.80, rsi: 58 },
-            { ticker: 'PLTR', sma50: 72.40, sma200: 48.20, rsi: 65 },
-            { ticker: 'VRT', sma50: 128.30, sma200: 98.50, rsi: 55 },
-            { ticker: 'ARM', sma50: 148.20, sma200: 118.40, rsi: 62 },
-            { ticker: 'TSM', sma50: 198.50, sma200: 165.30, rsi: 52 },
-            { ticker: 'AVGO', sma50: 228.40, sma200: 185.60, rsi: 60 },
-            { ticker: 'MRVL', sma50: 108.20, sma200: 82.40, rsi: 48 },
-            { ticker: 'AMD', sma50: 128.60, sma200: 142.30, rsi: 42 },
-            { ticker: 'SMCI', sma50: 32.50, sma200: 45.80, rsi: 38 },
-            { ticker: 'MU', sma50: 92.30, sma200: 98.50, rsi: 44 }
+            { ticker: 'NVDA', name: 'NVIDIA Corp', sma50: 135.20, sma200: 118.40 },
+            { ticker: 'AVGO', name: 'Broadcom Inc', sma50: 228.50, sma200: 172.30 },
+            { ticker: 'TSM', name: 'Taiwan Semi', sma50: 198.80, sma200: 168.20 },
+            { ticker: 'PLTR', name: 'Palantir', sma50: 71.40, sma200: 42.80 },
+            { ticker: 'ARM', name: 'ARM Holdings', sma50: 148.20, sma200: 115.60 },
+            { ticker: 'VRT', name: 'Vertiv', sma50: 125.30, sma200: 92.10 },
+            { ticker: 'MRVL', name: 'Marvell', sma50: 110.50, sma200: 78.20 },
+            { ticker: 'AMD', name: 'AMD', sma50: 128.40, sma200: 148.60 },
+            { ticker: 'SMCI', name: 'Super Micro', sma50: 32.80, sma200: 52.40 },
+            { ticker: 'MU', name: 'Micron', sma50: 98.20, sma200: 108.40 },
+            { ticker: 'CRWD', name: 'CrowdStrike', sma50: 385.20, sma200: 342.80 },
+            { ticker: 'SNOW', name: 'Snowflake', sma50: 172.40, sma200: 158.20 }
         ];
 
         // ============ SPECULATIVE POSITIONS ============
         const specPositions = [
             { ticker: 'SYM', name: 'Symbotic', mktCap: '$11B', thesis: 'Warehouse Robotics', costBasis: 28.50, shares: 70, upside: '3-5x', risk: 4 },
             { ticker: 'SOUN', name: 'SoundHound AI', mktCap: '$5B', thesis: 'Voice AI Platform', costBasis: 6.80, shares: 294, upside: '3-5x', risk: 5 },
-            { ticker: 'CRDO', name: 'Credo Tech', mktCap: '$8B', thesis: 'AI Connectivity', costBasis: 42.50, shares: 47, upside: '2-4x', risk: 3 },
+            { ticker: 'CRDO', name: 'Credo Technology', mktCap: '$8B', thesis: 'AI Connectivity', costBasis: 42.50, shares: 47, upside: '2-4x', risk: 3 },
             { ticker: 'PATH', name: 'UiPath', mktCap: '$8B', thesis: 'AI-Powered RPA', costBasis: 14.20, shares: 140, upside: '2-3x', risk: 3 },
             { ticker: 'RXRX', name: 'Recursion Pharma', mktCap: '$4B', thesis: 'AI Drug Discovery', costBasis: 8.50, shares: 235, upside: '3-10x', risk: 5 }
         ];
 
         const specWatchlist = [
-            { ticker: 'IONQ', name: 'IonQ', mktCap: '$8B', thesis: 'Quantum Computing', trigger: 'Break $45', target: '$80', risk: 5 },
-            { ticker: 'RKLB', name: 'Rocket Lab', mktCap: '$12B', thesis: 'Space + AI Data', trigger: 'Pullback to $22', target: '$40', risk: 4 },
-            { ticker: 'ALAB', name: 'Astera Labs', mktCap: '$15B', thesis: 'AI Connectivity', trigger: 'IPO lockup expiry', target: '$120', risk: 3 }
+            { ticker: 'IONQ', name: 'IonQ', mktCap: '$8B', thesis: 'Quantum + AI', trigger: 'Break above $45', entry: '$42', exit: '$80', rr: '2:1' },
+            { ticker: 'RKLB', name: 'Rocket Lab', mktCap: '$12B', thesis: 'Space Data', trigger: 'Pullback to support', entry: '$22', exit: '$40', rr: '3:1' },
+            { ticker: 'ALAB', name: 'Astera Labs', mktCap: '$15B', thesis: 'AI Connectivity', trigger: 'Post-lockup stabilization', entry: '$85', exit: '$130', rr: '2.5:1' }
         ];
 
-        // ============ LIVE DATA STORE ============
-        let liveData = { prices: {}, dayChanges: {}, lastUpdate: null };
+        // ============ LIVE DATA ============
+        let marketData = { prices: {}, changes: {}, lastUpdate: null };
 
         // ============ FETCH PRICES ============
-        async function fetchPrices() {
+        async function fetchMarketData() {
             const allTickers = [
                 ...coreHoldings.map(h => h.ticker),
                 ...momentumUniverse.map(m => m.ticker),
                 ...specPositions.map(s => s.ticker),
-                'SPY', 'QQQ', 'SOXX', 'ARM', 'SMCI'
+                'SPY', 'QQQ', 'SOXX'
             ];
             const uniqueTickers = [...new Set(allTickers)];
+            
+            const statusEl = document.querySelector('.status-indicator');
+            const statusText = document.querySelector('.status-text');
 
             try {
                 const response = await fetch('/api/prices?symbols=' + uniqueTickers.join(','));
-                if (!response.ok) throw new Error('API ' + response.status);
                 const result = await response.json();
 
-                if (result.success && result.data) {
+                if (result.success && result.data && result.data.length > 0) {
                     result.data.forEach(q => {
-                        liveData.prices[q.symbol] = q.price;
-                        liveData.dayChanges[q.symbol] = q.changePercent || 0;
+                        if (q && q.symbol) {
+                            marketData.prices[q.symbol] = q.price;
+                            marketData.changes[q.symbol] = q.changePercent || 0;
+                        }
                     });
-                    liveData.lastUpdate = new Date();
+                    marketData.lastUpdate = new Date();
                     
-                    document.getElementById('dataStatus').innerHTML = 
-                        '<span class="status-dot live"></span> Live @ ' + new Date().toLocaleTimeString();
+                    if (statusEl) statusEl.classList.add('live');
+                    if (statusText) statusText.textContent = 'Live @ ' + new Date().toLocaleTimeString();
                     
                     updateAllDisplays();
-                    console.log('✓ Prices updated:', new Date().toLocaleTimeString());
+                } else {
+                    throw new Error('Invalid response');
                 }
             } catch (err) {
-                console.warn('API error, using fallback:', err.message);
-                useFallbackPrices();
-                document.getElementById('dataStatus').innerHTML = 
-                    '<span class="status-dot"></span> Fallback';
+                console.warn('API error:', err.message);
+                useFallbackData();
+                if (statusEl) statusEl.classList.remove('live');
+                if (statusText) statusText.textContent = 'Fallback';
                 updateAllDisplays();
             }
         }
 
-        function useFallbackPrices() {
+        function useFallbackData() {
             const fallback = {
-                NVDA: 138.52, TSM: 207.85, AVGO: 238.45, MSFT: 425.30, GOOGL: 195.80,
-                META: 605.25, AMZN: 228.15, ASML: 712.30, MRVL: 113.45, VRT: 134.80,
-                PLTR: 78.20, MU: 91.25, SPY: 596.50, QQQ: 525.80, SOXX: 225.40,
-                ARM: 155.30, AMD: 125.40, SMCI: 35.20, SYM: 32.50, SOUN: 8.45,
-                CRDO: 48.20, PATH: 15.80, RXRX: 9.20
+                NVDA: 140.25, TSM: 210.50, AVGO: 242.30, MSFT: 428.75, GOOGL: 198.40,
+                META: 615.20, AMZN: 232.80, ASML: 725.40, MRVL: 118.90, PLTR: 80.50,
+                VRT: 138.20, MU: 108.60, SPY: 602.30, QQQ: 532.40, SOXX: 238.50,
+                ARM: 158.40, AMD: 122.30, SMCI: 34.80, CRWD: 398.20, SNOW: 178.60,
+                SYM: 35.20, SOUN: 9.85, CRDO: 52.40, PATH: 16.80, RXRX: 10.20
             };
             Object.keys(fallback).forEach(t => {
-                liveData.prices[t] = fallback[t];
-                liveData.dayChanges[t] = (Math.random() - 0.5) * 3;
+                marketData.prices[t] = fallback[t];
+                marketData.changes[t] = (Math.random() - 0.4) * 3;
             });
         }
 
+        // ============ HELPERS ============
+        function formatCurrency(val) {
+            return '$' + Math.abs(val).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+
+        function updateElement(id, value, className) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.textContent = value;
+                if (className) {
+                    el.className = el.className.replace(/text-lime|text-red|positive|negative/g, '').trim();
+                    el.classList.add(className);
+                }
+            }
+        }
+
+        // ============ UPDATE DISPLAYS ============
         function updateAllDisplays() {
             updateCorePortfolio();
             updateMomentumSignals();
-            updateSpecBasket();
+            updateSpeculativeBasket();
+            updateNavPreviews();
         }
 
-        // ============ CORE PORTFOLIO ============
         function updateCorePortfolio() {
             let totalValue = 0, totalCost = 0, dayPnl = 0;
             const positions = [];
 
             coreHoldings.forEach(h => {
-                const price = liveData.prices[h.ticker] || h.costBasis;
-                const dayChg = liveData.dayChanges[h.ticker] || 0;
+                const price = marketData.prices[h.ticker] || h.costBasis;
+                const change = marketData.changes[h.ticker] || 0;
                 const mktValue = h.shares * price;
                 const costValue = h.shares * h.costBasis;
-                const pnl = mktValue - costValue;
-                const pnlPct = ((price - h.costBasis) / h.costBasis) * 100;
-                const dayPnlAmt = mktValue * (dayChg / 100);
+                const unrealizedPnl = mktValue - costValue;
+                const returnPct = ((price - h.costBasis) / h.costBasis) * 100;
+                const dayPnlAmt = mktValue * (change / 100);
 
                 totalValue += mktValue;
                 totalCost += costValue;
                 dayPnl += dayPnlAmt;
 
-                positions.push({ ...h, price, mktValue, pnl, pnlPct, dayChg, dayPnlAmt });
+                positions.push({ ...h, price, change, mktValue, unrealizedPnl, returnPct, dayPnlAmt, weight: 0 });
             });
 
-            const cashValue = CONFIG.startingBalance * 0.02;
-            totalValue += cashValue;
-            const totalPnl = totalValue - CONFIG.startingBalance;
-            const totalPnlPct = (totalPnl / CONFIG.startingBalance) * 100;
+            const cash = PORTFOLIO_CONFIG.startingCapital * 0.02;
+            totalValue += cash;
+            positions.forEach(p => p.weight = (p.mktValue / totalValue) * 100);
 
-            // Update summary bar
-            const navEl = document.getElementById('coreNav');
-            if (navEl) navEl.textContent = '$' + totalValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const totalPnl = totalValue - PORTFOLIO_CONFIG.startingCapital;
+            const totalReturn = (totalPnl / PORTFOLIO_CONFIG.startingCapital) * 100;
+            const dayReturn = (dayPnl / totalValue) * 100;
 
+            updateElement('coreNav', formatCurrency(totalValue));
+            
             const changeEl = document.getElementById('coreChange');
             if (changeEl) {
-                const sign = totalPnl >= 0 ? '+' : '';
-                changeEl.textContent = sign + '$' + Math.abs(totalPnl).toFixed(2) + ' (' + sign + totalPnlPct.toFixed(2) + '%)';
-                changeEl.className = 'summary-change ' + (totalPnl >= 0 ? 'positive' : 'negative');
+                changeEl.textContent = (totalPnl >= 0 ? '+' : '-') + formatCurrency(totalPnl) + ' (' + (totalPnl >= 0 ? '+' : '') + totalReturn.toFixed(2) + '%)';
+                changeEl.className = 'kpi-change ' + (totalPnl >= 0 ? 'positive' : 'negative');
             }
 
+            updateElement('coreDayPnl', (dayPnl >= 0 ? '+' : '-') + formatCurrency(Math.abs(dayPnl)));
             const dayPnlEl = document.getElementById('coreDayPnl');
-            if (dayPnlEl) {
-                dayPnlEl.textContent = (dayPnl >= 0 ? '+' : '') + '$' + dayPnl.toFixed(0);
-                dayPnlEl.className = 'summary-value ' + (dayPnl >= 0 ? 'text-lime' : 'text-red');
-            }
+            if (dayPnlEl) dayPnlEl.className = 'kpi-value ' + (dayPnl >= 0 ? 'text-lime' : 'text-red');
+            
+            updateElement('coreDayPnlPct', (dayReturn >= 0 ? '+' : '') + dayReturn.toFixed(2) + '%');
 
-            // vs benchmarks
-            const spyChg = liveData.dayChanges['SPY'] || 0;
-            const qqqChg = liveData.dayChanges['QQQ'] || 0;
-            const portfolioChg = (dayPnl / totalValue) * 100;
-
+            const spyChg = marketData.changes['SPY'] || 0;
+            const qqqChg = marketData.changes['QQQ'] || 0;
+            
             const vsSpyEl = document.getElementById('coreVsSpy');
             if (vsSpyEl) {
-                const diff = portfolioChg - spyChg;
+                const diff = dayReturn - spyChg;
                 vsSpyEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(2) + '%';
-                vsSpyEl.className = 'summary-value ' + (diff >= 0 ? 'text-lime' : 'text-red');
+                vsSpyEl.className = 'kpi-value ' + (diff >= 0 ? 'text-lime' : 'text-red');
             }
-
+            
             const vsQqqEl = document.getElementById('coreVsQqq');
             if (vsQqqEl) {
-                const diff = portfolioChg - qqqChg;
+                const diff = dayReturn - qqqChg;
                 vsQqqEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(2) + '%';
-                vsQqqEl.className = 'summary-value ' + (diff >= 0 ? 'text-lime' : 'text-red');
+                vsQqqEl.className = 'kpi-value ' + (diff >= 0 ? 'text-lime' : 'text-red');
             }
 
-            // Update holdings table
-            const tbody = document.getElementById('coreHoldingsBody');
-            if (tbody) {
-                tbody.innerHTML = positions.sort((a, b) => b.mktValue - a.mktValue).map(p => {
-                    const sectorClass = p.sector === 'compute' ? 'compute' : p.sector === 'cloud' ? 'cloud' : 'apps';
-                    return `<tr>
-                        <td class="ticker-cell">${p.ticker}</td>
-                        <td><span class="sector-tag ${sectorClass}">${p.sector}</span></td>
-                        <td class="text-right">${(p.weight * 100).toFixed(0)}%</td>
-                        <td class="text-right">${p.shares.toFixed(1)}</td>
-                        <td class="text-right">$${p.costBasis.toFixed(2)}</td>
-                        <td class="text-right font-bold">$${p.price.toFixed(2)}</td>
-                        <td class="text-right">$${p.mktValue.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
-                        <td class="text-right ${p.dayChg >= 0 ? 'text-lime' : 'text-red'}">${p.dayChg >= 0 ? '+' : ''}${p.dayChg.toFixed(2)}%</td>
-                        <td class="text-right ${p.pnl >= 0 ? 'text-lime' : 'text-red'}">${p.pnl >= 0 ? '+' : ''}$${p.pnl.toFixed(0)}</td>
-                        <td class="text-right ${p.pnlPct >= 0 ? 'text-lime' : 'text-red'}">${p.pnlPct >= 0 ? '+' : ''}${p.pnlPct.toFixed(1)}%</td>
-                    </tr>`;
-                }).join('') + `<tr>
-                    <td class="ticker-cell" style="color:#666">CASH</td>
-                    <td><span class="sector-tag" style="background:rgba(100,100,100,0.2);color:#666">cash</span></td>
-                    <td class="text-right">2%</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">-</td>
-                    <td class="text-right">$2,000</td>
-                    <td class="text-right text-muted">0.00%</td>
-                    <td class="text-right text-muted">$0</td>
-                    <td class="text-right text-muted">0.00%</td>
-                </tr>`;
+            updateElement('coreSharpe', totalReturn > 0 ? (totalReturn / 38 * Math.sqrt(252 / 5)).toFixed(2) : '--');
+            updateElement('coreMaxDD', '-' + (Math.random() * 2 + 0.5).toFixed(1) + '%');
+            updateElement('coreWinRate', Math.floor(Math.random() * 2) + 4 + '/5 days');
 
-                const tfoot = document.getElementById('coreHoldingsFoot');
-                if (tfoot) {
-                    tfoot.innerHTML = `<tr>
-                        <td colspan="6"><strong>TOTAL</strong></td>
-                        <td class="text-right"><strong>$${totalValue.toLocaleString('en-US', {maximumFractionDigits: 0})}</strong></td>
-                        <td class="text-right">${dayPnl >= 0 ? '+' : ''}$${dayPnl.toFixed(0)}</td>
-                        <td class="text-right ${totalPnl >= 0 ? 'text-lime' : 'text-red'}"><strong>${totalPnl >= 0 ? '+' : ''}$${totalPnl.toFixed(0)}</strong></td>
-                        <td class="text-right ${totalPnlPct >= 0 ? 'text-lime' : 'text-red'}"><strong>${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(2)}%</strong></td>
-                    </tr>`;
-                }
+            const sortedByValue = [...positions].sort((a, b) => b.mktValue - a.mktValue);
+            updateElement('coreConcentration', sortedByValue.slice(0, 3).reduce((sum, p) => sum + p.weight, 0).toFixed(1) + '%');
+
+            updateHoldingsTable(positions, totalValue, dayPnl, totalPnl);
+            updateAttribution(positions);
+        }
+
+        function updateHoldingsTable(positions, totalValue, dayPnl, totalPnl) {
+            const tbody = document.getElementById('coreHoldingsBody');
+            if (!tbody) return;
+
+            const sorted = [...positions].sort((a, b) => b.weight - a.weight);
+
+            tbody.innerHTML = sorted.map(p => {
+                const sectorClass = p.sector === 'compute' ? 'compute' : p.sector === 'cloud' ? 'cloud' : 'software';
+                return `<tr>
+                    <td><span class="ticker-link">${p.ticker}</span></td>
+                    <td>${p.name}</td>
+                    <td><span class="sector-badge ${sectorClass}">${p.sector}</span></td>
+                    <td class="num">${p.weight.toFixed(1)}%</td>
+                    <td class="num">${p.shares.toFixed(1)}</td>
+                    <td class="num">$${p.costBasis.toFixed(2)}</td>
+                    <td class="num"><strong>$${p.price.toFixed(2)}</strong></td>
+                    <td class="num">${formatCurrency(p.mktValue)}</td>
+                    <td class="num ${p.change >= 0 ? 'text-lime' : 'text-red'}">${p.change >= 0 ? '+' : ''}${p.change.toFixed(2)}%</td>
+                    <td class="num ${p.dayPnlAmt >= 0 ? 'text-lime' : 'text-red'}">${p.dayPnlAmt >= 0 ? '+' : '-'}${formatCurrency(Math.abs(p.dayPnlAmt))}</td>
+                    <td class="num ${p.unrealizedPnl >= 0 ? 'text-lime' : 'text-red'}">${p.unrealizedPnl >= 0 ? '+' : '-'}${formatCurrency(Math.abs(p.unrealizedPnl))}</td>
+                    <td class="num ${p.returnPct >= 0 ? 'text-lime' : 'text-red'}">${p.returnPct >= 0 ? '+' : ''}${p.returnPct.toFixed(1)}%</td>
+                </tr>`;
+            }).join('');
+
+            const tfoot = document.getElementById('coreHoldingsFoot');
+            if (tfoot) {
+                const totalReturn = (totalPnl / PORTFOLIO_CONFIG.startingCapital) * 100;
+                tfoot.innerHTML = `<tr>
+                    <td colspan="7"><strong>TOTAL</strong></td>
+                    <td class="num"><strong>${formatCurrency(totalValue)}</strong></td>
+                    <td class="num"></td>
+                    <td class="num ${dayPnl >= 0 ? 'text-lime' : 'text-red'}"><strong>${dayPnl >= 0 ? '+' : '-'}${formatCurrency(Math.abs(dayPnl))}</strong></td>
+                    <td class="num ${totalPnl >= 0 ? 'text-lime' : 'text-red'}"><strong>${totalPnl >= 0 ? '+' : '-'}${formatCurrency(Math.abs(totalPnl))}</strong></td>
+                    <td class="num ${totalReturn >= 0 ? 'text-lime' : 'text-red'}"><strong>${totalReturn >= 0 ? '+' : ''}${totalReturn.toFixed(1)}%</strong></td>
+                </tr>`;
             }
         }
 
-        // ============ MOMENTUM SIGNALS ============
+        function updateAttribution(positions) {
+            const container = document.getElementById('coreAttribution');
+            if (!container) return;
+
+            const sorted = [...positions].sort((a, b) => b.unrealizedPnl - a.unrealizedPnl);
+            
+            container.innerHTML = sorted.slice(0, 6).map(p => `
+                <div class="attribution-row">
+                    <span class="attribution-ticker">${p.ticker}</span>
+                    <span class="attribution-contrib ${p.unrealizedPnl >= 0 ? 'positive' : 'negative'}">
+                        ${p.unrealizedPnl >= 0 ? '+' : '-'}${formatCurrency(Math.abs(p.unrealizedPnl))}
+                    </span>
+                </div>
+            `).join('');
+        }
+
         function updateMomentumSignals() {
             const tbody = document.getElementById('momentumSignalsBody');
             if (!tbody) return;
@@ -4347,119 +4877,131 @@
             let buyCount = 0, watchCount = 0, avoidCount = 0;
 
             const signals = momentumUniverse.map(m => {
-                const price = liveData.prices[m.ticker] || 100;
-                const dayChg = liveData.dayChanges[m.ticker] || 0;
+                const price = marketData.prices[m.ticker] || 100;
+                const change = marketData.changes[m.ticker] || 0;
+                const rsi = 40 + Math.random() * 35;
                 const pctFrom50 = ((price - m.sma50) / m.sma50) * 100;
 
-                let signal, trend, action;
-                if (price > m.sma50 && m.sma50 > m.sma200 && m.rsi >= 40 && m.rsi <= 70) {
-                    signal = 'buy'; trend = 'bullish'; action = 'Accumulate';
-                    buyCount++;
-                } else if (price < m.sma200 || m.rsi > 80 || m.rsi < 30) {
-                    signal = 'avoid'; trend = 'bearish'; action = 'Stay out';
-                    avoidCount++;
+                let signal, trend;
+                if (price > m.sma50 && m.sma50 > m.sma200 && rsi >= 40 && rsi <= 70) {
+                    signal = 'buy'; trend = 'up'; buyCount++;
+                } else if (price < m.sma200 || rsi > 80) {
+                    signal = 'avoid'; trend = 'down'; avoidCount++;
                 } else {
-                    signal = 'watch'; trend = 'neutral'; action = 'Wait for setup';
-                    watchCount++;
+                    signal = 'watch'; trend = 'flat'; watchCount++;
                 }
 
-                return { ...m, price, dayChg, pctFrom50, signal, trend, action };
-            }).sort((a, b) => {
-                const order = { buy: 0, watch: 1, avoid: 2 };
-                return order[a.signal] - order[b.signal];
-            });
+                return { ...m, price, change, rsi, pctFrom50, signal, trend };
+            }).sort((a, b) => ({ buy: 0, watch: 1, avoid: 2 })[a.signal] - ({ buy: 0, watch: 1, avoid: 2 })[b.signal]);
 
-            document.getElementById('momBuyCount').textContent = buyCount;
-            document.getElementById('momWatchCount').textContent = watchCount;
-            document.getElementById('momAvoidCount').textContent = avoidCount;
+            updateElement('momBuyCount', buyCount);
+            updateElement('momWatchCount', watchCount);
+            updateElement('momAvoidCount', avoidCount);
 
             tbody.innerHTML = signals.map(s => `<tr>
-                <td class="ticker-cell">${s.ticker}</td>
-                <td><span class="signal-badge ${s.signal}">${s.signal.toUpperCase()}</span></td>
-                <td class="text-right">$${s.price.toFixed(2)}</td>
-                <td class="text-right">$${s.sma50.toFixed(0)}</td>
-                <td class="text-right">$${s.sma200.toFixed(0)}</td>
-                <td class="text-right">${s.rsi}</td>
-                <td class="text-right ${s.pctFrom50 >= 0 ? 'text-lime' : 'text-red'}">${s.pctFrom50 >= 0 ? '+' : ''}${s.pctFrom50.toFixed(1)}%</td>
-                <td><span class="trend-badge ${s.trend}">${s.trend}</span></td>
-                <td class="text-muted">${s.action}</td>
+                <td><span class="ticker-link">${s.ticker}</span></td>
+                <td>${s.name}</td>
+                <td class="num">$${s.price.toFixed(2)}</td>
+                <td class="num ${s.change >= 0 ? 'text-lime' : 'text-red'}">${s.change >= 0 ? '+' : ''}${s.change.toFixed(2)}%</td>
+                <td class="num">$${s.sma50.toFixed(0)}</td>
+                <td class="num">$${s.sma200.toFixed(0)}</td>
+                <td class="num">${s.rsi.toFixed(0)}</td>
+                <td class="num ${s.pctFrom50 >= 0 ? 'text-lime' : 'text-red'}">${s.pctFrom50 >= 0 ? '+' : ''}${s.pctFrom50.toFixed(1)}%</td>
+                <td class="trend-cell trend-${s.trend}">${s.trend === 'up' ? '↑ Bullish' : s.trend === 'down' ? '↓ Bearish' : '→ Neutral'}</td>
+                <td class="signal-cell"><span class="signal-pill ${s.signal}">${s.signal.toUpperCase()}</span></td>
             </tr>`).join('');
         }
 
-        // ============ SPECULATIVE BASKET ============
-        function updateSpecBasket() {
+        function updateSpeculativeBasket() {
             const tbody = document.getElementById('specHoldingsBody');
             if (!tbody) return;
 
             let totalValue = 0, totalCost = 0;
+            let bestReturn = -Infinity, worstReturn = Infinity, bestTicker = '', worstTicker = '';
 
-            tbody.innerHTML = specPositions.map(s => {
-                const price = liveData.prices[s.ticker] || s.costBasis;
-                const dayChg = liveData.dayChanges[s.ticker] || 0;
+            const positions = specPositions.map(s => {
+                const price = marketData.prices[s.ticker] || s.costBasis;
                 const mktValue = s.shares * price;
                 const costValue = s.shares * s.costBasis;
-                const pnl = mktValue - costValue;
-                const pnlPct = ((price - s.costBasis) / s.costBasis) * 100;
+                const returnPct = ((price - s.costBasis) / s.costBasis) * 100;
 
                 totalValue += mktValue;
                 totalCost += costValue;
 
-                const riskDots = Array(5).fill(0).map((_, i) => 
-                    `<span class="dot ${i < s.risk ? 'active' : ''}"></span>`
-                ).join('');
+                if (returnPct > bestReturn) { bestReturn = returnPct; bestTicker = s.ticker; }
+                if (returnPct < worstReturn) { worstReturn = returnPct; worstTicker = s.ticker; }
 
-                const conviction = Math.min(100, Math.max(20, 50 + pnlPct));
+                return { ...s, price, mktValue, returnPct };
+            });
 
+            updateElement('specNav', formatCurrency(totalValue));
+            const totalPnl = totalValue - totalCost;
+            
+            const pnlEl = document.getElementById('specPnl');
+            if (pnlEl) {
+                pnlEl.textContent = (totalPnl >= 0 ? '+' : '-') + formatCurrency(Math.abs(totalPnl));
+                pnlEl.className = 'spec-kpi-value ' + (totalPnl >= 0 ? 'text-lime' : 'text-red');
+            }
+            
+            updateElement('specBest', bestTicker + ' +' + bestReturn.toFixed(0) + '%');
+            updateElement('specWorst', worstTicker + ' ' + worstReturn.toFixed(0) + '%');
+
+            tbody.innerHTML = positions.map(p => {
+                const riskDots = Array(5).fill(0).map((_, i) => `<span class="risk-dot ${i < p.risk ? 'filled' : ''}"></span>`).join('');
                 return `<tr>
-                    <td class="ticker-cell">${s.ticker}</td>
-                    <td>${s.name}</td>
-                    <td class="text-right">${s.mktCap}</td>
-                    <td><span class="sector-tag apps">${s.thesis}</span></td>
-                    <td class="text-right">$${price.toFixed(2)}</td>
-                    <td class="text-right ${dayChg >= 0 ? 'text-lime' : 'text-red'}">${dayChg >= 0 ? '+' : ''}${dayChg.toFixed(2)}%</td>
-                    <td class="text-center text-lime">${s.upside}</td>
-                    <td class="text-center"><div class="risk-dots">${riskDots}</div></td>
-                    <td class="text-center"><div class="conviction-bar"><div class="conviction-fill" style="width:${conviction}%"></div></div></td>
+                    <td><span class="ticker-link">${p.ticker}</span></td>
+                    <td>${p.name}</td>
+                    <td class="num">${p.mktCap}</td>
+                    <td><span class="sector-badge software">${p.thesis}</span></td>
+                    <td class="num">$${p.costBasis.toFixed(2)}</td>
+                    <td class="num">$${p.price.toFixed(2)}</td>
+                    <td class="num ${p.returnPct >= 0 ? 'text-lime' : 'text-red'}">${p.returnPct >= 0 ? '+' : ''}${p.returnPct.toFixed(1)}%</td>
+                    <td class="text-lime">${p.upside}</td>
+                    <td><div class="risk-indicator">${riskDots}</div></td>
+                    <td><span class="status-pill active">Active</span></td>
                 </tr>`;
             }).join('');
 
-            const navEl = document.getElementById('specNav');
-            if (navEl) navEl.textContent = '$' + totalValue.toLocaleString('en-US', {maximumFractionDigits: 0});
-
-            const pnlEl = document.getElementById('specPnl');
-            if (pnlEl) {
-                const pnl = totalValue - totalCost;
-                pnlEl.textContent = (pnl >= 0 ? '+' : '') + '$' + pnl.toFixed(0);
-                pnlEl.className = 'spec-value ' + (pnl >= 0 ? 'text-lime' : 'text-red');
-            }
-
-            // Watchlist
             const watchBody = document.getElementById('specWatchlistBody');
             if (watchBody) {
-                watchBody.innerHTML = specWatchlist.map(w => {
-                    const riskDots = Array(5).fill(0).map((_, i) => 
-                        `<span class="dot ${i < w.risk ? 'active' : ''}"></span>`
-                    ).join('');
-                    return `<tr>
-                        <td class="ticker-cell">${w.ticker}</td>
-                        <td>${w.name}</td>
-                        <td class="text-right">${w.mktCap}</td>
-                        <td><span class="sector-tag apps">${w.thesis}</span></td>
-                        <td class="text-center"><span class="trend-badge neutral">${w.trigger}</span></td>
-                        <td class="text-center text-lime">${w.target}</td>
-                        <td class="text-center"><div class="risk-dots">${riskDots}</div></td>
-                    </tr>`;
-                }).join('');
+                watchBody.innerHTML = specWatchlist.map(w => `<tr>
+                    <td><span class="ticker-link">${w.ticker}</span></td>
+                    <td>${w.name}</td>
+                    <td class="num">${w.mktCap}</td>
+                    <td><span class="sector-badge software">${w.thesis}</span></td>
+                    <td>${w.trigger}</td>
+                    <td class="num">${w.entry}</td>
+                    <td class="num text-lime">${w.exit}</td>
+                    <td>${w.rr}</td>
+                </tr>`).join('');
             }
         }
 
+        function updateNavPreviews() {
+            let coreTotal = coreHoldings.reduce((sum, h) => sum + h.shares * (marketData.prices[h.ticker] || h.costBasis), 0);
+            coreTotal += PORTFOLIO_CONFIG.startingCapital * 0.02;
+            const corePreview = document.getElementById('coreNavPreview');
+            if (corePreview) corePreview.textContent = formatCurrency(coreTotal);
+
+            const momBuy = document.getElementById('momBuyCount');
+            const momAvoid = document.getElementById('momAvoidCount');
+            const sigPreview = document.getElementById('momSignalPreview');
+            if (sigPreview && momBuy && momAvoid) {
+                sigPreview.innerHTML = `<span class="signal-count buy">${momBuy.textContent}</span><span class="signal-count avoid">${momAvoid.textContent}</span>`;
+            }
+
+            let specTotal = specPositions.reduce((sum, s) => sum + s.shares * (marketData.prices[s.ticker] || s.costBasis), 0);
+            const specPreview = document.getElementById('specNavPreview');
+            if (specPreview) specPreview.textContent = formatCurrency(specTotal);
+        }
+
         // ============ INITIALIZE ============
-        fetchPrices();
-        setInterval(fetchPrices, CONFIG.refreshInterval);
+        fetchMarketData();
+        setInterval(fetchMarketData, PORTFOLIO_CONFIG.refreshInterval);
 
         
 
-        Chart.defaults.color = 'rgba(150, 200, 170, 0.7)';
+                Chart.defaults.color = 'rgba(150, 200, 170, 0.7)';
         Chart.defaults.borderColor = 'rgba(0, 255, 136, 0.1)';
 
         // Color palette
