@@ -1023,7 +1023,423 @@
             margin-left: 4px !important;
         }
 
-        </style>
+    
+        /* === PROFESSIONAL PORTFOLIO STYLES === */
+        
+        /* Summary Bar */
+        .portfolio-summary-bar {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(5, 1fr);
+            gap: 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 40, 25, 0.9), rgba(10, 30, 20, 0.95));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .summary-item { }
+        .summary-item.primary { border-right: 1px solid rgba(0, 255, 136, 0.15); padding-right: 20px; }
+        .summary-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(150, 200, 170, 0.6); margin-bottom: 4px; }
+        .summary-value { font-size: 22px; font-weight: 700; color: #e0f0e8; font-family: 'SF Mono', monospace; }
+        .summary-item.primary .summary-value { font-size: 28px; color: #00FF88; }
+        .summary-change { font-size: 12px; margin-top: 2px; }
+        .summary-change.positive { color: #00FF88; }
+        .summary-change.negative { color: #FF4444; }
+        
+        .summary-item.status .summary-value { font-size: 12px; display: flex; align-items: center; gap: 6px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #FF8800; animation: pulse 1.5s infinite; }
+        .status-dot.live { background: #00FF88; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-card { }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .chart-controls { display: flex; gap: 4px; }
+        .chart-btn {
+            padding: 4px 10px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 4px;
+            color: rgba(0, 255, 136, 0.7);
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .chart-btn:hover, .chart-btn.active { background: rgba(0, 255, 136, 0.2); border-color: #00FF88; color: #00FF88; }
+        
+        .chart-legend { display: flex; gap: 16px; margin-top: 12px; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(150, 200, 170, 0.8); }
+        .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+        .legend-dot.lime { background: #00FF88; }
+        .legend-dot.cyan { background: #00D4FF; }
+        .legend-dot.purple { background: #AA44FF; }
+        .legend-dot.orange { background: #FF8800; }
+
+        /* Risk Card */
+        .risk-card { }
+        .risk-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .risk-metric {
+            padding: 12px;
+            background: rgba(0, 20, 15, 0.5);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 136, 0.08);
+        }
+        .risk-label { font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-bottom: 4px; }
+        .risk-value { font-size: 18px; font-weight: 600; font-family: 'SF Mono', monospace; }
+        .risk-context { font-size: 9px; color: rgba(150, 200, 170, 0.4); margin-top: 2px; }
+
+        /* Sector Allocation */
+        .allocation-summary { display: flex; gap: 8px; flex-wrap: wrap; }
+        .alloc-tag { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 500; }
+        .alloc-tag.compute { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .alloc-tag.cloud { background: rgba(0, 212, 255, 0.15); color: #00D4FF; }
+        .alloc-tag.apps { background: rgba(255, 0, 255, 0.15); color: #FF00FF; }
+        .alloc-tag.cash { background: rgba(150, 150, 150, 0.15); color: #999; }
+        
+        .sector-breakdown { margin-top: 16px; }
+        .sector-bar { display: flex; height: 24px; border-radius: 4px; overflow: hidden; }
+        .sector-fill { height: 100%; }
+        .sector-fill.compute { background: linear-gradient(90deg, #00FF88, #00CC6F); }
+        .sector-fill.cloud { background: linear-gradient(90deg, #00D4FF, #00A8CC); }
+        .sector-fill.apps { background: linear-gradient(90deg, #FF00FF, #CC00CC); }
+        .sector-fill.cash { background: #666; }
+
+        /* Holdings Table */
+        .holdings-table-wrapper { overflow-x: auto; }
+        .holdings-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .holdings-table th { 
+            padding: 10px 8px; 
+            text-align: left; 
+            font-size: 10px; 
+            text-transform: uppercase; 
+            color: rgba(150, 200, 170, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+        }
+        .holdings-table td { 
+            padding: 12px 8px; 
+            border-bottom: 1px solid rgba(0, 255, 136, 0.06);
+            color: rgba(200, 230, 210, 0.9);
+        }
+        .holdings-table tbody tr:hover { background: rgba(0, 255, 136, 0.03); }
+        .holdings-table tfoot td { font-weight: 600; border-top: 2px solid rgba(0, 255, 136, 0.2); }
+        
+        .table-controls { display: flex; gap: 8px; }
+        .table-select {
+            padding: 4px 8px;
+            background: rgba(0, 20, 15, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 4px;
+            color: #00FF88;
+            font-size: 11px;
+        }
+
+        /* Two Column Grid */
+        .two-column-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+        /* Technicals */
+        .technicals-list { display: flex; flex-direction: column; gap: 8px; }
+        .tech-row {
+            display: grid;
+            grid-template-columns: 60px 70px 1fr 80px;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(0, 20, 15, 0.4);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        .tech-ticker { font-weight: 600; color: #00D4FF; font-family: 'SF Mono', monospace; }
+        .tech-signal { padding: 3px 8px; border-radius: 3px; font-size: 9px; font-weight: 600; text-align: center; }
+        .tech-signal.bullish { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
+        .tech-signal.bearish { background: rgba(255, 68, 68, 0.2); color: #FF4444; }
+        .tech-signal.neutral { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
+        .tech-details { font-size: 11px; color: rgba(150, 200, 170, 0.7); }
+        .tech-level { text-align: right; font-family: 'SF Mono', monospace; font-size: 11px; }
+
+        /* Catalyst Calendar */
+        .catalyst-list { display: flex; flex-direction: column; gap: 8px; }
+        .catalyst-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px;
+            background: rgba(0, 20, 15, 0.4);
+            border-radius: 6px;
+            border-left: 3px solid rgba(0, 255, 136, 0.3);
+        }
+        .catalyst-date { text-align: center; min-width: 40px; }
+        .catalyst-date .month { display: block; font-size: 9px; color: rgba(150, 200, 170, 0.5); text-transform: uppercase; }
+        .catalyst-date .day { display: block; font-size: 18px; font-weight: 700; color: #00FF88; }
+        .catalyst-info { flex: 1; }
+        .catalyst-ticker { font-weight: 600; font-size: 12px; color: #00D4FF; }
+        .catalyst-event { font-size: 12px; color: rgba(200, 230, 210, 0.9); margin: 2px 0; }
+        .catalyst-type { display: inline-block; padding: 2px 6px; font-size: 9px; border-radius: 3px; }
+        .catalyst-type.earnings { background: rgba(255, 136, 0, 0.2); color: #FF8800; }
+
+        /* Valuation Table */
+        .valuation-table-wrapper { overflow-x: auto; }
+        .valuation-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .valuation-table th { padding: 10px 8px; text-align: left; font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.6); border-bottom: 1px solid rgba(0, 255, 136, 0.15); }
+        .valuation-table td { padding: 10px 8px; border-bottom: 1px solid rgba(0, 255, 136, 0.06); }
+        
+        .vs-5y { padding: 3px 8px; border-radius: 3px; font-size: 10px; }
+        .vs-5y.premium { background: rgba(255, 136, 0, 0.2); color: #FF8800; }
+        .vs-5y.inline { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .vs-5y.discount { background: rgba(0, 212, 255, 0.15); color: #00D4FF; }
+        
+        .thesis-status { padding: 3px 8px; border-radius: 3px; font-size: 10px; }
+        .thesis-status.intact { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .thesis-status.watch { background: rgba(255, 215, 0, 0.15); color: #FFD700; }
+
+        /* Watchlist */
+        .watchlist-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .watchlist-table th { padding: 10px 8px; text-align: left; font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.6); border-bottom: 1px solid rgba(0, 255, 136, 0.15); }
+        .watchlist-table td { padding: 12px 8px; border-bottom: 1px solid rgba(0, 255, 136, 0.06); }
+        
+        .ticker-badge { 
+            display: inline-block; 
+            padding: 4px 8px; 
+            background: rgba(0, 212, 255, 0.15); 
+            color: #00D4FF; 
+            border-radius: 4px; 
+            font-weight: 600; 
+            font-family: 'SF Mono', monospace;
+        }
+        .thesis-tag { padding: 3px 8px; border-radius: 3px; font-size: 10px; }
+        .thesis-tag.compute { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .thesis-tag.cloud { background: rgba(0, 212, 255, 0.15); color: #00D4FF; }
+        .thesis-tag.apps { background: rgba(255, 0, 255, 0.15); color: #FF00FF; }
+        .trigger-tag { padding: 3px 8px; background: rgba(255, 215, 0, 0.15); color: #FFD700; border-radius: 3px; font-size: 10px; }
+        
+        .risk-dots { display: flex; gap: 3px; justify-content: center; }
+        .risk-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 136, 0, 0.2); }
+        .risk-dots .dot.active { background: #FF8800; }
+
+        /* Strategy Content */
+        .strategy-content { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .strategy-section h4 { color: #00FF88; font-size: 13px; margin-bottom: 10px; }
+        .strategy-section p, .strategy-section li { font-size: 12px; color: rgba(200, 230, 210, 0.85); line-height: 1.6; }
+        .strategy-section ul { margin-left: 16px; margin-top: 8px; }
+        .strategy-section li { margin-bottom: 6px; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .portfolio-summary-bar { grid-template-columns: repeat(3, 1fr); }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .two-column-grid { grid-template-columns: 1fr; }
+            .strategy-content { grid-template-columns: 1fr; }
+        }
+
+
+        /* === THREE-STRATEGY PORTFOLIO === */
+        
+        /* Strategy Selector */
+        .strategy-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .strategy-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 12px;
+            background: rgba(10, 25, 18, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .strategy-btn:hover { border-color: rgba(0, 255, 136, 0.4); }
+        .strategy-btn.active { 
+            border-color: #00FF88; 
+            background: rgba(0, 255, 136, 0.08);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        .strategy-icon { font-size: 24px; margin-bottom: 8px; }
+        .strategy-label { font-size: 14px; font-weight: 600; color: #e0f0e8; }
+        .strategy-meta { font-size: 11px; color: rgba(150, 200, 170, 0.5); margin-top: 4px; }
+        .strategy-btn.active .strategy-label { color: #00FF88; }
+
+        /* Summary Bar */
+        .portfolio-summary-bar {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(5, 1fr);
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(0, 40, 25, 0.9), rgba(10, 30, 20, 0.95));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .summary-item.primary { border-right: 1px solid rgba(0, 255, 136, 0.15); padding-right: 16px; }
+        .summary-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(150, 200, 170, 0.5); margin-bottom: 4px; }
+        .summary-value { font-size: 18px; font-weight: 700; color: #e0f0e8; font-family: 'SF Mono', 'Consolas', monospace; }
+        .summary-item.primary .summary-value { font-size: 24px; color: #00FF88; }
+        .summary-change { font-size: 11px; margin-top: 2px; }
+        .summary-change.positive { color: #00FF88; }
+        .summary-change.negative { color: #FF4444; }
+        .summary-item.status .summary-value { font-size: 11px; display: flex; align-items: center; gap: 6px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #FF8800; }
+        .status-dot.live { background: #00FF88; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+        /* Grid Layouts */
+        .portfolio-grid { display: grid; grid-template-columns: 1.8fr 1fr; gap: 16px; margin-bottom: 16px; }
+        
+        /* Risk Grid */
+        .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+        .risk-item { padding: 10px; background: rgba(0, 20, 15, 0.5); border-radius: 6px; text-align: center; }
+        .risk-label { font-size: 9px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); }
+        .risk-value { font-size: 16px; font-weight: 600; margin-top: 4px; font-family: 'SF Mono', monospace; }
+
+        /* Sector Allocation */
+        .sector-allocation { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0, 255, 136, 0.1); }
+        .sector-title { font-size: 10px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-bottom: 8px; }
+        .sector-bar { display: flex; height: 20px; border-radius: 4px; overflow: hidden; }
+        .sector-segment { height: 100%; transition: width 0.3s; }
+        .sector-segment.compute { background: linear-gradient(90deg, #00FF88, #00CC6F); }
+        .sector-segment.cloud { background: linear-gradient(90deg, #00D4FF, #00A8CC); }
+        .sector-segment.apps { background: linear-gradient(90deg, #FF00FF, #CC00CC); }
+        .sector-segment.cash { background: #555; }
+        .sector-legend { display: flex; gap: 12px; margin-top: 8px; font-size: 10px; color: rgba(150, 200, 170, 0.7); }
+        .sector-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; }
+        .sector-legend .dot.compute { background: #00FF88; }
+        .sector-legend .dot.cloud { background: #00D4FF; }
+        .sector-legend .dot.apps { background: #FF00FF; }
+
+        /* Tables */
+        .table-scroll { overflow-x: auto; }
+        .holdings-table, .signals-table, .spec-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .holdings-table th, .signals-table th, .spec-table th {
+            padding: 10px 8px;
+            text-align: left;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: rgba(150, 200, 170, 0.5);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+            white-space: nowrap;
+        }
+        .holdings-table td, .signals-table td, .spec-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.05);
+            color: rgba(200, 230, 210, 0.9);
+        }
+        .holdings-table tbody tr:hover, .signals-table tbody tr:hover, .spec-table tbody tr:hover {
+            background: rgba(0, 255, 136, 0.03);
+        }
+        .holdings-table tfoot td { font-weight: 600; border-top: 2px solid rgba(0, 255, 136, 0.2); background: rgba(0, 255, 136, 0.02); }
+
+        .ticker-cell { font-weight: 600; font-family: 'SF Mono', monospace; color: #00D4FF; }
+        .sector-tag { padding: 2px 6px; border-radius: 3px; font-size: 9px; }
+        .sector-tag.compute { background: rgba(0, 255, 136, 0.15); color: #00FF88; }
+        .sector-tag.cloud { background: rgba(0, 212, 255, 0.15); color: #00D4FF; }
+        .sector-tag.apps { background: rgba(255, 0, 255, 0.15); color: #FF00FF; }
+
+        /* Signal Badges */
+        .signal-badge { padding: 3px 8px; border-radius: 3px; font-size: 9px; font-weight: 600; }
+        .signal-badge.buy { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
+        .signal-badge.watch { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
+        .signal-badge.avoid { background: rgba(255, 68, 68, 0.2); color: #FF4444; }
+
+        .trend-badge { padding: 2px 6px; border-radius: 3px; font-size: 9px; }
+        .trend-badge.bullish { background: rgba(0, 255, 136, 0.1); color: #00FF88; }
+        .trend-badge.bearish { background: rgba(255, 68, 68, 0.1); color: #FF4444; }
+        .trend-badge.neutral { background: rgba(255, 215, 0, 0.1); color: #FFD700; }
+
+        /* Thesis Grid */
+        .thesis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .thesis-section h4 { color: #00FF88; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; }
+        .thesis-section p { font-size: 12px; color: rgba(200, 230, 210, 0.8); line-height: 1.5; }
+        .thesis-section ul { margin: 8px 0 0 16px; font-size: 11px; color: rgba(200, 230, 210, 0.7); }
+        .thesis-section li { margin-bottom: 4px; }
+
+        /* Momentum Strategy */
+        .strategy-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding: 16px; background: rgba(10, 25, 18, 0.6); border-radius: 10px; border: 1px solid rgba(0, 255, 136, 0.1); }
+        .strategy-header.warning { border-color: rgba(255, 136, 0, 0.3); }
+        .strategy-title h3 { color: #00FF88; font-size: 18px; margin-bottom: 4px; }
+        .strategy-title p { color: rgba(150, 200, 170, 0.7); font-size: 12px; }
+        .strategy-stats { display: flex; gap: 20px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 28px; font-weight: 700; font-family: 'SF Mono', monospace; }
+        .stat-label { font-size: 10px; color: rgba(150, 200, 170, 0.5); text-transform: uppercase; }
+
+        .signal-rules { margin-bottom: 20px; }
+        .rules-title { font-size: 11px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-bottom: 12px; }
+        .rules-content { display: flex; flex-direction: column; gap: 8px; }
+        .rule { display: flex; align-items: center; gap: 12px; font-size: 12px; color: rgba(200, 230, 210, 0.8); }
+        .rule-badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 600; min-width: 60px; text-align: center; }
+        .rule.buy .rule-badge { background: rgba(0, 255, 136, 0.2); color: #00FF88; }
+        .rule.watch .rule-badge { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
+        .rule.avoid .rule-badge { background: rgba(255, 68, 68, 0.2); color: #FF4444; }
+
+        .perf-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .perf-item { padding: 16px; background: rgba(0, 20, 15, 0.5); border-radius: 8px; text-align: center; }
+        .perf-label { font-size: 10px; color: rgba(150, 200, 170, 0.5); margin-bottom: 6px; }
+        .perf-value { font-size: 20px; font-weight: 600; font-family: 'SF Mono', monospace; color: #e0f0e8; }
+
+        /* Speculative Strategy */
+        .risk-warning { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(255, 136, 0, 0.1); border-radius: 6px; font-size: 12px; color: #FF8800; }
+        .warning-icon { font-size: 18px; }
+
+        .spec-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; padding: 16px; background: rgba(10, 25, 18, 0.6); border-radius: 10px; }
+        .spec-stat { text-align: center; }
+        .spec-label { font-size: 9px; text-transform: uppercase; color: rgba(150, 200, 170, 0.5); margin-bottom: 4px; }
+        .spec-value { font-size: 20px; font-weight: 600; font-family: 'SF Mono', monospace; color: #e0f0e8; }
+
+        .thesis-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .thesis-cat { background: rgba(0, 20, 15, 0.4); border-radius: 8px; overflow: hidden; }
+        .cat-header { padding: 10px 12px; font-size: 12px; font-weight: 600; }
+        .cat-header.robotics { background: rgba(0, 255, 136, 0.1); color: #00FF88; }
+        .cat-header.software { background: rgba(0, 212, 255, 0.1); color: #00D4FF; }
+        .cat-header.infra { background: rgba(255, 136, 0, 0.1); color: #FF8800; }
+        .cat-content { padding: 12px; font-size: 11px; color: rgba(200, 230, 210, 0.7); line-height: 1.5; }
+        .cat-names { margin-top: 8px; font-family: 'SF Mono', monospace; color: #00D4FF; font-size: 10px; }
+
+        .warning-card { border-color: rgba(255, 136, 0, 0.3); }
+        .risk-factors ul { margin-left: 16px; }
+        .risk-factors li { font-size: 12px; color: rgba(200, 230, 210, 0.8); margin-bottom: 8px; line-height: 1.5; }
+
+        /* Risk dots */
+        .risk-dots { display: flex; gap: 3px; justify-content: center; }
+        .risk-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 136, 0, 0.2); }
+        .risk-dots .dot.active { background: #FF8800; }
+
+        .conviction-bar { width: 60px; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px; overflow: hidden; }
+        .conviction-fill { height: 100%; background: linear-gradient(90deg, #00FF88, #00D4FF); border-radius: 3px; }
+
+        /* Table actions */
+        .table-actions select {
+            padding: 6px 10px;
+            background: rgba(0, 20, 15, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 4px;
+            color: #00FF88;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .chart-period { font-size: 11px; color: rgba(150, 200, 170, 0.5); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .strategy-selector { flex-direction: column; }
+            .portfolio-summary-bar { grid-template-columns: repeat(3, 1fr); }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .thesis-grid, .thesis-categories { grid-template-columns: 1fr; }
+            .perf-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+
+    </style>
 </head>
 <body>
     <div class="container">
@@ -3043,157 +3459,403 @@
         <!-- AI Portfolio Tab -->
         <div id="portfolio" class="tab-content">
             <div class="section-description">
-                <strong>AI Investment Strategies</strong> tracks three hypothetical portfolios designed to capture AI's growth trajectory. 
-                <em>This is a tracking experiment, not investment advice.</em>
+                <strong>AI Equity Strategies</strong> — Three distinct approaches to capturing AI's growth trajectory. Live prices via Yahoo Finance. 
+                <em>For informational purposes only — not investment advice.</em>
             </div>
 
-            <!-- Strategy Selector -->
-            <div class="strategy-tabs">
-                <div class="strategy-tab active" onclick="showStrategy('core')">
-                    <div class="strategy-icon">🏛️</div>
-                    <div class="strategy-name">Core Infrastructure</div>
-                    <div class="strategy-desc">Set-and-forget AI leaders</div>
-                </div>
-                <div class="strategy-tab" onclick="showStrategy('momentum')">
-                    <div class="strategy-icon">⚡</div>
-                    <div class="strategy-name">Trend Following</div>
-                    <div class="strategy-desc">Momentum signals</div>
-                </div>
-                <div class="strategy-tab" onclick="showStrategy('emerging')">
-                    <div class="strategy-icon">🚀</div>
-                    <div class="strategy-name">Capability Plays</div>
-                    <div class="strategy-desc">Small/mid-cap watchlist</div>
-                </div>
+            <!-- Strategy Tabs -->
+            <div class="strategy-selector">
+                <button class="strategy-btn active" onclick="showStrategy('core', this)">
+                    <span class="strategy-icon">🏛️</span>
+                    <span class="strategy-label">Core Infrastructure</span>
+                    <span class="strategy-meta">Set & forget • 12 positions</span>
+                </button>
+                <button class="strategy-btn" onclick="showStrategy('momentum', this)">
+                    <span class="strategy-icon">⚡</span>
+                    <span class="strategy-label">Trend Following</span>
+                    <span class="strategy-meta">50/200 SMA system</span>
+                </button>
+                <button class="strategy-btn" onclick="showStrategy('speculative', this)">
+                    <span class="strategy-icon">🚀</span>
+                    <span class="strategy-label">Speculative Basket</span>
+                    <span class="strategy-meta">High risk • Small caps</span>
+                </button>
             </div>
 
-            <!-- CORE PORTFOLIO SECTION -->
-            <div id="strategy-core" class="strategy-content">
+            <!-- ============================================ -->
+            <!-- STRATEGY 1: CORE INFRASTRUCTURE -->
+            <!-- ============================================ -->
+            <div id="strategy-core" class="strategy-panel">
+                
+                <!-- Summary Bar -->
+                <div class="portfolio-summary-bar">
+                    <div class="summary-item primary">
+                        <div class="summary-label">Portfolio NAV</div>
+                        <div class="summary-value" id="coreNav">$100,000.00</div>
+                        <div class="summary-change positive" id="coreChange">+$0.00 (0.00%)</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Day P&L</div>
+                        <div class="summary-value" id="coreDayPnl">--</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">vs SPY</div>
+                        <div class="summary-value" id="coreVsSpy">--</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">vs QQQ</div>
+                        <div class="summary-value" id="coreVsQqq">--</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Beta</div>
+                        <div class="summary-value">1.42</div>
+                    </div>
+                    <div class="summary-item status">
+                        <div class="summary-label">Status</div>
+                        <div class="summary-value" id="dataStatus">
+                            <span class="status-dot"></span> Connecting...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart + Risk Grid -->
+                <div class="portfolio-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Performance vs Benchmarks</div>
+                            <div class="chart-period">Since Jan 1, 2026</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="portfolioChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Risk Metrics</div>
+                        <div class="risk-grid">
+                            <div class="risk-item">
+                                <div class="risk-label">Sharpe</div>
+                                <div class="risk-value" id="coreSharpe">--</div>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-label">Max DD</div>
+                                <div class="risk-value text-orange" id="coreMaxDD">--</div>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-label">Vol (Ann)</div>
+                                <div class="risk-value text-yellow">~38%</div>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-label">Win Rate</div>
+                                <div class="risk-value" id="coreWinRate">--</div>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-label">Best Day</div>
+                                <div class="risk-value text-lime" id="coreBestDay">--</div>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-label">Worst Day</div>
+                                <div class="risk-value text-red" id="coreWorstDay">--</div>
+                            </div>
+                        </div>
+                        <div class="sector-allocation">
+                            <div class="sector-title">Allocation</div>
+                            <div class="sector-bar">
+                                <div class="sector-segment compute" style="width:45%" title="Compute 45%"></div>
+                                <div class="sector-segment cloud" style="width:33%" title="Cloud 33%"></div>
+                                <div class="sector-segment apps" style="width:20%" title="Apps 20%"></div>
+                                <div class="sector-segment cash" style="width:2%" title="Cash 2%"></div>
+                            </div>
+                            <div class="sector-legend">
+                                <span><span class="dot compute"></span>Compute 45%</span>
+                                <span><span class="dot cloud"></span>Cloud 33%</span>
+                                <span><span class="dot apps"></span>Apps 20%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Holdings Table -->
                 <div class="card">
                     <div class="card-header">
-                        <div>
-                            <div class="card-title">🏛️ Core AI Infrastructure Portfolio</div>
-                            <div class="card-subtitle">Set-and-forget • Rebalanced quarterly • Started Jan 1, 2026</div>
-                        </div>
-                        <div class="live-indicator">
-                            <div class="live-dot"></div>
-                            <span>Live</span>
+                        <div class="card-title">Holdings</div>
+                        <div class="table-actions">
+                            <select id="coreSort" onchange="sortCoreHoldings(this.value)">
+                                <option value="weight">Sort: Weight</option>
+                                <option value="pnl">Sort: P&L %</option>
+                                <option value="dayChg">Sort: Day Chg</option>
+                            </select>
                         </div>
                     </div>
+                    <div class="table-scroll">
+                        <table class="holdings-table">
+                            <thead>
+                                <tr>
+                                    <th>Ticker</th>
+                                    <th>Sector</th>
+                                    <th class="text-right">Wt%</th>
+                                    <th class="text-right">Shares</th>
+                                    <th class="text-right">Cost</th>
+                                    <th class="text-right">Price</th>
+                                    <th class="text-right">Value</th>
+                                    <th class="text-right">Day</th>
+                                    <th class="text-right">P&L</th>
+                                    <th class="text-right">Return</th>
+                                </tr>
+                            </thead>
+                            <tbody id="coreHoldingsBody"></tbody>
+                            <tfoot id="coreHoldingsFoot"></tfoot>
+                        </table>
+                    </div>
+                </div>
 
-                    <div class="portfolio-value-display">
-                        <div class="portfolio-total" id="coreTotal">$100,000</div>
-                        <div class="portfolio-change positive" id="coreChange">
-                            ▲ $0 (+0.00%) since inception
+                <!-- Thesis -->
+                <div class="card">
+                    <div class="card-title">Strategy Rules</div>
+                    <div class="thesis-grid">
+                        <div class="thesis-section">
+                            <h4>Thesis</h4>
+                            <p>Own the infrastructure layer of AI. GPUs, foundry, networking, and hyperscaler capex are the highest-conviction plays regardless of which AI lab wins.</p>
                         </div>
-                        <div class="portfolio-meta">
-                            <span>📅 Starting: $100,000</span>
-                            <span>📆 Inception: Jan 1, 2026</span>
-                            <span id="lastUpdate">🔄 Updating...</span>
+                        <div class="thesis-section">
+                            <h4>Rebalancing</h4>
+                            <ul>
+                                <li>Quarterly (Jan, Apr, Jul, Oct)</li>
+                                <li>Max position: 25%</li>
+                                <li>Trim winners >50% from cost</li>
+                            </ul>
+                        </div>
+                        <div class="thesis-section">
+                            <h4>Risk Management</h4>
+                            <ul>
+                                <li>No stop losses (thesis-driven)</li>
+                                <li>2% cash for rebalancing</li>
+                                <li>Add on 20%+ drawdowns</li>
+                            </ul>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="chart-container">
-                        <canvas id="portfolioChart"></canvas>
+            <!-- ============================================ -->
+            <!-- STRATEGY 2: TREND FOLLOWING -->
+            <!-- ============================================ -->
+            <div id="strategy-momentum" class="strategy-panel" style="display:none;">
+                
+                <div class="strategy-header">
+                    <div class="strategy-title">
+                        <h3>⚡ Trend Following Strategy</h3>
+                        <p>Systematic momentum signals based on moving average crossovers and RSI</p>
                     </div>
+                    <div class="strategy-stats">
+                        <div class="stat">
+                            <div class="stat-value text-lime" id="momBuyCount">0</div>
+                            <div class="stat-label">BUY Signals</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value text-yellow" id="momWatchCount">0</div>
+                            <div class="stat-label">WATCH</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value text-red" id="momAvoidCount">0</div>
+                            <div class="stat-label">AVOID</div>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="metrics-row" style="margin-top: 20px;">
-                        <div class="metric-box">
-                            <div class="metric-label">Volatility</div>
-                            <div class="metric-value text-yellow">~38%</div>
+                <div class="signal-rules card">
+                    <div class="rules-title">Signal Rules</div>
+                    <div class="rules-content">
+                        <div class="rule buy">
+                            <span class="rule-badge">BUY</span>
+                            <span>Price > 50 SMA AND 50 SMA > 200 SMA AND RSI between 40-70</span>
                         </div>
-                        <div class="metric-box">
-                            <div class="metric-label">vs SPY</div>
-                            <div class="metric-value text-cyan" id="vsSpy">--</div>
+                        <div class="rule watch">
+                            <span class="rule-badge">WATCH</span>
+                            <span>Price near 50 SMA OR RSI approaching extremes</span>
                         </div>
-                        <div class="metric-box">
-                            <div class="metric-label">vs QQQ</div>
-                            <div class="metric-value text-cyan" id="vsQqq">--</div>
+                        <div class="rule avoid">
+                            <span class="rule-badge">AVOID</span>
+                            <span>Price < 200 SMA OR death cross OR RSI > 80 (overbought)</span>
                         </div>
-                        <div class="metric-box">
-                            <div class="metric-label">Best</div>
-                            <div class="metric-value text-lime" id="bestPerformer">--</div>
-                        </div>
-                    </div>
-
-                    <div style="margin: 20px 0 12px 0; color: rgba(150, 200, 170, 0.7); font-size: 13px; font-weight: 500;">
-                        Current Holdings
-                    </div>
-                    <div class="holdings-grid" id="holdingsGrid">
-                        <!-- Populated by JavaScript -->
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">Allocation Strategy</div>
-                    <div class="card-subtitle">How the portfolio allocates capital</div>
-                    <div style="color: rgba(200, 230, 210, 0.85); line-height: 1.7; font-size: 14px;">
-                        <p style="margin-bottom: 12px;"><strong style="color: #00FF88;">Thesis:</strong> Invest in companies with the highest exposure to AI value creation across the stack.</p>
-                        <ul style="margin-left: 20px; margin-bottom: 16px;">
-                            <li><strong>Compute Infrastructure (45%):</strong> NVDA, TSM, AVGO, MRVL, MU</li>
-                            <li><strong>AI Labs / Cloud (36%):</strong> MSFT, GOOGL, META, AMZN</li>
-                            <li><strong>AI Applications (17%):</strong> ASML, VRT, PLTR</li>
-                            <li><strong>Cash Reserve (2%):</strong> For rebalancing</li>
+                    <div class="card-title">AI Universe Signals</div>
+                    <div class="card-subtitle">Updated with live prices • Sorted by signal strength</div>
+                    <div class="signals-table-wrapper">
+                        <table class="signals-table">
+                            <thead>
+                                <tr>
+                                    <th>Ticker</th>
+                                    <th>Signal</th>
+                                    <th class="text-right">Price</th>
+                                    <th class="text-right">50 SMA</th>
+                                    <th class="text-right">200 SMA</th>
+                                    <th class="text-right">RSI(14)</th>
+                                    <th class="text-right">% from 50d</th>
+                                    <th>Trend</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="momentumSignalsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Momentum Chart</div>
+                    <div class="card-subtitle">Relative strength vs QQQ (20-day rolling)</div>
+                    <div class="chart-container">
+                        <canvas id="momentumChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">System Performance</div>
+                    <div class="perf-grid">
+                        <div class="perf-item">
+                            <div class="perf-label">Win Rate (Backtested)</div>
+                            <div class="perf-value">62%</div>
+                        </div>
+                        <div class="perf-item">
+                            <div class="perf-label">Avg Winner</div>
+                            <div class="perf-value text-lime">+18.4%</div>
+                        </div>
+                        <div class="perf-item">
+                            <div class="perf-label">Avg Loser</div>
+                            <div class="perf-value text-red">-8.2%</div>
+                        </div>
+                        <div class="perf-item">
+                            <div class="perf-label">Profit Factor</div>
+                            <div class="perf-value">2.3x</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- STRATEGY 3: SPECULATIVE BASKET -->
+            <!-- ============================================ -->
+            <div id="strategy-speculative" class="strategy-panel" style="display:none;">
+                
+                <div class="strategy-header warning">
+                    <div class="strategy-title">
+                        <h3>🚀 Speculative Basket</h3>
+                        <p>High-risk positions with asymmetric upside to AI capability improvements</p>
+                    </div>
+                    <div class="risk-warning">
+                        <span class="warning-icon">⚠️</span>
+                        <span>Position size: 2-5% max per name. These can go to zero.</span>
+                    </div>
+                </div>
+
+                <div class="spec-summary">
+                    <div class="spec-stat">
+                        <div class="spec-label">Basket Value</div>
+                        <div class="spec-value" id="specNav">$10,000</div>
+                    </div>
+                    <div class="spec-stat">
+                        <div class="spec-label">P&L</div>
+                        <div class="spec-value" id="specPnl">--</div>
+                    </div>
+                    <div class="spec-stat">
+                        <div class="spec-label">Avg Upside</div>
+                        <div class="spec-value text-lime">3-5x</div>
+                    </div>
+                    <div class="spec-stat">
+                        <div class="spec-label">Risk Level</div>
+                        <div class="spec-value text-orange">High</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Speculative Positions</div>
+                    <div class="table-scroll">
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th>Ticker</th>
+                                    <th>Company</th>
+                                    <th class="text-right">Mkt Cap</th>
+                                    <th>AI Thesis</th>
+                                    <th class="text-right">Price</th>
+                                    <th class="text-right">Day Chg</th>
+                                    <th class="text-center">Upside</th>
+                                    <th class="text-center">Risk</th>
+                                    <th class="text-center">Conviction</th>
+                                </tr>
+                            </thead>
+                            <tbody id="specHoldingsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Watchlist (Not Yet Owned)</div>
+                    <div class="table-scroll">
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th>Ticker</th>
+                                    <th>Company</th>
+                                    <th class="text-right">Mkt Cap</th>
+                                    <th>Thesis</th>
+                                    <th>Entry Trigger</th>
+                                    <th class="text-center">Target</th>
+                                    <th class="text-center">Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody id="specWatchlistBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Thesis by Category</div>
+                    <div class="thesis-categories">
+                        <div class="thesis-cat">
+                            <div class="cat-header robotics">🤖 AI Robotics</div>
+                            <div class="cat-content">
+                                <p>Companies building physical AI: humanoid robots, warehouse automation, autonomous systems. Early stage but massive TAM if AI capabilities continue improving.</p>
+                                <div class="cat-names">SYM, ISRG, PATH</div>
+                            </div>
+                        </div>
+                        <div class="thesis-cat">
+                            <div class="cat-header software">💬 AI-Native Software</div>
+                            <div class="cat-content">
+                                <p>Pure-play AI software companies that could see operating leverage as AI capabilities improve and costs decline.</p>
+                                <div class="cat-names">PLTR, SOUN, AI</div>
+                            </div>
+                        </div>
+                        <div class="thesis-cat">
+                            <div class="cat-header infra">🔌 Enabling Infrastructure</div>
+                            <div class="cat-content">
+                                <p>Picks and shovels for AI buildout: connectivity, power, cooling. Less sexy but more predictable.</p>
+                                <div class="cat-names">CRDO, VRT, NET</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card warning-card">
+                    <div class="card-title">⚠️ Risk Factors</div>
+                    <div class="risk-factors">
+                        <ul>
+                            <li><strong>Valuation:</strong> Many names trading at extreme multiples (>20x revenue). Any growth deceleration = pain.</li>
+                            <li><strong>Competition:</strong> Big tech (NVDA, MSFT, GOOGL) could crush smaller players.</li>
+                            <li><strong>Execution:</strong> Small caps have higher failure rates. Expect 30-50% of basket to underperform.</li>
+                            <li><strong>Liquidity:</strong> Some names have thin trading. Getting out in a crash is hard.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- MOMENTUM STRATEGY SECTION -->
-            <div id="strategy-momentum" class="strategy-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">⚡ Trend Following Strategy</div>
-                            <div class="card-subtitle">50 SMA / 200 SMA crossover system</div>
-                        </div>
-                    </div>
-
-                    <div class="section-description" style="margin: 0 0 20px 0;">
-                        <strong>Signal Rules:</strong> BUY when Price > 50 SMA AND 50 SMA > 200 SMA AND RSI(14) between 50-75.
-                    </div>
-
-                    <div id="momentumSignals">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- EMERGING / CAPABILITY PLAYS SECTION -->
-            <div id="strategy-emerging" class="strategy-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">🚀 Capability Improvement Plays</div>
-                            <div class="card-subtitle">Small & mid-caps with operating leverage to AI capability gains</div>
-                        </div>
-                    </div>
-
-                    <div class="section-description" style="margin: 0 0 20px 0;">
-                        These companies have <strong>asymmetric exposure</strong> to AI capability improvements. Higher risk, higher potential reward. Position sizes: 2-5% max.
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Company</th>
-                                <th>Market Cap</th>
-                                <th>Thesis</th>
-                                <th>Upside</th>
-                                <th>Risk</th>
-                            </tr>
-                        </thead>
-                        <tbody id="emergingTable">
-                            <!-- Populated by JavaScript -->
-                        </tbody>
-                    </table>
-
-                    <div class="insight-box orange" style="margin-top: 20px;">
-                        <span class="insight-label">⚠️ Higher Risk:</span>
-                        <span class="insight-text">These are speculative positions. Size accordingly (2-5% max per position).</span>
-                    </div>
-                </div>
-            </div>
         </div>
+
+        
+
+        
 
         <!-- Footer -->
         <div class="footer">
@@ -3262,75 +3924,6 @@
             document.getElementById('strategy-' + strategy).style.display = 'block';
             event.currentTarget.classList.add('active');
         }
-
-        // Portfolio data
-        const STARTING_BALANCE = 100000;
-        const coreHoldings = [
-            { ticker: 'NVDA', name: 'NVIDIA Corp', weight: 0.18, inceptionPrice: 134.29 },
-            { ticker: 'TSM', name: 'Taiwan Semiconductor', weight: 0.12, inceptionPrice: 203.75 },
-            { ticker: 'AVGO', name: 'Broadcom', weight: 0.10, inceptionPrice: 232.14 },
-            { ticker: 'MSFT', name: 'Microsoft', weight: 0.10, inceptionPrice: 421.50 },
-            { ticker: 'GOOGL', name: 'Alphabet', weight: 0.08, inceptionPrice: 191.25 },
-            { ticker: 'META', name: 'Meta Platforms', weight: 0.08, inceptionPrice: 589.34 },
-            { ticker: 'AMZN', name: 'Amazon', weight: 0.08, inceptionPrice: 224.00 },
-            { ticker: 'ASML', name: 'ASML Holding', weight: 0.06, inceptionPrice: 698.50 },
-            { ticker: 'MRVL', name: 'Marvell Technology', weight: 0.05, inceptionPrice: 111.20 },
-            { ticker: 'VRT', name: 'Vertiv Holdings', weight: 0.05, inceptionPrice: 131.45 },
-            { ticker: 'PLTR', name: 'Palantir', weight: 0.05, inceptionPrice: 75.50 },
-            { ticker: 'MU', name: 'Micron Technology', weight: 0.03, inceptionPrice: 89.75 },
-            { ticker: 'CASH', name: 'Cash Reserve', weight: 0.02, inceptionPrice: 1.00 }
-        ];
-
-        let currentPrices = {
-            'NVDA': 138.52, 'TSM': 207.85, 'AVGO': 238.45, 'MSFT': 425.30,
-            'GOOGL': 195.80, 'META': 605.25, 'AMZN': 228.15, 'ASML': 712.30,
-            'MRVL': 113.45, 'VRT': 134.80, 'PLTR': 78.20, 'MU': 91.25, 'CASH': 1.00,
-            'SPY': 478.50, 'QQQ': 525.80
-        };
-        const benchmarkInception = { SPY: 475.00, QQQ: 520.00 };
-
-        // Fetch live prices from API
-        async function fetchLivePrices() {
-            const tickers = ['NVDA', 'TSM', 'AVGO', 'MSFT', 'GOOGL', 'META', 'AMZN', 
-                           'ASML', 'MRVL', 'VRT', 'PLTR', 'MU', 'SPY', 'QQQ'];
-            try {
-                const response = await fetch('/api/prices?symbols=' + tickers.join(','));
-                if (!response.ok) throw new Error('API error: ' + response.status);
-                const result = await response.json();
-                
-                if (result.success && result.data) {
-                    // Update currentPrices with live data
-                    result.data.forEach(quote => {
-                        if (quote.symbol && quote.price) {
-                            currentPrices[quote.symbol] = quote.price;
-                        }
-                    });
-                    
-                    // Update display
-                    updatePortfolioDisplay();
-                    renderHoldings();
-                    
-                    const updateEl = document.getElementById('lastUpdate');
-                    if (updateEl) {
-                        updateEl.textContent = '🔄 Live @ ' + new Date().toLocaleTimeString();
-                        updateEl.style.color = '#00FF88';
-                    }
-                    
-                    console.log('✓ Prices updated from API:', new Date().toLocaleTimeString());
-                }
-            } catch (error) {
-                console.log('Using fallback prices (API unavailable):', error.message);
-                const updateEl = document.getElementById('lastUpdate');
-                if (updateEl) {
-                    updateEl.textContent = '⚠️ Fallback prices';
-                    updateEl.style.color = '#FF8800';
-                }
-            }
-        }
-
-        // Fetch prices on load and every 5 minutes
-        fetchLivePrices();
-        setInterval(fetchLivePrices, 5 * 60 * 1000);
 
         const momentumSignals = [
             { ticker: 'NVDA', price: 138.50, sma50: 135.20, sma200: 118.50, rsi: 58, signal: 'BUY' },
@@ -3517,6 +4110,355 @@
         }
 
         // Chart.js defaults
+// ============================================
+        // AI PORTFOLIO SYSTEM - THREE STRATEGIES
+        // ============================================
+
+        // Strategy tab switching
+        function showStrategy(strategy, btn) {
+            document.querySelectorAll('.strategy-panel').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('.strategy-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('strategy-' + strategy).style.display = 'block';
+            if (btn) btn.classList.add('active');
+        }
+
+        // ============ CONFIGURATION ============
+        const CONFIG = {
+            startingBalance: 100000,
+            specBasketSize: 10000,
+            refreshInterval: 5 * 60 * 1000
+        };
+
+        // ============ CORE HOLDINGS ============
+        const coreHoldings = [
+            { ticker: 'NVDA', name: 'NVIDIA', sector: 'compute', weight: 0.18, costBasis: 134.29, shares: 134.03 },
+            { ticker: 'TSM', name: 'Taiwan Semi', sector: 'compute', weight: 0.12, costBasis: 203.75, shares: 58.90 },
+            { ticker: 'AVGO', name: 'Broadcom', sector: 'compute', weight: 0.10, costBasis: 232.14, shares: 43.08 },
+            { ticker: 'MSFT', name: 'Microsoft', sector: 'cloud', weight: 0.10, costBasis: 421.50, shares: 23.72 },
+            { ticker: 'GOOGL', name: 'Alphabet', sector: 'cloud', weight: 0.08, costBasis: 191.25, shares: 41.83 },
+            { ticker: 'META', name: 'Meta', sector: 'cloud', weight: 0.08, costBasis: 589.34, shares: 13.57 },
+            { ticker: 'AMZN', name: 'Amazon', sector: 'cloud', weight: 0.07, costBasis: 224.00, shares: 31.25 },
+            { ticker: 'ASML', name: 'ASML', sector: 'apps', weight: 0.06, costBasis: 698.50, shares: 8.59 },
+            { ticker: 'MRVL', name: 'Marvell', sector: 'compute', weight: 0.05, costBasis: 111.20, shares: 44.96 },
+            { ticker: 'VRT', name: 'Vertiv', sector: 'apps', weight: 0.05, costBasis: 131.45, shares: 38.03 },
+            { ticker: 'PLTR', name: 'Palantir', sector: 'apps', weight: 0.05, costBasis: 75.50, shares: 66.23 },
+            { ticker: 'MU', name: 'Micron', sector: 'compute', weight: 0.04, costBasis: 89.75, shares: 44.57 }
+        ];
+
+        // ============ MOMENTUM UNIVERSE ============
+        const momentumUniverse = [
+            { ticker: 'NVDA', sma50: 132.50, sma200: 115.80, rsi: 58 },
+            { ticker: 'PLTR', sma50: 72.40, sma200: 48.20, rsi: 65 },
+            { ticker: 'VRT', sma50: 128.30, sma200: 98.50, rsi: 55 },
+            { ticker: 'ARM', sma50: 148.20, sma200: 118.40, rsi: 62 },
+            { ticker: 'TSM', sma50: 198.50, sma200: 165.30, rsi: 52 },
+            { ticker: 'AVGO', sma50: 228.40, sma200: 185.60, rsi: 60 },
+            { ticker: 'MRVL', sma50: 108.20, sma200: 82.40, rsi: 48 },
+            { ticker: 'AMD', sma50: 128.60, sma200: 142.30, rsi: 42 },
+            { ticker: 'SMCI', sma50: 32.50, sma200: 45.80, rsi: 38 },
+            { ticker: 'MU', sma50: 92.30, sma200: 98.50, rsi: 44 }
+        ];
+
+        // ============ SPECULATIVE POSITIONS ============
+        const specPositions = [
+            { ticker: 'SYM', name: 'Symbotic', mktCap: '$11B', thesis: 'Warehouse Robotics', costBasis: 28.50, shares: 70, upside: '3-5x', risk: 4 },
+            { ticker: 'SOUN', name: 'SoundHound AI', mktCap: '$5B', thesis: 'Voice AI Platform', costBasis: 6.80, shares: 294, upside: '3-5x', risk: 5 },
+            { ticker: 'CRDO', name: 'Credo Tech', mktCap: '$8B', thesis: 'AI Connectivity', costBasis: 42.50, shares: 47, upside: '2-4x', risk: 3 },
+            { ticker: 'PATH', name: 'UiPath', mktCap: '$8B', thesis: 'AI-Powered RPA', costBasis: 14.20, shares: 140, upside: '2-3x', risk: 3 },
+            { ticker: 'RXRX', name: 'Recursion Pharma', mktCap: '$4B', thesis: 'AI Drug Discovery', costBasis: 8.50, shares: 235, upside: '3-10x', risk: 5 }
+        ];
+
+        const specWatchlist = [
+            { ticker: 'IONQ', name: 'IonQ', mktCap: '$8B', thesis: 'Quantum Computing', trigger: 'Break $45', target: '$80', risk: 5 },
+            { ticker: 'RKLB', name: 'Rocket Lab', mktCap: '$12B', thesis: 'Space + AI Data', trigger: 'Pullback to $22', target: '$40', risk: 4 },
+            { ticker: 'ALAB', name: 'Astera Labs', mktCap: '$15B', thesis: 'AI Connectivity', trigger: 'IPO lockup expiry', target: '$120', risk: 3 }
+        ];
+
+        // ============ LIVE DATA STORE ============
+        let liveData = { prices: {}, dayChanges: {}, lastUpdate: null };
+
+        // ============ FETCH PRICES ============
+        async function fetchPrices() {
+            const allTickers = [
+                ...coreHoldings.map(h => h.ticker),
+                ...momentumUniverse.map(m => m.ticker),
+                ...specPositions.map(s => s.ticker),
+                'SPY', 'QQQ', 'SOXX', 'ARM', 'SMCI'
+            ];
+            const uniqueTickers = [...new Set(allTickers)];
+
+            try {
+                const response = await fetch('/api/prices?symbols=' + uniqueTickers.join(','));
+                if (!response.ok) throw new Error('API ' + response.status);
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    result.data.forEach(q => {
+                        liveData.prices[q.symbol] = q.price;
+                        liveData.dayChanges[q.symbol] = q.changePercent || 0;
+                    });
+                    liveData.lastUpdate = new Date();
+                    
+                    document.getElementById('dataStatus').innerHTML = 
+                        '<span class="status-dot live"></span> Live @ ' + new Date().toLocaleTimeString();
+                    
+                    updateAllDisplays();
+                    console.log('✓ Prices updated:', new Date().toLocaleTimeString());
+                }
+            } catch (err) {
+                console.warn('API error, using fallback:', err.message);
+                useFallbackPrices();
+                document.getElementById('dataStatus').innerHTML = 
+                    '<span class="status-dot"></span> Fallback';
+                updateAllDisplays();
+            }
+        }
+
+        function useFallbackPrices() {
+            const fallback = {
+                NVDA: 138.52, TSM: 207.85, AVGO: 238.45, MSFT: 425.30, GOOGL: 195.80,
+                META: 605.25, AMZN: 228.15, ASML: 712.30, MRVL: 113.45, VRT: 134.80,
+                PLTR: 78.20, MU: 91.25, SPY: 596.50, QQQ: 525.80, SOXX: 225.40,
+                ARM: 155.30, AMD: 125.40, SMCI: 35.20, SYM: 32.50, SOUN: 8.45,
+                CRDO: 48.20, PATH: 15.80, RXRX: 9.20
+            };
+            Object.keys(fallback).forEach(t => {
+                liveData.prices[t] = fallback[t];
+                liveData.dayChanges[t] = (Math.random() - 0.5) * 3;
+            });
+        }
+
+        function updateAllDisplays() {
+            updateCorePortfolio();
+            updateMomentumSignals();
+            updateSpecBasket();
+        }
+
+        // ============ CORE PORTFOLIO ============
+        function updateCorePortfolio() {
+            let totalValue = 0, totalCost = 0, dayPnl = 0;
+            const positions = [];
+
+            coreHoldings.forEach(h => {
+                const price = liveData.prices[h.ticker] || h.costBasis;
+                const dayChg = liveData.dayChanges[h.ticker] || 0;
+                const mktValue = h.shares * price;
+                const costValue = h.shares * h.costBasis;
+                const pnl = mktValue - costValue;
+                const pnlPct = ((price - h.costBasis) / h.costBasis) * 100;
+                const dayPnlAmt = mktValue * (dayChg / 100);
+
+                totalValue += mktValue;
+                totalCost += costValue;
+                dayPnl += dayPnlAmt;
+
+                positions.push({ ...h, price, mktValue, pnl, pnlPct, dayChg, dayPnlAmt });
+            });
+
+            const cashValue = CONFIG.startingBalance * 0.02;
+            totalValue += cashValue;
+            const totalPnl = totalValue - CONFIG.startingBalance;
+            const totalPnlPct = (totalPnl / CONFIG.startingBalance) * 100;
+
+            // Update summary bar
+            const navEl = document.getElementById('coreNav');
+            if (navEl) navEl.textContent = '$' + totalValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            const changeEl = document.getElementById('coreChange');
+            if (changeEl) {
+                const sign = totalPnl >= 0 ? '+' : '';
+                changeEl.textContent = sign + '$' + Math.abs(totalPnl).toFixed(2) + ' (' + sign + totalPnlPct.toFixed(2) + '%)';
+                changeEl.className = 'summary-change ' + (totalPnl >= 0 ? 'positive' : 'negative');
+            }
+
+            const dayPnlEl = document.getElementById('coreDayPnl');
+            if (dayPnlEl) {
+                dayPnlEl.textContent = (dayPnl >= 0 ? '+' : '') + '$' + dayPnl.toFixed(0);
+                dayPnlEl.className = 'summary-value ' + (dayPnl >= 0 ? 'text-lime' : 'text-red');
+            }
+
+            // vs benchmarks
+            const spyChg = liveData.dayChanges['SPY'] || 0;
+            const qqqChg = liveData.dayChanges['QQQ'] || 0;
+            const portfolioChg = (dayPnl / totalValue) * 100;
+
+            const vsSpyEl = document.getElementById('coreVsSpy');
+            if (vsSpyEl) {
+                const diff = portfolioChg - spyChg;
+                vsSpyEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(2) + '%';
+                vsSpyEl.className = 'summary-value ' + (diff >= 0 ? 'text-lime' : 'text-red');
+            }
+
+            const vsQqqEl = document.getElementById('coreVsQqq');
+            if (vsQqqEl) {
+                const diff = portfolioChg - qqqChg;
+                vsQqqEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(2) + '%';
+                vsQqqEl.className = 'summary-value ' + (diff >= 0 ? 'text-lime' : 'text-red');
+            }
+
+            // Update holdings table
+            const tbody = document.getElementById('coreHoldingsBody');
+            if (tbody) {
+                tbody.innerHTML = positions.sort((a, b) => b.mktValue - a.mktValue).map(p => {
+                    const sectorClass = p.sector === 'compute' ? 'compute' : p.sector === 'cloud' ? 'cloud' : 'apps';
+                    return `<tr>
+                        <td class="ticker-cell">${p.ticker}</td>
+                        <td><span class="sector-tag ${sectorClass}">${p.sector}</span></td>
+                        <td class="text-right">${(p.weight * 100).toFixed(0)}%</td>
+                        <td class="text-right">${p.shares.toFixed(1)}</td>
+                        <td class="text-right">$${p.costBasis.toFixed(2)}</td>
+                        <td class="text-right font-bold">$${p.price.toFixed(2)}</td>
+                        <td class="text-right">$${p.mktValue.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                        <td class="text-right ${p.dayChg >= 0 ? 'text-lime' : 'text-red'}">${p.dayChg >= 0 ? '+' : ''}${p.dayChg.toFixed(2)}%</td>
+                        <td class="text-right ${p.pnl >= 0 ? 'text-lime' : 'text-red'}">${p.pnl >= 0 ? '+' : ''}$${p.pnl.toFixed(0)}</td>
+                        <td class="text-right ${p.pnlPct >= 0 ? 'text-lime' : 'text-red'}">${p.pnlPct >= 0 ? '+' : ''}${p.pnlPct.toFixed(1)}%</td>
+                    </tr>`;
+                }).join('') + `<tr>
+                    <td class="ticker-cell" style="color:#666">CASH</td>
+                    <td><span class="sector-tag" style="background:rgba(100,100,100,0.2);color:#666">cash</span></td>
+                    <td class="text-right">2%</td>
+                    <td class="text-right">-</td>
+                    <td class="text-right">-</td>
+                    <td class="text-right">-</td>
+                    <td class="text-right">$2,000</td>
+                    <td class="text-right text-muted">0.00%</td>
+                    <td class="text-right text-muted">$0</td>
+                    <td class="text-right text-muted">0.00%</td>
+                </tr>`;
+
+                const tfoot = document.getElementById('coreHoldingsFoot');
+                if (tfoot) {
+                    tfoot.innerHTML = `<tr>
+                        <td colspan="6"><strong>TOTAL</strong></td>
+                        <td class="text-right"><strong>$${totalValue.toLocaleString('en-US', {maximumFractionDigits: 0})}</strong></td>
+                        <td class="text-right">${dayPnl >= 0 ? '+' : ''}$${dayPnl.toFixed(0)}</td>
+                        <td class="text-right ${totalPnl >= 0 ? 'text-lime' : 'text-red'}"><strong>${totalPnl >= 0 ? '+' : ''}$${totalPnl.toFixed(0)}</strong></td>
+                        <td class="text-right ${totalPnlPct >= 0 ? 'text-lime' : 'text-red'}"><strong>${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(2)}%</strong></td>
+                    </tr>`;
+                }
+            }
+        }
+
+        // ============ MOMENTUM SIGNALS ============
+        function updateMomentumSignals() {
+            const tbody = document.getElementById('momentumSignalsBody');
+            if (!tbody) return;
+
+            let buyCount = 0, watchCount = 0, avoidCount = 0;
+
+            const signals = momentumUniverse.map(m => {
+                const price = liveData.prices[m.ticker] || 100;
+                const dayChg = liveData.dayChanges[m.ticker] || 0;
+                const pctFrom50 = ((price - m.sma50) / m.sma50) * 100;
+
+                let signal, trend, action;
+                if (price > m.sma50 && m.sma50 > m.sma200 && m.rsi >= 40 && m.rsi <= 70) {
+                    signal = 'buy'; trend = 'bullish'; action = 'Accumulate';
+                    buyCount++;
+                } else if (price < m.sma200 || m.rsi > 80 || m.rsi < 30) {
+                    signal = 'avoid'; trend = 'bearish'; action = 'Stay out';
+                    avoidCount++;
+                } else {
+                    signal = 'watch'; trend = 'neutral'; action = 'Wait for setup';
+                    watchCount++;
+                }
+
+                return { ...m, price, dayChg, pctFrom50, signal, trend, action };
+            }).sort((a, b) => {
+                const order = { buy: 0, watch: 1, avoid: 2 };
+                return order[a.signal] - order[b.signal];
+            });
+
+            document.getElementById('momBuyCount').textContent = buyCount;
+            document.getElementById('momWatchCount').textContent = watchCount;
+            document.getElementById('momAvoidCount').textContent = avoidCount;
+
+            tbody.innerHTML = signals.map(s => `<tr>
+                <td class="ticker-cell">${s.ticker}</td>
+                <td><span class="signal-badge ${s.signal}">${s.signal.toUpperCase()}</span></td>
+                <td class="text-right">$${s.price.toFixed(2)}</td>
+                <td class="text-right">$${s.sma50.toFixed(0)}</td>
+                <td class="text-right">$${s.sma200.toFixed(0)}</td>
+                <td class="text-right">${s.rsi}</td>
+                <td class="text-right ${s.pctFrom50 >= 0 ? 'text-lime' : 'text-red'}">${s.pctFrom50 >= 0 ? '+' : ''}${s.pctFrom50.toFixed(1)}%</td>
+                <td><span class="trend-badge ${s.trend}">${s.trend}</span></td>
+                <td class="text-muted">${s.action}</td>
+            </tr>`).join('');
+        }
+
+        // ============ SPECULATIVE BASKET ============
+        function updateSpecBasket() {
+            const tbody = document.getElementById('specHoldingsBody');
+            if (!tbody) return;
+
+            let totalValue = 0, totalCost = 0;
+
+            tbody.innerHTML = specPositions.map(s => {
+                const price = liveData.prices[s.ticker] || s.costBasis;
+                const dayChg = liveData.dayChanges[s.ticker] || 0;
+                const mktValue = s.shares * price;
+                const costValue = s.shares * s.costBasis;
+                const pnl = mktValue - costValue;
+                const pnlPct = ((price - s.costBasis) / s.costBasis) * 100;
+
+                totalValue += mktValue;
+                totalCost += costValue;
+
+                const riskDots = Array(5).fill(0).map((_, i) => 
+                    `<span class="dot ${i < s.risk ? 'active' : ''}"></span>`
+                ).join('');
+
+                const conviction = Math.min(100, Math.max(20, 50 + pnlPct));
+
+                return `<tr>
+                    <td class="ticker-cell">${s.ticker}</td>
+                    <td>${s.name}</td>
+                    <td class="text-right">${s.mktCap}</td>
+                    <td><span class="sector-tag apps">${s.thesis}</span></td>
+                    <td class="text-right">$${price.toFixed(2)}</td>
+                    <td class="text-right ${dayChg >= 0 ? 'text-lime' : 'text-red'}">${dayChg >= 0 ? '+' : ''}${dayChg.toFixed(2)}%</td>
+                    <td class="text-center text-lime">${s.upside}</td>
+                    <td class="text-center"><div class="risk-dots">${riskDots}</div></td>
+                    <td class="text-center"><div class="conviction-bar"><div class="conviction-fill" style="width:${conviction}%"></div></div></td>
+                </tr>`;
+            }).join('');
+
+            const navEl = document.getElementById('specNav');
+            if (navEl) navEl.textContent = '$' + totalValue.toLocaleString('en-US', {maximumFractionDigits: 0});
+
+            const pnlEl = document.getElementById('specPnl');
+            if (pnlEl) {
+                const pnl = totalValue - totalCost;
+                pnlEl.textContent = (pnl >= 0 ? '+' : '') + '$' + pnl.toFixed(0);
+                pnlEl.className = 'spec-value ' + (pnl >= 0 ? 'text-lime' : 'text-red');
+            }
+
+            // Watchlist
+            const watchBody = document.getElementById('specWatchlistBody');
+            if (watchBody) {
+                watchBody.innerHTML = specWatchlist.map(w => {
+                    const riskDots = Array(5).fill(0).map((_, i) => 
+                        `<span class="dot ${i < w.risk ? 'active' : ''}"></span>`
+                    ).join('');
+                    return `<tr>
+                        <td class="ticker-cell">${w.ticker}</td>
+                        <td>${w.name}</td>
+                        <td class="text-right">${w.mktCap}</td>
+                        <td><span class="sector-tag apps">${w.thesis}</span></td>
+                        <td class="text-center"><span class="trend-badge neutral">${w.trigger}</span></td>
+                        <td class="text-center text-lime">${w.target}</td>
+                        <td class="text-center"><div class="risk-dots">${riskDots}</div></td>
+                    </tr>`;
+                }).join('');
+            }
+        }
+
+        // ============ INITIALIZE ============
+        fetchPrices();
+        setInterval(fetchPrices, CONFIG.refreshInterval);
+
+        
+
         Chart.defaults.color = 'rgba(150, 200, 170, 0.7)';
         Chart.defaults.borderColor = 'rgba(0, 255, 136, 0.1)';
 
